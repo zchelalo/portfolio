@@ -3,7 +3,7 @@ import { ProjectRepository } from '@/modules/project/domain/repository'
 
 import { Technology } from '@/constants'
 
-const projects: ProjectEntity[] = [
+export const projects: ProjectEntity[] = [
   {
     id: '123e4567-e89b-12d3-a456-426614174000',
     title: 'Notitas',
@@ -44,6 +44,14 @@ const projects: ProjectEntity[] = [
       {
         id: '123e4567-e89b-12d3-a456-426614174008',
         name: Technology.ZOD
+      },
+      {
+        id: '123e4567-e89b-12d3-a456-426614174009',
+        name: Technology.JAVASCRIPT
+      },
+      {
+        id: '123e4567-e89b-12d3-a456-426614174011',
+        name: Technology.EXPRESS
       }
     ],
     sourceCodeUrl: 'https://github.com/zchelalo/notitas',

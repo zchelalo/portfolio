@@ -1,15 +1,10 @@
-import { Technology } from '@/constants'
+import { SkillEntity } from '@/modules/skill/domain/entity'
 
 export interface ProjectEntity {
   id?: string
   title: string
   description: string
-  technologies: TechnologyEntity[]
+  technologies: SkillEntity[]
   sourceCodeUrl?: string
   previewUrl?: string
-}
-
-export interface TechnologyEntity {
-  id?: string
-  name: Technology
 }
