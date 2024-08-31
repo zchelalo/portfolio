@@ -3,6 +3,7 @@ import { SocialMediaType } from '@/constants'
 export interface AboutMeEntity {
   id?: string
   personalStatement: string
+  pfpUrl: string
   socialMedia: SocialMediaEntity[]
 }
 

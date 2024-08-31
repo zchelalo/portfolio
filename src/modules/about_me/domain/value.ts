@@ -4,10 +4,12 @@ import { SocialMediaType } from '@/constants'
 export class AboutMeEntityValue implements AboutMeEntity {
   readonly id?: string
   readonly personalStatement: string
+  readonly pfpUrl: string
   readonly socialMedia: SocialMediaEntity[]
 
-  constructor(personalStatement: string, socialMedia: SocialMediaEntity[], id?: string) {
+  constructor(personalStatement: string, pfpUrl: string, socialMedia: SocialMediaEntity[], id?: string) {
     this.personalStatement = personalStatement
+    this.pfpUrl = pfpUrl
 
     if (!Array.isArray(socialMedia) || socialMedia.some(sm => !(sm instanceof SocialMediaValue))) {
       throw new Error('invalid social media list')

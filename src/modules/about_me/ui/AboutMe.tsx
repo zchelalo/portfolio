@@ -12,7 +12,6 @@ import { Typewriter } from 'react-simple-typewriter'
 import { HiOutlineMail } from 'react-icons/hi'
 import { AiOutlineLinkedin, AiOutlineGithub } from 'react-icons/ai'
 
-import pfp from '@/assets/images/pfp.jpg'
 import '@/modules/about_me/ui/css/AboutMe.css'
 
 const aboutMeRepository = new MemoryRepository()
@@ -77,7 +76,7 @@ function AboutMe() {
         <>
           <section className='flex items-center'>
             <img
-              src={pfp}
+              src={aboutMe.pfpUrl}
               alt='Profile picture'
               className='rounded-full w-32 h-32 shadow-md'
             />

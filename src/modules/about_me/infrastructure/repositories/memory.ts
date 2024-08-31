@@ -6,6 +6,7 @@ import { SocialMediaType } from '@/constants'
 const aboutMe: AboutMeEntity = {
   id: '123e4567-e89b-12d3-a456-426614174000',
   personalStatement: 'I am a passionate backend software developer and technology enthusiast who loves creating innovative solutions to challenges. My journey has connected me with incredible people, allowing me to learn and grow. I am constantly striving to improve, always aiming for the best possible outcome in my work. I enjoy learning from others and sharing my knowledge.',
+  pfpUrl: '/src/assets/images/pfp.jpg',
   socialMedia: [
     {
       id: '123e4567-e89b-12d3-a456-426614174001',
