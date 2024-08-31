@@ -2,59 +2,20 @@ import { AboutMeEntity } from '@/modules/about_me/domain/entity'
 import { AboutMeUseCase } from '@/modules/about_me/application/use_cases/work_experience'
 import { MemoryRepository } from '@/modules/about_me/infrastructure/repositories/memory'
 
-import { SocialMediaType } from '@/constants'
-
 import { useEffect, useState } from 'react'
+import { useSocialMedia } from '@/modules/about_me/ui/hooks/useSocialMedia'
 
 import { SocialMedia } from '@/modules/about_me/ui/components/SocialMedia'
 import { Typewriter } from 'react-simple-typewriter'
-
-import { HiOutlineMail } from 'react-icons/hi'
-import { AiOutlineLinkedin, AiOutlineGithub } from 'react-icons/ai'
 
 import '@/modules/about_me/ui/css/AboutMe.css'
 
 const aboutMeRepository = new MemoryRepository()
 const aboutMeUseCase = new AboutMeUseCase(aboutMeRepository)
 
-const socialMediaUrlFunc = (url: string) => window.open(`https://${url}`)
-
-const socialMediaFuncs = {
-  [SocialMediaType.EMAIL]: {
-    onClick: (mail: string) => window.open(`mailto:${mail}`),
-    icon: HiOutlineMail
-  },
-  [SocialMediaType.LINKEDIN]: {
-    onClick: (url: string) => socialMediaUrlFunc(url),
-    icon: AiOutlineLinkedin
-  },
-  [SocialMediaType.GITHUB]: {
-    onClick: (url: string) => socialMediaUrlFunc(url),
-    icon: AiOutlineGithub
-  },
-  [SocialMediaType.TWITTER]: {
-    onClick: (url: string) => socialMediaUrlFunc(url),
-    icon: AiOutlineGithub
-  },
-  [SocialMediaType.INSTAGRAM]: {
-    onClick: (url: string) => socialMediaUrlFunc(url),
-    icon: AiOutlineGithub
-  },
-  [SocialMediaType.FACEBOOK]: {
-    onClick: (url: string) => socialMediaUrlFunc(url),
-    icon: AiOutlineGithub
-  },
-  [SocialMediaType.YOUTUBE]: {
-    onClick: (url: string) => socialMediaUrlFunc(url),
-    icon: AiOutlineGithub
-  },
-  [SocialMediaType.TIKTOK]: {
-    onClick: (url: string) => socialMediaUrlFunc(url),
-    icon: AiOutlineGithub
-  }
-}
-
 function AboutMe() {
+  const { socialMediaFuncs } = useSocialMedia()
+
   const [aboutMe, setAboutMe] = useState<AboutMeEntity>()
 
   useEffect(() => {
