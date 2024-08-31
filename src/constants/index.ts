@@ -43,3 +43,23 @@ export enum Technology {
   MYSQL = 'mysql',
   REDIS = 'redis'
 }
+
+export enum Theme {
+  LIGHT = 'light',
+  DARK = 'dark'
+}
+
+export enum Language {
+  EN = 'en',
+  ES = 'es'
+}
+
+export enum Section {
+  HOME = 'home',
+  ABOUT_ME = 'about_me',
+  STUDIES = 'studies',
+  WORK_EXPERIENCES = 'work_experiences',
+  PROJECTS = 'projects',
+  CONTACT = 'contact',
+  SKILLS = 'skills'
+}
