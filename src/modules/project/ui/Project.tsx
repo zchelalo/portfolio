@@ -2,8 +2,11 @@ import { ProjectEntity } from '@/modules/project/domain/entity'
 import { MemoryRepository } from '@/modules/project/infrastructure/repositories/memory'
 import { ProjectUseCase } from '@/modules/project/application/use_cases/project'
 
+import { Section } from '@/constants'
+
 import { useEffect, useState } from 'react'
 
+import { SectionLayout } from '@/components/SectionLayout'
 import { IconTechnology } from '@/modules/project/ui/components/IconTechnology'
 import { Button } from '@/components/Button'
 
@@ -25,11 +28,11 @@ function Project() {
   }, [])
 
   return (
-    <section id='projects' className='w-full flex flex-col justify-center mt-24'>
-      <header className='flex items-center'>
-        <HiOutlineCodeBracket  className='text-2xl text mr-2' />
-        <h1 className='text-2xl text font-medium'>Projects</h1>
-      </header>
+    <SectionLayout
+      icon={HiOutlineCodeBracket}
+      title='Projects'
+      id={Section.PROJECTS}
+    >
       <main className='w-full flex justify-center'>
         {projects?.map(project => (
           <article key={project.id} className='w-full rounded bg flex justify-center p-4 mt-4'>
@@ -78,7 +81,7 @@ function Project() {
           </article>
         ))}
       </main>
-    </section>
+    </SectionLayout>
   )
 }
 
