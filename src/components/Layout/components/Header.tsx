@@ -1,3 +1,5 @@
+import { Section } from '@/constants'
+
 import { useEffect, useState } from 'react'
 
 import { HashLink as Link } from 'react-router-hash-link'
@@ -25,7 +27,7 @@ function Header() {
         <li className='mx-3'>
           <Link
             smooth
-            to='#about_me'
+            to={`#${Section.ABOUT_ME}`}
             className='text-hover font-semibold'
           >
             About me
@@ -34,7 +36,7 @@ function Header() {
         <li className='mx-3'>
           <Link
             smooth
-            to='#work_experiences'
+            to={`#${Section.WORK_EXPERIENCES}`}
             className='text-hover font-semibold'
           >
             Work Experience
@@ -43,7 +45,7 @@ function Header() {
         <li className='mx-3'>
           <Link
             smooth
-            to='#projects'
+            to={`#${Section.PROJECTS}`}
             className='text-hover font-semibold'
           >
             Projects
@@ -52,7 +54,7 @@ function Header() {
         <li className='mx-3'>
           <Link
             smooth
-            to='#studies'
+            to={`#${Section.STUDIES}`}
             className='text-hover font-semibold'
           >
             Studies
@@ -61,7 +63,7 @@ function Header() {
         <li className='mx-3'>
           <Link
             smooth
-            to='#skills'
+            to={`#${Section.SKILLS}`}
             className='text-hover font-semibold'
           >
             Skills
