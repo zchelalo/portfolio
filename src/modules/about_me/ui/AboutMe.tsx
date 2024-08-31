@@ -2,6 +2,8 @@ import { AboutMeEntity } from '@/modules/about_me/domain/entity'
 import { AboutMeUseCase } from '@/modules/about_me/application/use_cases/work_experience'
 import { MemoryRepository } from '@/modules/about_me/infrastructure/repositories/memory'
 
+import { Section } from '@/constants'
+
 import { useEffect, useState } from 'react'
 import { useSocialMedia } from '@/modules/about_me/ui/hooks/useSocialMedia'
 
@@ -32,7 +34,7 @@ function AboutMe() {
   }, [])
 
   return (
-    <section id='about_me' className='w-full flex flex-col justify-center mt-24'>
+    <section id={Section.ABOUT_ME} className='w-full flex flex-col justify-center mt-24'>
       {aboutMe ?
         <>
           <section className='flex items-center'>
