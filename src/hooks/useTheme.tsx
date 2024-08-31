@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react'
 
-import { LocalStorageKey } from '@/constants'
-
-type Theme = 'light' | 'dark'
+import { LocalStorageKey, Theme } from '@/constants'
 
 function useTheme() {
   const [theme, setTheme] = useState<Theme>(() => {
     const storedTheme = localStorage.getItem(LocalStorageKey.THEME) as Theme
     if (storedTheme) return storedTheme
     const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
-    return prefersDarkMode ? 'dark' : 'light'
+    return prefersDarkMode ? Theme.DARK : Theme.LIGHT
   })
 
   useEffect(() => {
@@ -22,12 +20,12 @@ function useTheme() {
   }, [theme])
 
   const setThemeInHTML = (theme: Theme) => {
-    document.documentElement.classList.toggle('dark', theme === 'dark')
+    document.documentElement.classList.toggle(Theme.DARK, theme === Theme.DARK)
   }
 
   const changeTheme = (theme: Theme) => {
-    if (theme !== 'light' && theme !== 'dark') {
-      theme = 'light'
+    if (!Object.values(Theme).includes(theme)) {
+      theme = Theme.LIGHT
     }
 
     setTheme(theme)
