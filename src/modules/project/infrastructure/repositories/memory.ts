@@ -1,59 +1,52 @@
 import { ProjectEntity } from '@/modules/project/domain/entity'
+import { SkillEntity } from '@/modules/skill/domain/entity'
 import { ProjectRepository } from '@/modules/project/domain/repository'
 
 import { Technology } from '@/constants'
+
+import { skills } from '@/modules/skill/infrastructure/repositories/memory'
+
+const skillsNotitas: SkillEntity[] = []
+
+const node = skills.find(skill => skill.name === Technology.NODE)
+if (node) skillsNotitas.push(node)
+
+const sequelize = skills.find(skill => skill.name === Technology.SEQUELIZE)
+if (sequelize) skillsNotitas.push(sequelize)
+
+const postgresql = skills.find(skill => skill.name === Technology.POSTGRESQL)
+if (postgresql) skillsNotitas.push(postgresql)
+
+const docker = skills.find(skill => skill.name === Technology.DOCKER)
+if (docker) skillsNotitas.push(docker)
+
+const react = skills.find(skill => skill.name === Technology.REACT)
+if (react) skillsNotitas.push(react)
+
+const tailwindCss = skills.find(skill => skill.name === Technology.TAILWIND_CSS)
+if (tailwindCss) skillsNotitas.push(tailwindCss)
+
+const shadcn = skills.find(skill => skill.name === Technology.SHADCN)
+if (shadcn) skillsNotitas.push(shadcn)
+
+const i18next = skills.find(skill => skill.name === Technology.I18NEXT)
+if (i18next) skillsNotitas.push(i18next)
+
+const zod = skills.find(skill => skill.name === Technology.ZOD)
+if (zod) skillsNotitas.push(zod)
+
+const javascript = skills.find(skill => skill.name === Technology.JAVASCRIPT)
+if (javascript) skillsNotitas.push(javascript)
+
+const express = skills.find(skill => skill.name === Technology.EXPRESS)
+if (express) skillsNotitas.push(express)
 
 export const projects: ProjectEntity[] = [
   {
     id: '123e4567-e89b-12d3-a456-426614174000',
     title: 'Notitas',
     description: 'A simple note-taking app built with microservices architecture. It uses a React frontend, a Node.js backend, and a PostgreSQL database. It also uses Docker and Docker Compose for development and deployment.',
-    technologies: [
-      {
-        id: '123e4567-e89b-12d3-a456-426614174000',
-        name: Technology.NODE
-      },
-      {
-        id: '123e4567-e89b-12d3-a456-426614174001',
-        name: Technology.SEQUELIZE
-      },
-      {
-        id: '123e4567-e89b-12d3-a456-426614174002',
-        name: Technology.POSTGRESQL
-      },
-      {
-        id: '123e4567-e89b-12d3-a456-426614174003',
-        name: Technology.DOCKER
-      },
-      {
-        id: '123e4567-e89b-12d3-a456-426614174004',
-        name: Technology.REACT
-      },
-      {
-        id: '123e4567-e89b-12d3-a456-426614174005',
-        name: Technology.TAILWIND_CSS
-      },
-      {
-        id: '123e4567-e89b-12d3-a456-426614174006',
-        name: Technology.SHADCN
-      },
-      {
-        id: '123e4567-e89b-12d3-a456-426614174007',
-        name: Technology.I18NEXT
-      },
-      {
-        id: '123e4567-e89b-12d3-a456-426614174008',
-        name: Technology.ZOD
-      },
-      {
-        id: '123e4567-e89b-12d3-a456-426614174009',
-        name: Technology.JAVASCRIPT
-      },
-      {
-        id: '123e4567-e89b-12d3-a456-426614174011',
-        name: Technology.EXPRESS
-      }
-    ],
+    technologies: skillsNotitas,
     sourceCodeUrl: 'https://github.com/zchelalo/notitas',
     previewUrl: undefined
   },

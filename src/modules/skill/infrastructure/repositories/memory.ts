@@ -6,7 +6,7 @@ import { Technology } from '@/constants'
 
 import { projects } from '@/modules/project/infrastructure/repositories/memory'
 
-const skills: SkillEntity[] = [
+export const skills: SkillEntity[] = [
   {
     id: '123e4567-e89b-12d3-a456-426614174000',
     name: Technology.NODE
