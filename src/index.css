@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.bg {
+  @apply bg-violet-300 dark:bg-violet-900 !important;
+}
+
+.bg-hover {
+  @apply bg-violet-300 hover:bg-violet-400 dark:bg-violet-900 dark:hover:bg-violet-800 !important;
+}
+
+.bg-hover-secondary {
+  @apply bg-violet-400 hover:bg-violet-500 dark:bg-violet-700 dark:hover:bg-violet-600 !important;
+}
+
+.bg-active {
+  @apply bg-violet-400 dark:bg-violet-800 !important;
+}
+
+.text {
+  @apply text-violet-900 dark:text-violet-300 !important;
+}
+
+.text-secondary {
+  @apply text-violet-950 dark:text-violet-200 !important;
+}
+
+.text-hover {
+  @apply text-violet-900 hover:text-violet-700 dark:text-violet-300 dark:hover:text-violet-500 cursor-pointer !important;
+}
+
+.text-active {
+  @apply text-violet-700 dark:text-violet-500 !important;
+}
