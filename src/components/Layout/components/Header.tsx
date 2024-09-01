@@ -23,7 +23,7 @@ function Header() {
     <header
       className='w-full p-2 fixed top-0 left-0 flex flex-col justify-center items-center'
     >
-      <ul className={`p-2 my-1 flex justify-center items-center ${scrolled ? 'rounded bg' : ''}`}>
+      <ul className={`p-2 my-1 flex justify-center items-center ${scrolled ? 'rounded bg' : ''} transition duration-300`}>
         <li className='mx-3'>
           <Link
             smooth
