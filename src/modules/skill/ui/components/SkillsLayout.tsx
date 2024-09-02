@@ -2,12 +2,12 @@ import { SkillEntity } from '@/modules/skill/domain/entity'
 import { ProjectEntity } from '@/modules/project/domain/entity'
 import { MemoryRepository } from '@/modules/skill/infrastructure/repositories/memory'
 import { SkillUseCase } from '@/modules/skill/application/use_cases/skill'
+import { SkillService } from '@/modules/skill/application/service/skill'
 
 import { useState } from 'react'
 
 import { SkillLevel } from '@/constants'
 
-import { toast } from 'sonner'
 import { firstLetterToUpperCase } from '@/utils/string'
 
 import { ModalSkillsUsed } from '@/modules/skill/ui/components/ModalSkillsUsed'
@@ -20,6 +20,7 @@ type SkillsLayoutProps = {
 
 const skillRepository = new MemoryRepository()
 const skillUseCase = new SkillUseCase(skillRepository)
+const skillService = new SkillService(skillUseCase)
 
 function SkillsLayout({
   level,
@@ -30,23 +31,14 @@ function SkillsLayout({
   const [projects, setProjects] = useState<ProjectEntity[]>()
 
   const fetchProjects = async (skill: SkillEntity) => {
-    if (!skill) {
-      toast.info('No skill selected')
-      return
-    }
-    const skillObtained = await skillUseCase.getSkillById(skill.id as string, 0, 10)
+    const skillAndProjects = await skillService.fetchSkillAndProjects(skill, 0, 10)
 
-    if (!skillObtained) {
-      toast.error('Skill not found')
-      return
-    }
-    if (!skillObtained.projects.length) {
-      toast.info('No projects to show')
+    if (!skillAndProjects) {
       return
     }
 
-    setSelectedSkill(skillObtained.skill)
-    setProjects(skillObtained.projects)
+    setSelectedSkill(skillAndProjects.skill)
+    setProjects(skillAndProjects.projects)
     setModalIsOpen(true)
   }
 
