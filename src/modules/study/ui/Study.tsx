@@ -39,7 +39,7 @@ function Study() {
     >
       <main>
         {studies.map(study => (
-          <div className='rounded bg text border-2 border-violet-900 flex flex-wrap justify-between items-center p-2 mt-4'>
+          <div key={study.id} className='rounded bg text border-2 border-violet-900 flex flex-wrap justify-between items-center p-2 mt-4'>
             <div className='flex flex-col'>
               <h2 className='font-semibold'>{study.institution}</h2>
               <span>{study.career}</span>

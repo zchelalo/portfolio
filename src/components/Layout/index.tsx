@@ -1,5 +1,7 @@
 import { useTheme } from '@/hooks/useTheme'
 
+import { Theme } from '@/constants'
+
 import { Button } from '@/components/Button'
 import { Header } from '@/components/Layout/components/Header'
 
@@ -23,7 +25,7 @@ function Layout({ children }: LayoutProps) {
         <div className='sticky bottom-4'>
           <Button
             type='button'
-            onClick={() => changeTheme(theme === 'light' ? 'dark' : 'light')}
+            onClick={() => changeTheme(theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT)}
           >
             {theme === 'light' ? <HiOutlineMoon /> : <HiOutlineSun />}
           </Button>

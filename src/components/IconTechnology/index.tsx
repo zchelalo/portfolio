@@ -1,5 +1,5 @@
 import { Technology } from '@/constants'
-import { useTechnology } from '@/modules/project/ui/hooks/useTechnology'
+import { useTechnology } from '@/components/IconTechnology/hooks/useTechnology'
 
 type IconTechnologyProps = {
   technology: Technology

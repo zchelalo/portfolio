@@ -1,6 +1,6 @@
 import { SkillEntity } from '@/modules/skill/domain/entity'
 import { ProjectEntity } from '@/modules/project/domain/entity'
-import { SkillRepository } from '@/modules/skill/domain/repository'
+import { Filters, SkillRepository } from '@/modules/skill/domain/repository'
 
 import { SkillLevel, Technology } from '@/constants'
 
@@ -139,8 +139,15 @@ export class MemoryRepository implements SkillRepository {
     return { skill: skillObtained, projects: projectsObtained }
   }
 
-  async getSkills(offset: number, limit: number): Promise<SkillEntity[]> {
-    const skillsObtained = skills.slice(offset, offset + limit)
+  async getSkills(offset: number, limit: number, filters?: Filters): Promise<SkillEntity[]> {
+    let skillsObtained = skills
+    if (filters) {
+      if (filters.level) {
+        skillsObtained = skillsObtained.filter(skill => skill.level == filters.level)
+      }
+    }
+
+    skillsObtained = skillsObtained.slice(offset, offset + limit)
     if (skillsObtained.length === 0) {
       throw new Error('skills not found')
     }

@@ -7,7 +7,7 @@ import { Section } from '@/constants'
 import { useEffect, useState } from 'react'
 
 import { SectionLayout } from '@/components/SectionLayout'
-import { IconTechnology } from '@/modules/project/ui/components/IconTechnology'
+import { IconTechnology } from '@/components/IconTechnology'
 import { Button } from '@/components/Button'
 
 import { HiOutlineCodeBracket  } from 'react-icons/hi2'
