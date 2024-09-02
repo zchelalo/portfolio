@@ -14,6 +14,10 @@
   @apply bg-violet-300 dark:bg-violet-900 !important;
 }
 
+.bg-secondary {
+  @apply bg-violet-400 dark:bg-violet-800 !important;
+}
+
 .bg-hover {
   @apply bg-violet-300 hover:bg-violet-400 dark:bg-violet-900 dark:hover:bg-violet-800 !important;
 }
