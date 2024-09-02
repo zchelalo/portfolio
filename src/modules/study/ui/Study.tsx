@@ -1,10 +1,36 @@
+import { StudyEntity } from '@/modules/study/domain/entity'
+import { MemoryRepository } from '@/modules/study/infrastructure/repositories/memory'
+import { StudyUseCase } from '@/modules/study/application/use_cases/study'
+
+import { useEffect, useState } from 'react'
+
+import moment from 'moment'
+
 import { Section } from '@/constants'
 
 import { SectionLayout } from '@/components/SectionLayout'
 
 import { HiOutlineAcademicCap } from 'react-icons/hi2'
 
+const studyRepository = new MemoryRepository()
+const studyUseCase = new StudyUseCase(studyRepository)
+
 function Study() {
+  const [studies, setStudies] = useState<StudyEntity[]>([])
+
+  useEffect(() => {
+    const fetchStudies = async () => {
+      try {
+        const studiesObtained = await studyUseCase.getStudies(0, 5)
+        setStudies(studiesObtained)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    fetchStudies()
+  }, [])
+
   return (
     <SectionLayout
       icon={HiOutlineAcademicCap}
@@ -12,33 +38,17 @@ function Study() {
       id={Section.STUDIES}
     >
       <main>
-        <div className='rounded bg text border-2 border-violet-900 flex flex-wrap justify-between items-center p-2 mt-4'>
-          <div className='flex flex-col'>
-            <h2 className='font-semibold'>CECyTES</h2>
-            <span>Programming Technician</span>
+        {studies.map(study => (
+          <div className='rounded bg text border-2 border-violet-900 flex flex-wrap justify-between items-center p-2 mt-4'>
+            <div className='flex flex-col'>
+              <h2 className='font-semibold'>{study.institution}</h2>
+              <span>{study.career}</span>
+            </div>
+            <span>
+              {moment(study.startDate).utc(true).format('YYYY')} - {moment(study.endDate).utc(true).format('YYYY')}
+            </span>
           </div>
-          <span>
-            2018 - 2021
-          </span>
-        </div>
-        <div className='rounded bg text border-2 border-violet-900 flex flex-wrap justify-between items-center p-2 mt-4'>
-          <div className='flex flex-col'>
-            <h2 className='font-semibold'>Universidad Tecnológica de Nogales</h2>
-            <span>Higher University Technician in Information Technologies</span>
-          </div>
-          <span>
-            2021 - 2023
-          </span>
-        </div>
-        <div className='rounded bg text border-2 border-violet-900 flex flex-wrap justify-between items-center p-2 mt-4'>
-          <div className='flex flex-col'>
-            <h2 className='font-semibold'>Universidad Tecnológica de Nogales</h2>
-            <span>Engineer in Multiplatform Software Development and Management</span>
-          </div>
-          <span>
-            2023 - 2025
-          </span>
-        </div>
+        ))}
       </main>
     </SectionLayout>
   )
