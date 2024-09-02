@@ -7,7 +7,7 @@ import { Section } from '@/constants'
 import { useEffect, useState } from 'react'
 
 import { SectionLayout } from '@/components/SectionLayout'
-import { IconTechnology } from '@/components/IconTechnology'
+import { ButtonTechnology } from '@/components/ButtonTechnology'
 import { Button } from '@/components/Button'
 
 import { HiOutlineCodeBracket  } from 'react-icons/hi2'
@@ -53,7 +53,7 @@ function Project() {
               <div className='flex flex-col justify-center'>
                 <div className='flex flex-wrap items-center'>
                   {project.technologies.map(technology => (
-                    <IconTechnology key={technology.id} technology={technology.name} />
+                    <ButtonTechnology key={technology.id} technology={technology.name} />
                   ))}
                 </div>
                 <div className=''>

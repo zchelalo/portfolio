@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 
 import { Section, SkillLevel } from '@/constants'
 
-import { IconTechnology } from '@/components/IconTechnology'
+import { ButtonTechnology } from '@/components/ButtonTechnology'
 import { SectionLayout } from '@/components/SectionLayout'
 
 import { MdOutlineWeb } from 'react-icons/md'
@@ -45,7 +45,7 @@ function Skill() {
           <h2 className='text text-xl font-medium'>Basic</h2>
           <div className='w-full flex flex-wrap items-center'>
             {basicSkills?.map(skill => (
-              <IconTechnology key={skill.id} technology={skill.name} />
+              <ButtonTechnology key={skill.id} technology={skill.name} />
             ))}
           </div>
         </section>
@@ -53,7 +53,7 @@ function Skill() {
           <h2 className='text text-xl font-medium'>Intermediete</h2>
           <div className='w-full flex flex-wrap items-center'>
             {intermedieteSkills?.map(skill => (
-              <IconTechnology key={skill.id} technology={skill.name} />
+              <ButtonTechnology key={skill.id} technology={skill.name} />
             ))}
           </div>
         </section>
@@ -61,7 +61,7 @@ function Skill() {
           <h2 className='text text-xl font-medium'>Advanced</h2>
           <div className='w-full flex flex-wrap items-center'>
             {advancedSkills?.map(skill => (
-              <IconTechnology key={skill.id} technology={skill.name} />
+              <ButtonTechnology key={skill.id} technology={skill.name} />
             ))}
           </div>
         </section>

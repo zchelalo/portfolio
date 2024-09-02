@@ -1,18 +1,22 @@
-import { Technology } from '@/constants'
-import { useTechnology } from '@/components/IconTechnology/hooks/useTechnology'
+import { useTechnology } from '@/hooks/useTechnology'
 
-type IconTechnologyProps = {
+import { Technology } from '@/constants'
+
+import { NavLink } from 'react-router-dom'
+
+type ButtonTechnologyProps = {
   technology: Technology
 }
 
-function IconTechnology({
+function ButtonTechnology({
   technology
-}: IconTechnologyProps) {
+}: ButtonTechnologyProps) {
   const { technologyData } = useTechnology()
 
   return (
-    <div
-      className='rounded flex justify-center items-center p-1 mr-1 mt-1'
+    <NavLink
+      to={`/skills/${technology}`}
+      className='rounded flex justify-center items-center p-1 mr-1 mt-1 cursor-pointer hover:scale-105 transition-transform'
       style={{
         color: technologyData[technology].textColor,
         backgroundColor: technologyData[technology].backgroundColor
@@ -20,8 +24,8 @@ function IconTechnology({
     >
       {technologyData[technology].icon({ title: technologyData[technology].name })}
       <span className='text-xs ml-1'>{technologyData[technology].name}</span>
-    </div>
+    </NavLink>
   )
 }
 
-export { IconTechnology }
+export { ButtonTechnology }
