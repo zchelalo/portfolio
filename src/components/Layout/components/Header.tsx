@@ -27,7 +27,7 @@ function Header() {
         <li className='mx-3'>
           <Link
             smooth
-            to={`#${Section.ABOUT_ME}`}
+            to={`/#${Section.ABOUT_ME}`}
             className='text-hover font-semibold'
           >
             About me
@@ -36,7 +36,7 @@ function Header() {
         <li className='mx-3'>
           <Link
             smooth
-            to={`#${Section.WORK_EXPERIENCES}`}
+            to={`/#${Section.WORK_EXPERIENCES}`}
             className='text-hover font-semibold'
           >
             Work Experience
@@ -45,7 +45,7 @@ function Header() {
         <li className='mx-3'>
           <Link
             smooth
-            to={`#${Section.PROJECTS}`}
+            to={`/#${Section.PROJECTS}`}
             className='text-hover font-semibold'
           >
             Projects
@@ -54,7 +54,7 @@ function Header() {
         <li className='mx-3'>
           <Link
             smooth
-            to={`#${Section.STUDIES}`}
+            to={`/#${Section.STUDIES}`}
             className='text-hover font-semibold'
           >
             Studies
@@ -63,7 +63,7 @@ function Header() {
         <li className='mx-3'>
           <Link
             smooth
-            to={`#${Section.SKILLS}`}
+            to={`/#${Section.SKILLS}`}
             className='text-hover font-semibold'
           >
             Skills

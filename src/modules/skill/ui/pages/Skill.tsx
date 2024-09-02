@@ -8,6 +8,10 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 import { Technology } from '@/constants'
 
+import { firstLetterToUpperCase } from '@/utils/string'
+
+import { ProjectCard } from '@/components/ProjectCard'
+
 const skillRepository = new MemoryRepository()
 const skillUseCase = new SkillUseCase(skillRepository)
 
@@ -44,14 +48,23 @@ function Skill() {
   }, [technology, navigate])
 
   return (
-    <div>
-      <pre>
-        {skill && JSON.stringify(skill, null, 2)}
-      </pre>
-      <pre>
-        {projects && JSON.stringify(projects, null, 2)}
-      </pre>
-    </div>
+    <main>
+      {skill ? (
+        <>
+          <h1 className='text text-2xl font-semibold'>
+            Projects that use {firstLetterToUpperCase(skill.name)}
+          </h1>
+          {projects && projects.length > 0 ? (
+            projects.map(project => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+              />
+            ))
+          ) : undefined}
+        </>
+      ) : undefined}
+    </main>
   )
 }
 
