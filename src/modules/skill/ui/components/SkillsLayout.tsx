@@ -7,6 +7,7 @@ import { useState } from 'react'
 
 import { SkillLevel } from '@/constants'
 
+import { toast } from 'sonner'
 import { firstLetterToUpperCase } from '@/utils/string'
 
 import { ModalSkillsUsed } from '@/modules/skill/ui/components/ModalSkillsUsed'
@@ -29,11 +30,20 @@ function SkillsLayout({
   const [projects, setProjects] = useState<ProjectEntity[]>()
 
   const fetchProjects = async (skill: SkillEntity) => {
-    if (!skill) return
+    if (!skill) {
+      toast.info('No skill selected')
+      return
+    }
     const skillObtained = await skillUseCase.getSkillById(skill.id as string)
 
-    if (!skillObtained) return
-    if (!skillObtained.projects.length) return
+    if (!skillObtained) {
+      toast.error('Skill not found')
+      return
+    }
+    if (!skillObtained.projects.length) {
+      toast.info('No projects to show')
+      return
+    }
 
     setSelectedSkill(skillObtained.skill)
     setProjects(skillObtained.projects)

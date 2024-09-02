@@ -2,6 +2,7 @@ import { useTheme } from '@/hooks/useTheme'
 
 import { Theme } from '@/constants'
 
+import { Toaster } from 'sonner'
 import { Button } from '@/components/Button'
 import { Header } from '@/components/Layout/components/Header'
 
@@ -30,6 +31,12 @@ function Layout({ children }: LayoutProps) {
             {theme === 'light' ? <HiOutlineMoon /> : <HiOutlineSun />}
           </Button>
         </div>
+        <Toaster
+          closeButton={true}
+          richColors={true}
+          expand={true}
+          theme={theme}
+        />
       </div>
     </div>
   )
