@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 
 import { Section, SkillLevel } from '@/constants'
 
-import { ButtonTechnology } from '@/components/ButtonTechnology'
+import { SkillsLayout } from '@/modules/skill/ui/components/SkillsLayout'
 import { SectionLayout } from '@/components/SectionLayout'
 
 import { MdOutlineWeb } from 'react-icons/md'
@@ -41,30 +41,24 @@ function Skill() {
       id={Section.SKILLS}
     >
       <main className='flex flex-col items-center'>
-        <section className='w-full flex flex-col mt-4'>
-          <h2 className='text text-xl font-medium'>Basic</h2>
-          <div className='w-full flex flex-wrap items-center'>
-            {basicSkills?.map(skill => (
-              <ButtonTechnology key={skill.id} technology={skill.name} />
-            ))}
-          </div>
-        </section>
-        <section className='w-full flex flex-col mt-4'>
-          <h2 className='text text-xl font-medium'>Intermediete</h2>
-          <div className='w-full flex flex-wrap items-center'>
-            {intermedieteSkills?.map(skill => (
-              <ButtonTechnology key={skill.id} technology={skill.name} />
-            ))}
-          </div>
-        </section>
-        <section className='w-full flex flex-col mt-4'>
-          <h2 className='text text-xl font-medium'>Advanced</h2>
-          <div className='w-full flex flex-wrap items-center'>
-            {advancedSkills?.map(skill => (
-              <ButtonTechnology key={skill.id} technology={skill.name} />
-            ))}
-          </div>
-        </section>
+        {basicSkills ? (
+          <SkillsLayout
+            level={SkillLevel.BASIC}
+            skills={basicSkills}
+          />
+        ) : undefined}
+        {intermedieteSkills ? (
+          <SkillsLayout
+            level={SkillLevel.INTERMEDIATE}
+            skills={intermedieteSkills}
+          />
+        ) : undefined}
+        {advancedSkills ? (
+          <SkillsLayout
+            level={SkillLevel.ADVANCED}
+            skills={advancedSkills}
+          />
+        ) : undefined}
       </main>
     </SectionLayout>
   )
