@@ -17,15 +17,21 @@ export class SkillUseCase {
     this.skillRepository = skillRepository
   }
 
-  public async getSkillById(id: string): Promise<{ skill: SkillEntity, projects: ProjectEntity[] }> {
+  public async getSkillById(id: string, offset: number, limit: number): Promise<{ skill: SkillEntity, projects: ProjectEntity[] }> {
     getSkillByIDSchema.parse({ id })
+    paginationSchema.parse({ offset, limit })
 
-    const skillObtained = await this.skillRepository.getSkillById(id)
+    const skillObtained = await this.skillRepository.getSkillById(id, offset, limit)
     return skillObtained
   }
 
-  public async getSkillByTechnology(technology: Technology): Promise<{ skill: SkillEntity, projects: ProjectEntity[] }> {
-    const skillsObtained = await this.skillRepository.getSkillByTechnology(technology)
+  public async getSkillByTechnology(technology: Technology, offset: number, limit: number): Promise<{ skill: SkillEntity, projects: ProjectEntity[] }> {
+    if (!Object.values(Technology).includes(technology)) {
+      throw new Error('invalid technology name')
+    }
+    paginationSchema.parse({ offset, limit })
+
+    const skillsObtained = await this.skillRepository.getSkillByTechnology(technology, offset, limit)
     return skillsObtained
   }
 

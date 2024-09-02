@@ -34,7 +34,7 @@ function SkillsLayout({
       toast.info('No skill selected')
       return
     }
-    const skillObtained = await skillUseCase.getSkillById(skill.id as string)
+    const skillObtained = await skillUseCase.getSkillById(skill.id as string, 0, 10)
 
     if (!skillObtained) {
       toast.error('Skill not found')

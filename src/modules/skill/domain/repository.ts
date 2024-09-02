@@ -8,7 +8,7 @@ export interface Filters {
 }
 
 export interface SkillRepository {
-  getSkillById(uuid: string): Promise<{ skill: SkillEntity, projects: ProjectEntity[] }>
-  getSkillByTechnology(technology: Technology): Promise<{ skill: SkillEntity, projects: ProjectEntity[] }>
+  getSkillById(uuid: string, offset: number, limit: number): Promise<{ skill: SkillEntity, projects: ProjectEntity[] }>
+  getSkillByTechnology(technology: Technology, offset: number, limit: number): Promise<{ skill: SkillEntity, projects: ProjectEntity[] }>
   getSkills(offset: number, limit: number, filters?: Filters): Promise<SkillEntity[]>
 }

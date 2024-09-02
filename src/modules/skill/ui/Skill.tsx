@@ -41,24 +41,30 @@ function Skill() {
       id={Section.SKILLS}
     >
       <main className='flex flex-col items-center'>
-        {basicSkills ? (
-          <SkillsLayout
-            level={SkillLevel.BASIC}
-            skills={basicSkills}
-          />
-        ) : undefined}
-        {intermedieteSkills ? (
-          <SkillsLayout
-            level={SkillLevel.INTERMEDIATE}
-            skills={intermedieteSkills}
-          />
-        ) : undefined}
-        {advancedSkills ? (
-          <SkillsLayout
-            level={SkillLevel.ADVANCED}
-            skills={advancedSkills}
-          />
-        ) : undefined}
+        {(!basicSkills && !intermedieteSkills && !advancedSkills) ? (
+          <p>No skills to show</p>
+        ) : (
+          <>
+            {basicSkills ? (
+              <SkillsLayout
+                level={SkillLevel.BASIC}
+                skills={basicSkills}
+              />
+            ) : undefined}
+            {intermedieteSkills ? (
+              <SkillsLayout
+                level={SkillLevel.INTERMEDIATE}
+                skills={intermedieteSkills}
+              />
+            ) : undefined}
+            {advancedSkills ? (
+              <SkillsLayout
+                level={SkillLevel.ADVANCED}
+                skills={advancedSkills}
+              />
+            ) : undefined}
+          </>
+        )}
       </main>
     </SectionLayout>
   )

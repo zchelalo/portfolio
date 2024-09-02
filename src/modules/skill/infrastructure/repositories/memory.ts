@@ -130,21 +130,21 @@ export const skills: SkillEntity[] = [
 ]
 
 export class MemoryRepository implements SkillRepository {
-  async getSkillById(id: string): Promise<{ skill: SkillEntity, projects: ProjectEntity[] }> {
+  async getSkillById(id: string, offset: number, limit: number): Promise<{ skill: SkillEntity, projects: ProjectEntity[] }> {
     const skillObtained = skills.find(skill => skill.id === id)
     if (!skillObtained) {
       throw new Error(`skill with id ${id} not found`)
     }
-    const projectsObtained = projects.filter(project => project.technologies.some(technology => technology.name === skillObtained.name))
+    const projectsObtained = projects.filter(project => project.technologies.some(technology => technology.name === skillObtained.name)).slice(offset, offset + limit)
     return { skill: skillObtained, projects: projectsObtained }
   }
 
-  async getSkillByTechnology(technology: Technology): Promise<{ skill: SkillEntity, projects: ProjectEntity[] }> {
+  async getSkillByTechnology(technology: Technology, offset: number, limit: number): Promise<{ skill: SkillEntity, projects: ProjectEntity[] }> {
     const skillObtained = skills.find(skill => skill.name === technology)
     if (!skillObtained) {
       throw new Error(`skill with technology ${technology} not found`)
     }
-    const projectsObtained = projects.filter(project => project.technologies.some(technology => technology.name === skillObtained.name))
+    const projectsObtained = projects.filter(project => project.technologies.some(technology => technology.name === skillObtained.name)).slice(offset, offset + limit)
     return { skill: skillObtained, projects: projectsObtained }
   }
 
