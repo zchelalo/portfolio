@@ -63,3 +63,9 @@ export enum Section {
   CONTACT = 'contact',
   SKILLS = 'skills'
 }
+
+export enum SkillLevel {
+  BASIC = 'basic',
+  INTERMEDIATE = 'intermediate',
+  ADVANCED = 'advanced'
+}

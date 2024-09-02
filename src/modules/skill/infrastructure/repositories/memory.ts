@@ -2,106 +2,130 @@ import { SkillEntity } from '@/modules/skill/domain/entity'
 import { ProjectEntity } from '@/modules/project/domain/entity'
 import { SkillRepository } from '@/modules/skill/domain/repository'
 
-import { Technology } from '@/constants'
+import { SkillLevel, Technology } from '@/constants'
 
 import { projects } from '@/modules/project/infrastructure/repositories/memory'
 
 export const skills: SkillEntity[] = [
   {
     id: '123e4567-e89b-12d3-a456-426614174000',
-    name: Technology.NODE
+    name: Technology.NODE,
+    level: SkillLevel.ADVANCED
   },
   {
     id: '123e4567-e89b-12d3-a456-426614174001',
-    name: Technology.SEQUELIZE
+    name: Technology.SEQUELIZE,
+    level: SkillLevel.ADVANCED
   },
   {
     id: '123e4567-e89b-12d3-a456-426614174002',
-    name: Technology.POSTGRESQL
+    name: Technology.POSTGRESQL,
+    level: SkillLevel.ADVANCED
   },
   {
     id: '123e4567-e89b-12d3-a456-426614174003',
-    name: Technology.DOCKER
+    name: Technology.DOCKER,
+    level: SkillLevel.INTERMEDIATE
   },
   {
     id: '123e4567-e89b-12d3-a456-426614174004',
-    name: Technology.REACT
+    name: Technology.REACT,
+    level: SkillLevel.INTERMEDIATE
   },
   {
     id: '123e4567-e89b-12d3-a456-426614174005',
-    name: Technology.TAILWIND_CSS
+    name: Technology.TAILWIND_CSS,
+    level: SkillLevel.ADVANCED
   },
   {
     id: '123e4567-e89b-12d3-a456-426614174006',
-    name: Technology.SHADCN
+    name: Technology.SHADCN,
+    level: SkillLevel.INTERMEDIATE
   },
   {
     id: '123e4567-e89b-12d3-a456-426614174007',
-    name: Technology.I18NEXT
+    name: Technology.I18NEXT,
+    level: SkillLevel.INTERMEDIATE
   },
   {
     id: '123e4567-e89b-12d3-a456-426614174008',
-    name: Technology.ZOD
+    name: Technology.ZOD,
+    level: SkillLevel.ADVANCED
   },
   {
     id: '123e4567-e89b-12d3-a456-426614174009',
-    name: Technology.JAVASCRIPT
+    name: Technology.JAVASCRIPT,
+    level: SkillLevel.ADVANCED
   },
   {
     id: '123e4567-e89b-12d3-a456-426614174010',
-    name: Technology.TYPESCRIPT
+    name: Technology.TYPESCRIPT,
+    level: SkillLevel.ADVANCED
   },
   {
     id: '123e4567-e89b-12d3-a456-426614174011',
-    name: Technology.EXPRESS
+    name: Technology.EXPRESS,
+    level: SkillLevel.ADVANCED
   },
   {
     id: '123e4567-e89b-12d3-a456-426614174012',
-    name: Technology.DRIZZLE
+    name: Technology.DRIZZLE,
+    level: SkillLevel.ADVANCED
   },
   {
     id: '123e4567-e89b-12d3-a456-426614174013',
-    name: Technology.MONGOOSE
+    name: Technology.MONGOOSE,
+    level: SkillLevel.BASIC
   },
   {
     id: '123e4567-e89b-12d3-a456-426614174014',
-    name: Technology.MONGODB
+    name: Technology.MONGODB,
+    level: SkillLevel.BASIC
   },
   {
     id: '123e4567-e89b-12d3-a456-426614174015',
-    name: Technology.JEST
+    name: Technology.JEST,
+    level: SkillLevel.INTERMEDIATE
   },
   {
     id: '123e4567-e89b-12d3-a456-426614174016',
-    name: Technology.ESLINT
+    name: Technology.ESLINT,
+    level: SkillLevel.BASIC
   },
   {
     id: '123e4567-e89b-12d3-a456-426614174017',
-    name: Technology.GO
+    name: Technology.GO,
+    level: SkillLevel.INTERMEDIATE
   },
   {
     id: '123e4567-e89b-12d3-a456-426614174018',
-    name: Technology.GIN
+    name: Technology.GIN,
+    level: SkillLevel.BASIC
   },
   {
     id: '123e4567-e89b-12d3-a456-426614174019',
-    name: Technology.PYTHON
+    name: Technology.PYTHON,
+    level: SkillLevel.BASIC
   },
   {
     id: '123e4567-e89b-12d3-a456-426614174020',
-    name: Technology.FASTAPI
+    name: Technology.FASTAPI,
+    level: SkillLevel.BASIC
   },
   {
     id: '123e4567-e89b-12d3-a456-426614174021',
-    name: Technology.SQLALCHEMY
+    name: Technology.SQLALCHEMY,
+    level: SkillLevel.BASIC
   },
   {
     id: '123e4567-e89b-12d3-a456-426614174022',
-    name: Technology.MYSQL
+    name: Technology.MYSQL,
+    level: SkillLevel.ADVANCED
   },
   {
     id: '123e4567-e89b-12d3-a456-426614174023',
-    name: Technology.REDIS
+    name: Technology.REDIS,
+    level: SkillLevel.INTERMEDIATE
   }
 ]
 
