@@ -8,6 +8,8 @@ import {
   paginationSchema
 } from '@/modules/skill/application/schemas/skill'
 
+import { Technology } from '@/constants'
+
 export class SkillUseCase {
   private readonly skillRepository: SkillRepository
 
@@ -20,6 +22,11 @@ export class SkillUseCase {
 
     const skillObtained = await this.skillRepository.getSkillById(id)
     return skillObtained
+  }
+
+  public async getSkillByTechnology(technology: Technology): Promise<{ skill: SkillEntity, projects: ProjectEntity[] }> {
+    const skillsObtained = await this.skillRepository.getSkillByTechnology(technology)
+    return skillsObtained
   }
 
   public async getSkills(offset: number, limit: number, filters?: Filters): Promise<SkillEntity[]> {

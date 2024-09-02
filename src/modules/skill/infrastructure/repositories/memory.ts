@@ -139,6 +139,15 @@ export class MemoryRepository implements SkillRepository {
     return { skill: skillObtained, projects: projectsObtained }
   }
 
+  async getSkillByTechnology(technology: Technology): Promise<{ skill: SkillEntity, projects: ProjectEntity[] }> {
+    const skillObtained = skills.find(skill => skill.name === technology)
+    if (!skillObtained) {
+      throw new Error(`skill with technology ${technology} not found`)
+    }
+    const projectsObtained = projects.filter(project => project.technologies.some(technology => technology.name === skillObtained.name))
+    return { skill: skillObtained, projects: projectsObtained }
+  }
+
   async getSkills(offset: number, limit: number, filters?: Filters): Promise<SkillEntity[]> {
     let skillsObtained = skills
     if (filters) {

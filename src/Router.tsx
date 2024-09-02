@@ -14,7 +14,7 @@ function Router() {
             element={<Home />}
           />
           <Route
-            path='/skills/{technology}'
+            path='/skills/:technology'
             element={<Skill />}
           />
         </Routes>
