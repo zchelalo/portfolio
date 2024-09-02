@@ -10,7 +10,7 @@ import { SkillLevel } from '@/constants'
 
 import { firstLetterToUpperCase } from '@/utils/string'
 
-import { ModalSkillsUsed } from '@/modules/skill/ui/components/ModalSkillsUsed'
+import { ModalSkillsUsed } from '@/components/ModalSkillsUsed'
 import { ButtonTechnology } from '@/components/ButtonTechnology'
 
 type SkillsLayoutProps = {
