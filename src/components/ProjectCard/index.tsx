@@ -38,7 +38,7 @@ function ProjectCard({
   }
 
   return (
-    <article key={project.id} className='w-full rounded bg flex justify-center p-4 mt-4'>
+    <article className='w-full rounded bg flex justify-center p-4 mt-4'>
 
       {modalIsOpen && selectedSkill && projects ? (
         <ModalSkillsUsed
