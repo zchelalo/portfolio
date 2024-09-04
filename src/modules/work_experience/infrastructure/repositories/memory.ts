@@ -7,6 +7,21 @@ const workExperiences: WorkExperienceEntity[] = [
     company: 'Under Apps Systems',
     position: 'Backend Developer',
     description: 'I maintained and fixed bugs in microservices, developed endpoints in NodeJS, designed and implemented PostgreSQL schemas, and created a full application using Hono, Drizzle, Zod, and JWT-based authentication. I also dockerized applications, set up a reverse proxy with NGINX, conducted unit testing with Jest, documented with Typedoc, and automated processes using bash scripts. Additionally, I actively participated in agile methodology projects.',
+    fullDescription: `- Mantenimiento y corrección de errores en cuatro microservicios, tres de ellos
+desarrollados en NodeJS con Express y el cuarto hecho en Java con Spring Boot.
+- Desarrollo de endpoints en NodeJS con Javascript y Typescript.
+- Diseño e implementación de schemas de base de datos (PostgreSQL).
+- Diseño y desarrollo de una aplicación utilizando Hono, Drizzle, Zod y autenticación
+mediante JWT y refresh tokens en NodeJS con Typescript.
+- Dockerización de aplicaciones en desarrollo y producción.
+- Implementación de un reverse proxy con NGINX.
+- Testing unitario con Jest y el TestingHelper de Hono.
+- Creación de base de datos temporales a la hora de hacer testing.
+- Documentación con Typedoc.
+- Documentación de endpoints con Swagger.
+- Automatización de procesos con scripts bash y scripts en package.json.
+- Participe de proyectos implementando metodologías ágiles.
+`,
     startDate: '2023-09-15T00:00:00Z',
     endDate: undefined
   }

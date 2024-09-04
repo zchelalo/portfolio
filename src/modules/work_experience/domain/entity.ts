@@ -3,6 +3,7 @@ export interface WorkExperienceEntity {
   company: string
   position: string
   description: string
+  fullDescription: string
   startDate: string
   endDate?: string
 }

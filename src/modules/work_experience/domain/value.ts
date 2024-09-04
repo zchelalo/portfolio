@@ -5,13 +5,15 @@ export class WorkExperienceValue implements WorkExperienceEntity {
   readonly company: string
   readonly position: string
   readonly description: string
+  readonly fullDescription: string
   readonly startDate: string
   readonly endDate?: string
 
-  constructor(company: string, position: string, description: string, startDate: string, endDate?: string, id?: string) {
+  constructor(company: string, position: string, description: string, fullDescription: string, startDate: string, endDate?: string, id?: string) {
     this.company = company
     this.position = position
     this.description = description
+    this.fullDescription = fullDescription
 
     if (!this.isValidISODate(startDate)) {
       throw new Error(`invalid ISO format for startDate: ${startDate}`)
