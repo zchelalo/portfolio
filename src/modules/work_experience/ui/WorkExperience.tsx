@@ -40,7 +40,10 @@ function WorkExperience() {
     >
       <main className='flex flex-col justify-center'>
         {workExperiences.map(workExperience => (
-          <>
+          <div
+            key={workExperience.id}
+            className='flex flex-col justify-center'
+          >
             {modalIsOpen ? (
               <ModalFullWorkExperience
                 setModalIsOpen={setModalIsOpen}
@@ -48,11 +51,10 @@ function WorkExperience() {
               />
             ): undefined}
             <Work
-              key={workExperience.id}
               workExperience={workExperience}
               onClick={() => setModalIsOpen(true)}
             />
-          </>
+          </div>
         ))}
       </main>
     </SectionLayout>
