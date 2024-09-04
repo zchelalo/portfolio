@@ -70,3 +70,8 @@ export enum SkillLevel {
   INTERMEDIATE = 'intermediate',
   ADVANCED = 'advanced'
 }
+
+export enum NamespaceLanguage {
+  COMMON = 'common',
+  ABOUT_ME = 'about_me'
+}

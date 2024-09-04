@@ -2,10 +2,11 @@ import { AboutMeEntity } from '@/modules/about_me/domain/entity'
 import { AboutMeUseCase } from '@/modules/about_me/application/use_cases/work_experience'
 import { MemoryRepository } from '@/modules/about_me/infrastructure/repositories/memory'
 
-import { Section } from '@/constants'
+import { NamespaceLanguage, Section } from '@/constants'
 
 import { useEffect, useState } from 'react'
 import { useSocialMedia } from '@/modules/about_me/ui/hooks/useSocialMedia'
+import { useTranslation } from 'react-i18next'
 
 import { SocialMedia } from '@/modules/about_me/ui/components/SocialMedia'
 import { Typewriter } from 'react-simple-typewriter'
@@ -16,6 +17,7 @@ const aboutMeRepository = new MemoryRepository()
 const aboutMeUseCase = new AboutMeUseCase(aboutMeRepository)
 
 function AboutMe() {
+  const { t } = useTranslation(NamespaceLanguage.ABOUT_ME)
   const { socialMediaFuncs } = useSocialMedia()
 
   const [aboutMe, setAboutMe] = useState<AboutMeEntity>()
@@ -45,7 +47,7 @@ function AboutMe() {
             />
             <h1 className='ml-4 text text-4xl presentation-h1'>
               <Typewriter
-                words={[`Hi, I'm Chelalo`, `Hi, I'm Eduardo`]}
+                words={[t('ui.presentation_one'), t('ui.presentation_two')]}
                 loop={true}
                 cursor
                 cursorStyle='_'
