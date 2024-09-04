@@ -16,7 +16,8 @@ const aboutMe: AboutMeEntity = {
     {
       id: '123e4567-e89b-12d3-a456-426614174002',
       type: SocialMediaType.LINKEDIN,
-      url: 'www.linkedin.com/in/chelalo'
+      url: 'www.linkedin.com/in/chelalo',
+      fileToUpload: '/src/assets/files/resume.pdf'
     },
     {
       id: '123e4567-e89b-12d3-a456-426614174003',

@@ -24,14 +24,16 @@ export class SocialMediaValue implements SocialMediaEntity {
   readonly id?: string
   readonly type: SocialMediaType
   readonly url: string
+  readonly fileToUpload?: string
 
-  constructor(type: SocialMediaType, url: string, id?: string) {
+  constructor(type: SocialMediaType, url: string, fileToUpload?: string, id?: string) {
     if (!Object.values(SocialMediaType).includes(type)) {
       throw new Error(`invalid social media type: ${type}`)
     }
 
     this.type = type
     this.url = url
+    this.fileToUpload = fileToUpload
     this.id = id
   }
 }

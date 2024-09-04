@@ -66,6 +66,7 @@ function AboutMe() {
                   onClick={socialMediaFuncs[sm.type].onClick}
                   icon={socialMediaFuncs[sm.type].icon}
                   socialMedia={sm.url}
+                  fileToUpload={sm.fileToUpload}
                 />
               ))}
             </div>

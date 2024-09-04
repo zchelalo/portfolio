@@ -11,4 +11,5 @@ export interface SocialMediaEntity {
   id?: string
   type: SocialMediaType
   url: string
+  fileToUpload?: string
 }
