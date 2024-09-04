@@ -53,7 +53,7 @@ function ProjectCard({
       <img
         src='https://porfolio.dev/projects/svgl.webp'
         alt={project.title}
-        className='w-1/2 rounded'
+        className='w-1/2 rounded object-cover'
       />
       <div className='w-1/2 flex flex-col justify-between pl-4 text'>
         <div className='flex flex-col mb-2'>
