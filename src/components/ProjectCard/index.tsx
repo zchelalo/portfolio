@@ -60,7 +60,7 @@ function ProjectCard({
           <h2 className='text-lg font-medium'>
             {project.title}
           </h2>
-          <p>
+          <p className='text-pretty'>
             {project.description}
           </p>
         </div>

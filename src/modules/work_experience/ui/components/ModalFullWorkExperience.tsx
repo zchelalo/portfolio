@@ -18,7 +18,7 @@ function ModalFullWorkExperience({
 }: ModalFullWorkExperienceProps) {
   return (
     <Modal>
-      <div className='max-w-4xl w-2/3 max-h-[80vh] rounded bg text flex flex-col p-4'>
+      <div className='max-w-4xl w-2/4 max-h-[80vh] rounded bg text flex flex-col p-4 overflow-y-auto'>
         <header className='w-full flex flex-wrap justify-between items-center'>
           <h3 className='text-lg font-medium'>
             {workExperience.company}
@@ -34,7 +34,7 @@ function ModalFullWorkExperience({
           </Button>
         </header>
         <main>
-          <p className='text-md whitespace-pre-wrap my-4'>
+          <p className='text-pretty text-md whitespace-pre-wrap my-4 px-4'>
             {workExperience.fullDescription}
           </p>
           <div className='flex flex-col'>

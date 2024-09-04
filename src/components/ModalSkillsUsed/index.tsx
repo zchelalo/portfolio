@@ -26,7 +26,7 @@ function ModalSkillsUsed({
 }: ModalSkillsUsedProps) {
   return (
     <Modal>
-      <div className='max-w-4xl w-2/3 max-h-[80vh] rounded bg text flex flex-col p-4'>
+      <div className='max-w-4xl w-2/4 max-h-[80vh] rounded bg text flex flex-col p-4'>
         <header className='w-full flex flex-wrap justify-between items-center'>
           <h3 className='text-lg font-medium'>
             Projects that I have done with {firstLetterToUpperCase(skill.name)}
