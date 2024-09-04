@@ -7,6 +7,7 @@ import { Section } from '@/constants'
 import { useEffect, useState } from 'react'
 
 import { SectionLayout } from '@/components/SectionLayout'
+import { ModalFullWorkExperience } from '@/modules/work_experience/ui/components/ModalFullWorkExperience'
 import { Work } from '@/modules/work_experience/ui/components/Work'
 
 import { HiOutlineBriefcase } from 'react-icons/hi2'
@@ -15,6 +16,7 @@ const workExperienceRepository = new MemoryRepository()
 const workRepositoryUseCase = new WorkExperienceUseCase(workExperienceRepository)
 
 function WorkExperience() {
+  const [modalIsOpen, setModalIsOpen] = useState(false)
   const [workExperiences, setWorkExperiences] = useState<WorkExperienceEntity[]>([])
 
   useEffect(() => {
@@ -38,14 +40,19 @@ function WorkExperience() {
     >
       <main className='flex flex-col justify-center'>
         {workExperiences.map(workExperience => (
-          <Work
-            key={workExperience.id}
-            company={workExperience.company}
-            position={workExperience.position}
-            description={workExperience.description}
-            startDate={workExperience.startDate}
-            endDate={workExperience.endDate || 'Present'}
-          />
+          <>
+            {modalIsOpen ? (
+              <ModalFullWorkExperience
+                setModalIsOpen={setModalIsOpen}
+                workExperience={workExperience}
+              />
+            ): undefined}
+            <Work
+              key={workExperience.id}
+              workExperience={workExperience}
+              onClick={() => setModalIsOpen(true)}
+            />
+          </>
         ))}
       </main>
     </SectionLayout>
