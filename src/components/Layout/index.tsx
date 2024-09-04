@@ -1,13 +1,17 @@
 import { useTheme } from '@/hooks/useTheme'
+import { useLanguage } from '@/hooks/useLanguage'
 
-import { Theme } from '@/constants'
+import { Language, Theme } from '@/constants'
 
 import { Toaster } from 'sonner'
 import { Button } from '@/components/Button'
 import { Header } from '@/components/Layout/components/Header'
 
-import { HiOutlineMoon } from 'react-icons/hi2'
-import { HiOutlineSun } from 'react-icons/hi2'
+import {
+  HiOutlineMoon,
+  HiOutlineSun,
+  HiOutlineLanguage
+} from 'react-icons/hi2'
 
 type LayoutProps = {
   children: React.ReactNode
@@ -15,6 +19,7 @@ type LayoutProps = {
 
 function Layout({ children }: LayoutProps) {
   const { theme, changeTheme } = useTheme()
+  const { language, changeLanguage } = useLanguage()
 
   return (
     <div className='bg-indigo-200 dark:bg-indigo-950 min-h-screen'>
@@ -29,6 +34,13 @@ function Layout({ children }: LayoutProps) {
             onClick={() => changeTheme(theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT)}
           >
             {theme === 'light' ? <HiOutlineMoon /> : <HiOutlineSun />}
+          </Button>
+          <Button
+            type='button'
+            onClick={() => changeLanguage(language === Language.EN ? Language.ES : Language.EN)}
+            className='ml-2'
+          >
+            <HiOutlineLanguage />
           </Button>
         </div>
         <Toaster
