@@ -1,5 +1,6 @@
 export enum LocalStorageKey {
-  THEME = 'theme'
+  THEME = 'theme',
+  LANGUAGE = 'language'
 }
 
 export enum SocialMediaType {
