@@ -10,17 +10,10 @@ const studies: StudyEntity[] = [
     endDate: '2021-08-01T00:00:00Z'
   },
   {
-    id: '123e4567-e89b-12d3-a456-426614174001',
-    institution: 'Universidad Tecnológica de Nogales',
-    career: 'Higher University Technician in Information Technologies',
-    startDate: '2021-08-01T00:00:00Z',
-    endDate: '2023-08-01T00:00:00Z'
-  },
-  {
     id: '123e4567-e89b-12d3-a456-426614174002',
     institution: 'Universidad Tecnológica de Nogales',
     career: 'Engineer in Multiplatform Software Development and Management',
-    startDate: '2023-08-01T00:00:00Z',
+    startDate: '2021-08-01T00:00:00Z',
     endDate: '2025-04-01T00:00:00Z'
   }
 ]
