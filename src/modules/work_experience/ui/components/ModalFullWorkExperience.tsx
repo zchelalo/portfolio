@@ -8,16 +8,20 @@ import { Modal } from '@/components/Modal'
 import { HiOutlineXMark } from 'react-icons/hi2'
 
 type ModalFullWorkExperienceProps = {
+  modalIsOpen: boolean
   setModalIsOpen: (isOpen: boolean) => void
   workExperience: WorkExperienceEntity
 }
 
 function ModalFullWorkExperience({
+  modalIsOpen,
   setModalIsOpen,
   workExperience
 }: ModalFullWorkExperienceProps) {
   return (
-    <Modal>
+    <Modal
+      className={`${modalIsOpen ? 'modal-open' : 'modal-closed'}`}
+    >
       <div className='max-w-4xl w-2/4 max-h-[80vh] rounded bg text flex flex-col p-4 overflow-y-auto'>
         <header className='w-full flex flex-wrap justify-between items-center'>
           <h3 className='text-lg font-medium'>

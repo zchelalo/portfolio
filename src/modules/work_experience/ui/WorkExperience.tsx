@@ -44,12 +44,11 @@ function WorkExperience() {
             key={workExperience.id}
             className='flex flex-col justify-center'
           >
-            {modalIsOpen ? (
-              <ModalFullWorkExperience
-                setModalIsOpen={setModalIsOpen}
-                workExperience={workExperience}
-              />
-            ): undefined}
+            <ModalFullWorkExperience
+              modalIsOpen={modalIsOpen}
+              setModalIsOpen={setModalIsOpen}
+              workExperience={workExperience}
+            />
             <Work
               workExperience={workExperience}
               onClick={() => setModalIsOpen(true)}
