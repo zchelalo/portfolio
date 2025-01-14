@@ -24,8 +24,12 @@ function Layout({ children }: LayoutProps) {
   return (
     <div className='bg-indigo-200 dark:bg-indigo-950 min-h-screen'>
       <div className='relative flex flex-col min-h-screen max-w-4xl mx-auto px-4 sm:px-6 lg:px-8'>
-        <Header />
-        <div className='flex-grow py-16'>
+        <div
+          className='hidden sm:flex'
+        >
+          <Header />
+        </div>
+        <div className='flex-grow pb-16 sm:py-16'>
           {children}
         </div>
         <div className='sticky bottom-4'>
