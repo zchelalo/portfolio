@@ -1,10 +1,13 @@
-import { Section } from '@/constants'
+import { NamespaceLanguage, Section } from '@/constants'
 
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { HashLink as Link } from 'react-router-hash-link'
 
 function Header() {
+  const { t } = useTranslation(NamespaceLanguage.ABOUT_ME)
+
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -30,7 +33,7 @@ function Header() {
             to={`/#${Section.ABOUT_ME}`}
             className='text-hover font-semibold'
           >
-            About me
+            {t('ui.header.about_me')}
           </Link>
         </li>
         <li className='mx-3'>
@@ -39,7 +42,7 @@ function Header() {
             to={`/#${Section.WORK_EXPERIENCES}`}
             className='text-hover font-semibold'
           >
-            Work Experience
+            {t('ui.header.work_experieces')}
           </Link>
         </li>
         <li className='mx-3'>
@@ -48,7 +51,7 @@ function Header() {
             to={`/#${Section.PROJECTS}`}
             className='text-hover font-semibold'
           >
-            Projects
+            {t('ui.header.projects')}
           </Link>
         </li>
         <li className='mx-3'>
@@ -57,7 +60,7 @@ function Header() {
             to={`/#${Section.STUDIES}`}
             className='text-hover font-semibold'
           >
-            Studies
+            {t('ui.header.studies')}
           </Link>
         </li>
         <li className='mx-3'>
@@ -66,7 +69,7 @@ function Header() {
             to={`/#${Section.SKILLS}`}
             className='text-hover font-semibold'
           >
-            Skills
+            {t('ui.header.skills')}
           </Link>
         </li>
       </ul>
