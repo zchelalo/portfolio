@@ -6,6 +6,7 @@ import { Language, Theme } from '@/constants'
 import { Toaster } from 'sonner'
 import { Button } from '@/components/Button'
 import { Header } from '@/components/Layout/components/Header'
+import { PhoneMenu } from '@/components/Layout/components/PhoneMenu'
 
 import {
   HiOutlineMoon,
@@ -24,11 +25,14 @@ function Layout({ children }: LayoutProps) {
   return (
     <div className='bg-indigo-200 dark:bg-indigo-950 min-h-screen'>
       <div className='relative flex flex-col min-h-screen max-w-4xl mx-auto px-4 sm:px-6 lg:px-8'>
-        <div
-          className='hidden sm:flex'
-        >
+
+        <div className='hidden sm:flex'>
           <Header />
         </div>
+        <div className='flex sm:hidden'>
+          <PhoneMenu />
+        </div>
+
         <div className='flex-grow pb-16 sm:py-16'>
           {children}
         </div>
