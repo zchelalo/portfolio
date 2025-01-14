@@ -43,9 +43,9 @@ function AboutMe() {
             <img
               src={aboutMe.pfpUrl}
               alt='Profile picture'
-              className='rounded-full w-32 h-32 shadow-md'
+              className='rounded-full w-28 h-28 sm:w-32 sm:h-32 shadow-md'
             />
-            <h1 className='ml-4 text text-4xl presentation-h1'>
+            <h1 className='ml-4 text text-2xl sm:text-4xl presentation-h1'>
               <Typewriter
                 words={[t('ui.presentation_one'), t('ui.presentation_two')]}
                 loop={true}
@@ -57,7 +57,7 @@ function AboutMe() {
               />
             </h1>
           </section>
-          <section className='text-lg text-secondary mt-3'>
+          <section className='text-base sm:text-lg text-secondary mt-3'>
             <p className='text text-pretty'>
               {aboutMe.personalStatement}
             </p>

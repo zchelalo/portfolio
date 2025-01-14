@@ -35,7 +35,7 @@ function SocialMedia({
     <article className='flex items-stretch rounded border-2 border-violet-900 dark:border-violet-300 mt-2 mr-2'>
       <Button
         type='button'
-        className='bg px-3 mr-1'
+        className='bg sm:px-3 mr-1 text-lg'
         onClick={() => onClick(socialMedia)}
       >
         {icon({ title: socialMedia })}
@@ -43,7 +43,7 @@ function SocialMedia({
       {fileToUpload ? (
         <Button
           type='button'
-          className='bg px-3 mr-1'
+          className='bg sm:px-3 mr-1 text-lg'
           onClick={() => {
             downloadFile(fileToUpload)
           }}
@@ -53,12 +53,12 @@ function SocialMedia({
       ) : undefined}
       <Button
         type='button'
-        className='bg px-3 mr-1'
+        className='bg sm:px-3 mr-1 text-lg'
         onClick={() => navigator.clipboard.writeText(socialMedia)}
       >
         <HiOutlineClipboardCopy />
       </Button>
-      <div className='flex-grow rounded p-2 bg text'>
+      <div className='flex-grow rounded p-2 bg text text-xs sm:text-lg'>
         {socialMedia}
       </div>
     </article>
