@@ -73,5 +73,6 @@ export enum SkillLevel {
 
 export enum NamespaceLanguage {
   COMMON = 'common',
-  ABOUT_ME = 'about_me'
+  ABOUT_ME = 'about_me',
+  HEADER = 'header',
 }
