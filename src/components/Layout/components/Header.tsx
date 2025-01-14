@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { HashLink as Link } from 'react-router-hash-link'
 
 function Header() {
-  const { t } = useTranslation(NamespaceLanguage.ABOUT_ME)
+  const { t } = useTranslation(NamespaceLanguage.HEADER)
 
   const [scrolled, setScrolled] = useState(false)
 
@@ -33,7 +33,7 @@ function Header() {
             to={`/#${Section.ABOUT_ME}`}
             className='text-hover font-semibold'
           >
-            {t('ui.header.about_me')}
+            {t('ui.about_me')}
           </Link>
         </li>
         <li className='mx-3'>
@@ -42,7 +42,7 @@ function Header() {
             to={`/#${Section.WORK_EXPERIENCES}`}
             className='text-hover font-semibold'
           >
-            {t('ui.header.work_experieces')}
+            {t('ui.work_experieces')}
           </Link>
         </li>
         <li className='mx-3'>
@@ -51,7 +51,7 @@ function Header() {
             to={`/#${Section.PROJECTS}`}
             className='text-hover font-semibold'
           >
-            {t('ui.header.projects')}
+            {t('ui.projects')}
           </Link>
         </li>
         <li className='mx-3'>
@@ -60,7 +60,7 @@ function Header() {
             to={`/#${Section.STUDIES}`}
             className='text-hover font-semibold'
           >
-            {t('ui.header.studies')}
+            {t('ui.studies')}
           </Link>
         </li>
         <li className='mx-3'>
@@ -69,7 +69,7 @@ function Header() {
             to={`/#${Section.SKILLS}`}
             className='text-hover font-semibold'
           >
-            {t('ui.header.skills')}
+            {t('ui.skills')}
           </Link>
         </li>
       </ul>

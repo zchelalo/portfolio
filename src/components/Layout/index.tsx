@@ -40,13 +40,14 @@ function Layout({ children }: LayoutProps) {
           <Button
             type='button'
             onClick={() => changeTheme(theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT)}
+            className='shadow-lg'
           >
             {theme === 'light' ? <HiOutlineMoon /> : <HiOutlineSun />}
           </Button>
           <Button
             type='button'
             onClick={() => changeLanguage(language === Language.EN ? Language.ES : Language.EN)}
-            className='ml-2'
+            className='ml-2 shadow-lg'
           >
             <HiOutlineLanguage />
           </Button>
