@@ -38,7 +38,7 @@ function ProjectCard({
   }
 
   return (
-    <article className='w-full rounded bg flex justify-center p-4 mt-4'>
+    <article className='w-full rounded bg flex flex-col sm:flex-row justify-center p-4 mt-4'>
 
       {modalIsOpen && selectedSkill && projects ? (
         <ModalSkillsUsed
@@ -53,9 +53,9 @@ function ProjectCard({
       <img
         src='https://porfolio.dev/projects/svgl.webp'
         alt={project.title}
-        className='w-1/2 rounded object-cover'
+        className='w-full sm:w-1/2 rounded object-cover'
       />
-      <div className='w-1/2 flex flex-col justify-between pl-4 text'>
+      <section className='w-full sm:w-1/2 flex flex-col justify-between sm:pl-4 mt-2 sm:mt-0 text'>
         <div className='flex flex-col mb-2'>
           <h2 className='text-lg font-medium'>
             {project.title}
@@ -95,7 +95,7 @@ function ProjectCard({
             ) : undefined}
           </div>
         </div>
-      </div>
+      </section>
     </article>
   )
 }
