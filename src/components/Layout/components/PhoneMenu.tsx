@@ -1,9 +1,10 @@
-import { NamespaceLanguage } from '@/constants'
+import { NamespaceLanguage, Section } from '@/constants'
 
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { Button } from '@/components/Button'
+import { HashLink as Link } from 'react-router-hash-link'
 
 import { HiOutlineBars3 } from 'react-icons/hi2'
 
@@ -31,19 +32,49 @@ function PhoneMenu() {
       >
         <ul className='mb-2'>
           <li className='text-base font-medium p-1 underline underline-offset-2'>
-            {t('ui.about_me')}
+            <Link
+              smooth
+              to={`/#${Section.ABOUT_ME}`}
+              className='text-hover font-semibold'
+            >
+              {t('ui.about_me')}
+            </Link>
           </li>
           <li className='text-base font-medium p-1 underline underline-offset-2'>
-            {t('ui.work_experieces')}
+            <Link
+              smooth
+              to={`/#${Section.WORK_EXPERIENCES}`}
+              className='text-hover font-semibold'
+            >
+              {t('ui.work_experieces')}
+            </Link>
           </li>
           <li className='text-base font-medium p-1 underline underline-offset-2'>
-            {t('ui.projects')}
+            <Link
+              smooth
+              to={`/#${Section.PROJECTS}`}
+              className='text-hover font-semibold'
+            >
+              {t('ui.projects')}
+            </Link>
           </li>
           <li className='text-base font-medium p-1 underline underline-offset-2'>
-            {t('ui.studies')}
+            <Link
+              smooth
+              to={`/#${Section.STUDIES}`}
+              className='text-hover font-semibold'
+            >
+              {t('ui.studies')}
+            </Link>
           </li>
           <li className='text-base font-medium p-1 underline underline-offset-2'>
-            {t('ui.skills')}
+            <Link
+              smooth
+              to={`/#${Section.SKILLS}`}
+              className='text-hover font-semibold'
+            >
+              {t('ui.skills')}
+            </Link>
           </li>
         </ul>
       </div>
