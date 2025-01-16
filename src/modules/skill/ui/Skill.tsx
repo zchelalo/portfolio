@@ -3,8 +3,9 @@ import { MemoryRepository } from '@/modules/skill/infrastructure/repositories/me
 import { SkillUseCase } from '@/modules/skill/application/use_cases/skill'
 
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
-import { Section, SkillLevel } from '@/constants'
+import { NamespaceLanguage, Section, SkillLevel } from '@/constants'
 
 import { SkillsLayout } from '@/modules/skill/ui/components/SkillsLayout'
 import { SectionLayout } from '@/components/SectionLayout'
@@ -15,6 +16,7 @@ const skillRepository = new MemoryRepository()
 const skillUseCase = new SkillUseCase(skillRepository)
 
 function Skill() {
+  const { t } = useTranslation(NamespaceLanguage.HEADER)
   const [basicSkills, setBasicSkills] = useState<SkillEntity[]>()
   const [intermedieteSkills, setIntermedieteSkills] = useState<SkillEntity[]>()
   const [advancedSkills, setAdvancedSkills] = useState<SkillEntity[]>()
@@ -36,8 +38,8 @@ function Skill() {
 
   return (
     <SectionLayout
-      title='Skills'
       icon={MdOutlineWeb}
+      title={t('ui.skills')}
       id={Section.SKILLS}
     >
       <main className='flex flex-col items-center'>

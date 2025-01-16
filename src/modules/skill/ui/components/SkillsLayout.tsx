@@ -5,10 +5,9 @@ import { SkillUseCase } from '@/modules/skill/application/use_cases/skill'
 import { SkillService } from '@/modules/skill/application/service/skill'
 
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
-import { SkillLevel } from '@/constants'
-
-import { firstLetterToUpperCase } from '@/utils/string'
+import { NamespaceLanguage, SkillLevel } from '@/constants'
 
 import { ModalSkillsUsed } from '@/components/ModalSkillsUsed'
 import { ButtonTechnology } from '@/components/ButtonTechnology'
@@ -26,6 +25,7 @@ function SkillsLayout({
   level,
   skills
 }: SkillsLayoutProps) {
+  const { t } = useTranslation(NamespaceLanguage.COMMON)
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [selectedSkill, setSelectedSkill] = useState<SkillEntity>()
   const [projects, setProjects] = useState<ProjectEntity[]>()
@@ -54,7 +54,7 @@ function SkillsLayout({
         />
       ) : undefined}
 
-      <h2 className='text text-xl font-medium'>{firstLetterToUpperCase(level)}</h2>
+      <h2 className='text text-xl font-medium'>{t(level)}</h2>
       <div className='w-full flex flex-wrap items-center'>
         {skills.map(skill => (
           <ButtonTechnology

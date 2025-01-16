@@ -1,3 +1,6 @@
 {
-  "languages": "Idiomas"
+  "languages": "Idiomas",
+  "basic": "Básico",
+  "advanced": "Avanzado",
+  "intermediate": "Intermedio"
 }
