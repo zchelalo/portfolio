@@ -3,10 +3,11 @@ import { MemoryRepository } from '@/modules/study/infrastructure/repositories/me
 import { StudyUseCase } from '@/modules/study/application/use_cases/study'
 
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import moment from 'moment'
 
-import { Section } from '@/constants'
+import { NamespaceLanguage, Section } from '@/constants'
 
 import { SectionLayout } from '@/components/SectionLayout'
 
@@ -16,6 +17,7 @@ const studyRepository = new MemoryRepository()
 const studyUseCase = new StudyUseCase(studyRepository)
 
 function Study() {
+  const { t } = useTranslation(NamespaceLanguage.HEADER)
   const [studies, setStudies] = useState<StudyEntity[]>([])
 
   useEffect(() => {
@@ -34,7 +36,7 @@ function Study() {
   return (
     <SectionLayout
       icon={HiOutlineAcademicCap}
-      title='Studies'
+      title={t('ui.studies')}
       id={Section.STUDIES}
     >
       <main>
