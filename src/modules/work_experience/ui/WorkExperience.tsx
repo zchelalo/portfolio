@@ -4,6 +4,8 @@ import { MemoryRepository } from '@/modules/work_experience/infrastructure/repos
 
 import { NamespaceLanguage, Section } from '@/constants'
 
+import { i18next } from '@/config/i18n'
+
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -33,7 +35,7 @@ function WorkExperience() {
     }
 
     fetchWorkExperiences()
-  }, [])
+  }, [i18next.language])
 
   return (
     <SectionLayout
