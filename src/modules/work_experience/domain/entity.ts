@@ -1,3 +1,5 @@
+import { Language } from '@/constants'
+
 export interface WorkExperienceEntity {
   id?: string
   company: string
@@ -6,4 +8,5 @@ export interface WorkExperienceEntity {
   fullDescription: string
   startDate: string
   endDate?: string
+  lang: Language
 }
