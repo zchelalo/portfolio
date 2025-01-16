@@ -58,15 +58,7 @@ const aboutMe: AboutMeEntity[] = [
 
 export class MemoryRepository implements AboutMeRepository {
   async getAboutMe(): Promise<AboutMeEntity> {
-    if (i18next.language === Language.ES) {
-      const aboutMeObtained = aboutMe.find(aboutMe => aboutMe.lang === Language.ES)
-      if (!aboutMeObtained) {
-        throw new Error('About me not found')
-      }
-      return aboutMeObtained
-    }
-
-    const aboutMeObtained = aboutMe.find(aboutMe => aboutMe.lang === Language.EN)
+    const aboutMeObtained = aboutMe.find(aboutMe => aboutMe.lang === i18next.language)
     if (!aboutMeObtained) {
       throw new Error('About me not found')
     }
