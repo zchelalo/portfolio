@@ -4,6 +4,8 @@ import { MemoryRepository } from '@/modules/about_me/infrastructure/repositories
 
 import { NamespaceLanguage, Section } from '@/constants'
 
+import { i18next } from '@/config/i18n'
+
 import { useEffect, useState } from 'react'
 import { useSocialMedia } from '@/modules/about_me/ui/hooks/useSocialMedia'
 import { useTranslation } from 'react-i18next'
@@ -33,7 +35,7 @@ function AboutMe() {
     }
 
     fetchAboutMe()
-  }, [])
+  }, [i18next.language])
 
   return (
     <section id={Section.ABOUT_ME} className='w-full flex flex-col justify-center mt-24'>
