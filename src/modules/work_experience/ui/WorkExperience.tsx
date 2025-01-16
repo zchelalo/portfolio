@@ -23,6 +23,7 @@ function WorkExperience() {
 
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [workExperiences, setWorkExperiences] = useState<WorkExperienceEntity[]>([])
+  const [workExperienceModal, setWorkExperienceModal] = useState<WorkExperienceEntity | null>(null)
 
   useEffect(() => {
     const fetchWorkExperiences = async () => {
@@ -44,19 +45,23 @@ function WorkExperience() {
       id={Section.WORK_EXPERIENCES}
     >
       <main className='flex flex-col justify-center'>
+        <ModalFullWorkExperience
+          modalIsOpen={modalIsOpen}
+          setModalIsOpen={setModalIsOpen}
+          workExperience={workExperienceModal}
+          setWorkExperience={setWorkExperienceModal}
+        />
         {workExperiences.map(workExperience => (
           <div
             key={workExperience.id}
             className='flex flex-col justify-center'
           >
-            <ModalFullWorkExperience
-              modalIsOpen={modalIsOpen}
-              setModalIsOpen={setModalIsOpen}
-              workExperience={workExperience}
-            />
             <Work
               workExperience={workExperience}
-              onClick={() => setModalIsOpen(true)}
+              onClick={() => {
+                setModalIsOpen(true)
+                setWorkExperienceModal(workExperience)
+              }}
             />
           </div>
         ))}
