@@ -2,9 +2,10 @@ import { WorkExperienceEntity } from '@/modules/work_experience/domain/entity'
 import { WorkExperienceUseCase } from '@/modules/work_experience/application/use_cases/work_experience'
 import { MemoryRepository } from '@/modules/work_experience/infrastructure/repositories/memory'
 
-import { Section } from '@/constants'
+import { NamespaceLanguage, Section } from '@/constants'
 
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { SectionLayout } from '@/components/SectionLayout'
 import { ModalFullWorkExperience } from '@/modules/work_experience/ui/components/ModalFullWorkExperience'
@@ -16,6 +17,8 @@ const workExperienceRepository = new MemoryRepository()
 const workRepositoryUseCase = new WorkExperienceUseCase(workExperienceRepository)
 
 function WorkExperience() {
+  const { t } = useTranslation(NamespaceLanguage.HEADER)
+
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [workExperiences, setWorkExperiences] = useState<WorkExperienceEntity[]>([])
 
@@ -35,7 +38,7 @@ function WorkExperience() {
   return (
     <SectionLayout
       icon={HiOutlineBriefcase}
-      title='Work experiences'
+      title={t('ui.work_experieces')}
       id={Section.WORK_EXPERIENCES}
     >
       <main className='flex flex-col justify-center'>
