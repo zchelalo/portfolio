@@ -26,8 +26,8 @@ function ModalSkillsUsed({
 }: ModalSkillsUsedProps) {
   return (
     <Modal>
-      <div className='max-w-4xl w-2/4 max-h-[80vh] rounded bg text flex flex-col p-4'>
-        <header className='w-full flex flex-wrap justify-between items-center'>
+      <div className='sm:max-w-4xl w-10/12 sm:w-3/4 lg:w-2/4 max-h-[80vh] rounded bg text flex flex-col p-4'>
+        <header className='w-full flex justify-between items-center'>
           <h3 className='text-lg font-medium'>
             Projects that I have done with {firstLetterToUpperCase(skill.name)}
           </h3>
@@ -44,7 +44,7 @@ function ModalSkillsUsed({
           </Button>
         </header>
         <main className='flex flex-col justify-center items-center'>
-          {projects.map((project) => (
+          {projects.map(project => (
             <ProjectCard
               key={project.id}
               project={project}

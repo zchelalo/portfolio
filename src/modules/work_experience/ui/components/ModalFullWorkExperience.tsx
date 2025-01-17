@@ -26,7 +26,7 @@ return (
     >
       {workExperience && (
         <div className='sm:max-w-4xl w-10/12 sm:w-3/4 lg:w-2/4 max-h-[80vh] rounded bg text flex flex-col p-4 overflow-y-auto'>
-          <header className='w-full flex flex-wrap justify-between items-center'>
+          <header className='w-full flex justify-between items-center'>
             <h3 className='text-lg font-medium'>
               {workExperience.company}
             </h3>

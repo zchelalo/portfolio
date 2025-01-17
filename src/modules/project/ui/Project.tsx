@@ -36,10 +36,11 @@ function Project() {
     >
       <main className='w-full flex justify-center'>
         {projects?.map(project => (
-          <ProjectCard
-            key={project.id}
-            project={project}
-          />
+          <div className='mt-4' key={project.id}>
+            <ProjectCard
+              project={project}
+            />
+          </div>
         ))}
       </main>
     </SectionLayout>
