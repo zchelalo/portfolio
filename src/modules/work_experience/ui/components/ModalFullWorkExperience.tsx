@@ -50,7 +50,7 @@ return (
                 {workExperience.position}
               </span>
               <span className='font-medium'>
-                {moment(workExperience.startDate).utc(true).format('MMMM YYYY')} - {workExperience.endDate ? moment(workExperience.endDate).utc(true).format('MMMM YYYY') : 'Present'}
+                {moment(workExperience.startDate).utc(true).format('MM/YYYY')} - {workExperience.endDate ? moment(workExperience.endDate).utc(true).format('MM/YYYY') : 'Present'}
               </span>
             </div>
           </main>

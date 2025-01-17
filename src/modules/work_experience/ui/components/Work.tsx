@@ -20,7 +20,7 @@ function Work({
         <header className='w-full sm:w-2/6 flex flex-col justify-between text-pretty'>
           <div>
             <h2 className='text-lg font-medium'>{workExperience.company}</h2>
-            <span>{moment(workExperience.startDate).utc(true).format('MMMM YYYY')} - {workExperience.endDate ? moment(workExperience.endDate).utc(true).format('MMMM YYYY') : 'Present'}</span>
+            <span>{moment(workExperience.startDate).utc(true).format('MM/YYYY')} - {workExperience.endDate ? moment(workExperience.endDate).utc(true).format('MM/YYYY') : 'Present'}</span>
           </div>
           <span className='font-medium'>
             {workExperience.position}
