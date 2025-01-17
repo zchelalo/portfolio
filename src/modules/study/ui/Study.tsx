@@ -7,6 +7,8 @@ import { useTranslation } from 'react-i18next'
 
 import moment from 'moment'
 
+import { i18next } from '@/config/i18n'
+
 import { NamespaceLanguage, Section } from '@/constants'
 
 import { SectionLayout } from '@/components/SectionLayout'
@@ -31,7 +33,7 @@ function Study() {
     }
 
     fetchStudies()
-  }, [])
+  }, [i18next.language])
 
   return (
     <SectionLayout
