@@ -2,6 +2,8 @@ import { ProjectEntity } from '@/modules/project/domain/entity'
 import { SkillEntity } from '@/modules/skill/domain/entity'
 import { SkillValue } from '@/modules/skill/domain/value'
 
+import { Language } from '@/constants'
+
 export class ProjectValue implements ProjectEntity {
   readonly id?: string
   readonly title: string
@@ -9,8 +11,9 @@ export class ProjectValue implements ProjectEntity {
   readonly technologies: SkillEntity[]
   readonly sourceCodeUrl?: string
   readonly previewUrl?: string
+  readonly lang: Language
 
-  constructor(title: string, description: string, technologies: SkillEntity[], sourceCodeUrl?: string, previewUrl?: string, id?: string) {
+  constructor(title: string, description: string, technologies: SkillEntity[], sourceCodeUrl?: string, previewUrl?: string, id?: string, lang?: Language) {
     this.title = title
     this.description = description
 
@@ -22,5 +25,10 @@ export class ProjectValue implements ProjectEntity {
     this.sourceCodeUrl = sourceCodeUrl
     this.previewUrl = previewUrl
     this.id = id
+    if (lang) {
+      this.lang = lang
+    } else {
+      this.lang = Language.EN
+    }
   }
 }

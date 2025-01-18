@@ -1,5 +1,7 @@
 import { WorkExperienceEntity } from '@/modules/work_experience/domain/entity'
 
+import { Language } from '@/constants'
+
 export class WorkExperienceValue implements WorkExperienceEntity {
   readonly id?: string
   readonly company: string
@@ -8,8 +10,9 @@ export class WorkExperienceValue implements WorkExperienceEntity {
   readonly fullDescription: string
   readonly startDate: string
   readonly endDate?: string
+  readonly lang: Language
 
-  constructor(company: string, position: string, description: string, fullDescription: string, startDate: string, endDate?: string, id?: string) {
+  constructor(company: string, position: string, description: string, fullDescription: string, startDate: string, endDate?: string, id?: string, lang?: Language) {
     this.company = company
     this.position = position
     this.description = description
@@ -25,6 +28,12 @@ export class WorkExperienceValue implements WorkExperienceEntity {
     this.startDate = startDate
     this.endDate = endDate
     this.id = id
+
+    if (lang) {
+      this.lang = lang
+    } else {
+      this.lang = Language.EN
+    }
   }
 
   private isValidISODate(date: string): boolean {

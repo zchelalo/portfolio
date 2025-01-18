@@ -1,13 +1,16 @@
 import { StudyEntity } from '@/modules/study/domain/entity'
 
+import { Language } from '@/constants'
+
 export class SkillValue implements StudyEntity {
   readonly id?: string
   readonly institution: string
   readonly career: string
   readonly startDate: string
   readonly endDate: string
+  readonly lang: Language
 
-  constructor(institution: string, career: string, startDate: string, endDate: string, id?: string) {
+  constructor(institution: string, career: string, startDate: string, endDate: string, id?: string, lang?: Language) {
     this.institution = institution
     this.career = career
 
@@ -22,6 +25,12 @@ export class SkillValue implements StudyEntity {
     this.startDate = startDate
     this.endDate = endDate
     this.id = id
+
+    if (lang) {
+      this.lang = lang
+    } else {
+      this.lang = Language.EN
+    }
   }
 
   private isValidISODate(date: string): boolean {

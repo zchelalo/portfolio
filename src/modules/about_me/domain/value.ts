@@ -1,13 +1,14 @@
 import { AboutMeEntity, SocialMediaEntity } from '@/modules/about_me/domain/entity'
-import { SocialMediaType } from '@/constants'
+import { Language, SocialMediaType } from '@/constants'
 
 export class AboutMeEntityValue implements AboutMeEntity {
   readonly id?: string
   readonly personalStatement: string
   readonly pfpUrl: string
   readonly socialMedia: SocialMediaEntity[]
+  readonly lang: Language
 
-  constructor(personalStatement: string, pfpUrl: string, socialMedia: SocialMediaEntity[], id?: string) {
+  constructor(personalStatement: string, pfpUrl: string, socialMedia: SocialMediaEntity[], id?: string, lang?: Language) {
     this.personalStatement = personalStatement
     this.pfpUrl = pfpUrl
 
@@ -17,6 +18,12 @@ export class AboutMeEntityValue implements AboutMeEntity {
 
     this.socialMedia = socialMedia
     this.id = id
+
+    if (lang) {
+      this.lang = lang
+    } else {
+      this.lang = Language.EN
+    }
   }
 }
 
