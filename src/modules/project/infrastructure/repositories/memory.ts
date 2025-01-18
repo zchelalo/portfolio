@@ -6,6 +6,8 @@ import { Technology } from '@/constants'
 
 import { skills } from '@/modules/skill/infrastructure/repositories/memory'
 
+import notitasPreview from '@/assets/images/projects/notitas.png'
+
 const skillsNotitas: SkillEntity[] = []
 
 const node = skills.find(skill => skill.name === Technology.NODE)
@@ -48,7 +50,7 @@ export const projects: ProjectEntity[] = [
     description: 'A simple note-taking app built with microservices architecture. It uses a React frontend, a Node.js backend, and a PostgreSQL database. It also uses Docker and Docker Compose for development and deployment.',
     technologies: skillsNotitas,
     sourceCodeUrl: 'https://github.com/zchelalo/notitas',
-    previewUrl: undefined
+    previewUrl: notitasPreview
   },
 ]
 

@@ -51,7 +51,7 @@ function ProjectCard({
       ) : undefined}
 
       <img
-        src='https://porfolio.dev/projects/svgl.webp'
+        src={project.previewUrl || ''}
         alt={project.title}
         className='w-full sm:w-1/2 rounded object-cover'
       />
