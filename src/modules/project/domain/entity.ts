@@ -1,5 +1,7 @@
 import { SkillEntity } from '@/modules/skill/domain/entity'
 
+import { Language } from '@/constants'
+
 export interface ProjectEntity {
   id?: string
   title: string
@@ -7,4 +9,5 @@ export interface ProjectEntity {
   technologies: SkillEntity[]
   sourceCodeUrl?: string
   previewUrl?: string
+  lang: Language
 }

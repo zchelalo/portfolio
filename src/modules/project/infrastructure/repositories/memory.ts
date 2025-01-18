@@ -2,9 +2,11 @@ import { ProjectEntity } from '@/modules/project/domain/entity'
 import { SkillEntity } from '@/modules/skill/domain/entity'
 import { ProjectRepository } from '@/modules/project/domain/repository'
 
-import { Technology } from '@/constants'
+import { Language, Technology } from '@/constants'
 
 import { skills } from '@/modules/skill/infrastructure/repositories/memory'
+
+import { i18next as i18n } from '@/config/i18n'
 
 import notitasPreview from '@/assets/images/projects/notitas.png'
 
@@ -50,8 +52,18 @@ export const projects: ProjectEntity[] = [
     description: 'A simple note-taking app built with microservices architecture. It uses a React frontend, a Node.js backend, and a PostgreSQL database. It also uses Docker and Docker Compose for development and deployment.',
     technologies: skillsNotitas,
     sourceCodeUrl: 'https://github.com/zchelalo/notitas',
-    previewUrl: notitasPreview
+    previewUrl: notitasPreview,
+    lang: Language.EN
   },
+  {
+    id: '123e4567-e89b-12d3-a456-426614174001',
+    title: 'Notitas',
+    description: 'Una aplicación simple para tomar notas construida con arquitectura de microservicios. Utiliza un frontend en React, un backend en Node.js y una base de datos PostgreSQL. También emplea Docker y Docker Compose para el desarrollo y despliegue.',
+    technologies: skillsNotitas,
+    sourceCodeUrl: 'https://github.com/zchelalo/notitas',
+    previewUrl: notitasPreview,
+    lang: Language.ES
+  }
 ]
 
 export class MemoryRepository implements ProjectRepository {
@@ -64,7 +76,11 @@ export class MemoryRepository implements ProjectRepository {
   }
 
   async getProjects(offset: number, limit: number): Promise<ProjectEntity[]> {
-    const projectsObtained = projects.slice(offset, offset + limit)
+    let projectsObtained = projects.filter(project => project.lang === i18n.language)
+    if (projectsObtained.length === 0) {
+      throw new Error('projects not found')
+    }
+    projectsObtained = projectsObtained.slice(offset, offset + limit)
     if (projectsObtained.length === 0) {
       throw new Error('projects not found')
     }

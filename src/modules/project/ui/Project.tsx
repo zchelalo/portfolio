@@ -4,6 +4,8 @@ import { ProjectUseCase } from '@/modules/project/application/use_cases/project'
 
 import { NamespaceLanguage, Section } from '@/constants'
 
+import { i18next } from '@/config/i18n'
+
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -26,7 +28,7 @@ function Project() {
     }
 
     fetchProjects()
-  }, [])
+  }, [i18next.language])
 
   return (
     <SectionLayout
@@ -34,7 +36,7 @@ function Project() {
       title={t('ui.projects')}
       id={Section.PROJECTS}
     >
-      <main className='w-full flex justify-center'>
+      <main className='w-full flex flex-col justify-center items-center'>
         {projects?.map(project => (
           <div className='mt-4' key={project.id}>
             <ProjectCard
