@@ -9,7 +9,7 @@ const aboutMe: AboutMeEntity[] = [
   {
     id: '123e4567-e89b-12d3-a456-426614174000',
     personalStatement: 'I am a passionate backend software developer and technology enthusiast who loves creating innovative solutions to challenges. My journey has connected me with incredible people, allowing me to learn and grow. I am constantly striving to improve, always aiming for the best possible outcome in my work. I enjoy learning from others and sharing my knowledge.',
-    pfpUrl: '/src/assets/images/pfp.jpg',
+    pfpUrl: '/images/pfp.jpg',
     socialMedia: [
       {
         id: '123e4567-e89b-12d3-a456-426614174001',
@@ -20,7 +20,7 @@ const aboutMe: AboutMeEntity[] = [
         id: '123e4567-e89b-12d3-a456-426614174002',
         type: SocialMediaType.LINKEDIN,
         url: 'www.linkedin.com/in/chelalo',
-        fileToUpload: '/src/assets/files/cv-en.pdf'
+        fileToUpload: '/files/cv-en.pdf'
       },
       {
         id: '123e4567-e89b-12d3-a456-426614174003',
@@ -33,7 +33,7 @@ const aboutMe: AboutMeEntity[] = [
   {
     id: '123e4567-e89b-12d3-a456-426614174001',
     personalStatement: 'Soy un apasionado desarrollador de software backend y entusiasta de la tecnología, que disfruta creando soluciones innovadoras para los desafíos. Mi trayectoria me ha conectado con personas increíbles, permitiéndome aprender y crecer. Siempre busco mejorar, apuntando a obtener el mejor resultado posible en mi trabajo. Disfruto aprendiendo de los demás y compartiendo mis conocimientos.',
-    pfpUrl: '/src/assets/images/pfp.jpg',
+    pfpUrl: '/images/pfp.jpg',
     socialMedia: [
       {
         id: '123e4567-e89b-12d3-a456-426614174001',
@@ -44,7 +44,7 @@ const aboutMe: AboutMeEntity[] = [
         id: '123e4567-e89b-12d3-a456-426614174004',
         type: SocialMediaType.LINKEDIN,
         url: 'www.linkedin.com/in/chelalo',
-        fileToUpload: '/src/assets/files/cv-es.pdf'
+        fileToUpload: '/files/cv-es.pdf'
       },
       {
         id: '123e4567-e89b-12d3-a456-426614174003',
