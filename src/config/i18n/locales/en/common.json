@@ -2,5 +2,14 @@
   "languages": "Languages",
   "basic": "Basic",
   "advanced": "Advanced",
-  "intermediate": "Intermediate"
+  "intermediate": "Intermediate",
+  "alerts": {
+    "skills": {
+      "no_selected": "No skills selected",
+      "not_found": "Skill not found"
+    },
+    "projects": {
+      "no_projects_to_show": "No projects to show"
+    }
+  }
 }

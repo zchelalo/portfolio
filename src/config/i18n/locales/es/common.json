@@ -2,5 +2,14 @@
   "languages": "Idiomas",
   "basic": "Básico",
   "advanced": "Avanzado",
-  "intermediate": "Intermedio"
+  "intermediate": "Intermedio",
+  "alerts": {
+    "skills": {
+      "no_selected": "No se han seleccionado habilidades",
+      "not_found": "Habilidad no encontrada"
+    },
+    "projects": {
+      "no_projects_to_show": "No hay proyectos para mostrar"
+    }
+  }
 }
