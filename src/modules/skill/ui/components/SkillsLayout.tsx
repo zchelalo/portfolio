@@ -27,8 +27,8 @@ function SkillsLayout({
 }: SkillsLayoutProps) {
   const { t } = useTranslation(NamespaceLanguage.COMMON)
   const [modalIsOpen, setModalIsOpen] = useState(false)
-  const [selectedSkill, setSelectedSkill] = useState<SkillEntity>()
-  const [projects, setProjects] = useState<ProjectEntity[]>()
+  const [selectedSkill, setSelectedSkill] = useState<SkillEntity | null>(null)
+  const [projects, setProjects] = useState<ProjectEntity[]>([])
 
   const fetchProjects = async (skill: SkillEntity) => {
     const skillAndProjects = await skillService.fetchSkillAndProjects(skill, 0, 10)
@@ -44,15 +44,14 @@ function SkillsLayout({
 
   return (
     <section className='w-full flex flex-col mt-4'>
-      {modalIsOpen && selectedSkill && projects ? (
-        <ModalSkillsUsed
-          skill={selectedSkill}
-          projects={projects}
-          setSelectedSkill={setSelectedSkill}
-          setProjects={setProjects}
-          setModalIsOpen={setModalIsOpen}
-        />
-      ) : undefined}
+      <ModalSkillsUsed
+        skill={selectedSkill}
+        projects={projects}
+        modalIsOpen={modalIsOpen}
+        setSelectedSkill={setSelectedSkill}
+        setProjects={setProjects}
+        setModalIsOpen={setModalIsOpen}
+      />
 
       <h2 className='text text-xl font-medium'>{t(level)}</h2>
       <div className='w-full flex flex-wrap items-center'>
@@ -60,6 +59,7 @@ function SkillsLayout({
           <ButtonTechnology
             key={skill.id}
             technology={skill.name}
+            clickable={true}
             onClick={() => fetchProjects(skill)}
           />
         ))}

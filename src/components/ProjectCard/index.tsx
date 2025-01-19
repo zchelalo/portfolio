@@ -1,55 +1,17 @@
-import { SkillEntity } from '@/modules/skill/domain/entity'
 import { ProjectEntity } from '@/modules/project/domain/entity'
-import { MemoryRepository } from '@/modules/skill/infrastructure/repositories/memory'
-import { SkillUseCase } from '@/modules/skill/application/use_cases/skill'
-import { SkillService } from '@/modules/skill/application/service/skill'
-
-import { useState } from 'react'
 
 import { Button } from '@/components/Button'
 import { ButtonTechnology } from '@/components/ButtonTechnology'
-import { ModalSkillsUsed } from '@/components/ModalSkillsUsed'
 
 type ProjectCardProps = {
   project: ProjectEntity
 }
 
-const skillRepository = new MemoryRepository()
-const skillUseCase = new SkillUseCase(skillRepository)
-const skillService = new SkillService(skillUseCase)
-
 function ProjectCard({
   project
 }: ProjectCardProps) {
-  const [modalIsOpen, setModalIsOpen] = useState(false)
-  const [selectedSkill, setSelectedSkill] = useState<SkillEntity>()
-  const [projects, setProjects] = useState<ProjectEntity[]>()
-
-  const fetchProjects = async (skill: SkillEntity) => {
-    const skillAndProjects = await skillService.fetchSkillAndProjects(skill, 0, 10)
-
-    if (!skillAndProjects) {
-      return
-    }
-
-    setSelectedSkill(skillAndProjects.skill)
-    setProjects(skillAndProjects.projects)
-    setModalIsOpen(true)
-  }
-
   return (
     <article className='w-full rounded bg flex flex-col sm:flex-row justify-center p-4'>
-
-      {modalIsOpen && selectedSkill && projects ? (
-        <ModalSkillsUsed
-          skill={selectedSkill}
-          projects={projects}
-          setSelectedSkill={setSelectedSkill}
-          setProjects={setProjects}
-          setModalIsOpen={setModalIsOpen}
-        />
-      ) : undefined}
-
       <img
         src={project.previewUrl || ''}
         alt={project.title}
@@ -70,7 +32,6 @@ function ProjectCard({
               <ButtonTechnology
                 key={technology.id}
                 technology={technology.name}
-                onClick={() => fetchProjects(technology)}
               />
             ))}
           </div>

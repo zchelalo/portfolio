@@ -4,6 +4,8 @@ import { Filters, SkillRepository } from '@/modules/skill/domain/repository'
 
 import { SkillLevel, Technology } from '@/constants'
 
+import { i18next } from '@/config/i18n'
+
 import { projects } from '@/modules/project/infrastructure/repositories/memory'
 
 export const skills: SkillEntity[] = [
@@ -135,7 +137,8 @@ export class MemoryRepository implements SkillRepository {
     if (!skillObtained) {
       throw new Error(`skill with id ${id} not found`)
     }
-    const projectsObtained = projects.filter(project => project.technologies.some(technology => technology.name === skillObtained.name)).slice(offset, offset + limit)
+    let projectsObtained = projects.filter(project => project.lang === i18next.language)
+    projectsObtained = projectsObtained.filter(project => project.technologies.some(technology => technology.name === skillObtained.name)).slice(offset, offset + limit)
     return { skill: skillObtained, projects: projectsObtained }
   }
 
