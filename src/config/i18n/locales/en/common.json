@@ -3,6 +3,7 @@
   "basic": "Basic",
   "advanced": "Advanced",
   "intermediate": "Intermediate",
+  "more_info": "More info",
   "alerts": {
     "skills": {
       "no_selected": "No skills selected",

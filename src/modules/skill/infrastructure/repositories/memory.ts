@@ -15,11 +15,6 @@ export const skills: SkillEntity[] = [
     level: SkillLevel.ADVANCED
   },
   {
-    id: '123e4567-e89b-12d3-a456-426614174001',
-    name: Technology.SEQUELIZE,
-    level: SkillLevel.ADVANCED
-  },
-  {
     id: '123e4567-e89b-12d3-a456-426614174002',
     name: Technology.POSTGRESQL,
     level: SkillLevel.ADVANCED
@@ -33,26 +28,6 @@ export const skills: SkillEntity[] = [
     id: '123e4567-e89b-12d3-a456-426614174004',
     name: Technology.REACT,
     level: SkillLevel.INTERMEDIATE
-  },
-  {
-    id: '123e4567-e89b-12d3-a456-426614174005',
-    name: Technology.TAILWIND_CSS,
-    level: SkillLevel.ADVANCED
-  },
-  {
-    id: '123e4567-e89b-12d3-a456-426614174006',
-    name: Technology.SHADCN,
-    level: SkillLevel.INTERMEDIATE
-  },
-  {
-    id: '123e4567-e89b-12d3-a456-426614174007',
-    name: Technology.I18NEXT,
-    level: SkillLevel.INTERMEDIATE
-  },
-  {
-    id: '123e4567-e89b-12d3-a456-426614174008',
-    name: Technology.ZOD,
-    level: SkillLevel.ADVANCED
   },
   {
     id: '123e4567-e89b-12d3-a456-426614174009',
@@ -70,16 +45,6 @@ export const skills: SkillEntity[] = [
     level: SkillLevel.ADVANCED
   },
   {
-    id: '123e4567-e89b-12d3-a456-426614174012',
-    name: Technology.DRIZZLE,
-    level: SkillLevel.ADVANCED
-  },
-  {
-    id: '123e4567-e89b-12d3-a456-426614174013',
-    name: Technology.MONGOOSE,
-    level: SkillLevel.BASIC
-  },
-  {
     id: '123e4567-e89b-12d3-a456-426614174014',
     name: Technology.MONGODB,
     level: SkillLevel.BASIC
@@ -90,19 +55,9 @@ export const skills: SkillEntity[] = [
     level: SkillLevel.INTERMEDIATE
   },
   {
-    id: '123e4567-e89b-12d3-a456-426614174016',
-    name: Technology.ESLINT,
-    level: SkillLevel.BASIC
-  },
-  {
     id: '123e4567-e89b-12d3-a456-426614174017',
     name: Technology.GO,
-    level: SkillLevel.INTERMEDIATE
-  },
-  {
-    id: '123e4567-e89b-12d3-a456-426614174018',
-    name: Technology.GIN,
-    level: SkillLevel.BASIC
+    level: SkillLevel.ADVANCED
   },
   {
     id: '123e4567-e89b-12d3-a456-426614174019',
@@ -115,20 +70,15 @@ export const skills: SkillEntity[] = [
     level: SkillLevel.BASIC
   },
   {
-    id: '123e4567-e89b-12d3-a456-426614174021',
-    name: Technology.SQLALCHEMY,
-    level: SkillLevel.BASIC
-  },
-  {
     id: '123e4567-e89b-12d3-a456-426614174022',
     name: Technology.MYSQL,
     level: SkillLevel.ADVANCED
   },
   {
     id: '123e4567-e89b-12d3-a456-426614174023',
-    name: Technology.REDIS,
-    level: SkillLevel.INTERMEDIATE
-  }
+    name: Technology.AWS,
+    level: SkillLevel.BASIC
+  },
 ]
 
 export class MemoryRepository implements SkillRepository {

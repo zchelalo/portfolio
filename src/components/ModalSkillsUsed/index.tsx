@@ -31,7 +31,7 @@ function ModalSkillsUsed({
       className={`${modalIsOpen ? 'modal-open' : 'modal-closed'}`}
     >
       {modalIsOpen && skill && projects ? (
-        <div className='sm:max-w-4xl w-10/12 sm:w-3/4 lg:w-2/4 max-h-[80vh] rounded bg text flex flex-col p-4'>
+        <div className='sm:max-w-4xl w-10/12 sm:w-3/4 lg:w-2/4 max-h-[80dvh] rounded bg text flex flex-col p-4'>
           <header className='w-full flex justify-between items-center'>
             <h3 className='text-lg font-medium'>
               Projects that I have done with {firstLetterToUpperCase(skill.name)}

@@ -57,6 +57,11 @@ export class MemoryRepository implements StudyRepository {
     if (studiesObtained.length === 0) {
       throw new Error('studies not found')
     }
-    return studiesObtained
+    
+    return studiesObtained.sort((a, b) => {
+      const dateA = new Date(a.startDate)
+      const dateB = new Date(b.startDate)
+      return dateB.getTime() - dateA.getTime()
+    })
   }
 }

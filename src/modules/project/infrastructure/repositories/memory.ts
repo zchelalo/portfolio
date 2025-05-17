@@ -9,41 +9,69 @@ import { skills } from '@/modules/skill/infrastructure/repositories/memory'
 import { i18next as i18n } from '@/config/i18n'
 
 const skillsNotitas: SkillEntity[] = []
+const skillsSaloncito: SkillEntity[] = []
 
 const node = skills.find(skill => skill.name === Technology.NODE)
-if (node) skillsNotitas.push(node)
-
-const sequelize = skills.find(skill => skill.name === Technology.SEQUELIZE)
-if (sequelize) skillsNotitas.push(sequelize)
+if (node) {
+  skillsNotitas.push(node)
+  skillsSaloncito.push(node)
+}
 
 const postgresql = skills.find(skill => skill.name === Technology.POSTGRESQL)
-if (postgresql) skillsNotitas.push(postgresql)
+if (postgresql) {
+  skillsNotitas.push(postgresql)
+  skillsSaloncito.push(postgresql)
+}
 
 const docker = skills.find(skill => skill.name === Technology.DOCKER)
-if (docker) skillsNotitas.push(docker)
+if (docker) {
+  skillsNotitas.push(docker)
+  skillsSaloncito.push(docker)
+}
 
 const react = skills.find(skill => skill.name === Technology.REACT)
-if (react) skillsNotitas.push(react)
-
-const tailwindCss = skills.find(skill => skill.name === Technology.TAILWIND_CSS)
-if (tailwindCss) skillsNotitas.push(tailwindCss)
-
-const shadcn = skills.find(skill => skill.name === Technology.SHADCN)
-if (shadcn) skillsNotitas.push(shadcn)
-
-const i18next = skills.find(skill => skill.name === Technology.I18NEXT)
-if (i18next) skillsNotitas.push(i18next)
-
-const zod = skills.find(skill => skill.name === Technology.ZOD)
-if (zod) skillsNotitas.push(zod)
+if (react) {
+  skillsNotitas.push(react)
+  skillsSaloncito.push(react)
+}
 
 const javascript = skills.find(skill => skill.name === Technology.JAVASCRIPT)
 if (javascript) skillsNotitas.push(javascript)
 
 const express = skills.find(skill => skill.name === Technology.EXPRESS)
-if (express) skillsNotitas.push(express)
+if (express) {
+  skillsNotitas.push(express)
+  skillsSaloncito.push(express)
+}
+
+const go = skills.find(skill => skill.name === Technology.GO)
+if (go) skillsSaloncito.push(go)
+
+const typescript = skills.find(skill => skill.name === Technology.TYPESCRIPT)
+if (typescript) skillsSaloncito.push(typescript)
+
+const aws = skills.find(skill => skill.name === Technology.AWS)
+if (aws) skillsSaloncito.push(aws)
 
 export const projects: ProjectEntity[] = [
+  {
+    id: '123e4567-e89b-12d3-a456-426614174002',
+    title: 'Saloncito',
+    description: 'An e-learning platform for students and teachers, similar to Google Classroom. Built with a microservices architecture using a React frontend, an authentication service in TypeScript/Node.js, and user, API gateway, and class management services in Go. Each microservice has its own database. The system is containerized with Docker and orchestrated using Docker Compose.',
+    technologies: skillsSaloncito,
+    sourceCodeUrl: 'https://github.com/zchelalo/saloncito',
+    previewUrl: '/images/projects/saloncito.png',
+    lang: Language.EN
+  },
+  {
+    id: '123e4567-e89b-12d3-a456-426614174003',
+    title: 'Saloncito',
+    description: 'Plataforma de e-learning para estudiantes y docentes, similar a Google Classroom. Desarrollada con una arquitectura de microservicios, utilizando un frontend en React, un servicio de autenticación en TypeScript/Node.js, y microservicios de gestión de usuarios, API gateway y clases en Go. Cada microservicio cuenta con su propia base de datos. La aplicación está contenerizada con Docker y orquestada mediante Docker Compose.',
+    technologies: skillsSaloncito,
+    sourceCodeUrl: 'https://github.com/zchelalo/saloncito',
+    previewUrl: '/images/projects/saloncito.png',
+    lang: Language.ES
+  },
   {
     id: '123e4567-e89b-12d3-a456-426614174000',
     title: 'Notitas',
@@ -61,7 +89,7 @@ export const projects: ProjectEntity[] = [
     sourceCodeUrl: 'https://github.com/zchelalo/notitas',
     previewUrl: '/images/projects/notitas.png',
     lang: Language.ES
-  }
+  },
 ]
 
 export class MemoryRepository implements ProjectRepository {

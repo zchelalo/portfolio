@@ -20,7 +20,7 @@ const aboutMe: AboutMeEntity[] = [
         id: '123e4567-e89b-12d3-a456-426614174002',
         type: SocialMediaType.LINKEDIN,
         url: 'www.linkedin.com/in/chelalo',
-        fileToUpload: '/files/cv-en.pdf'
+        fileToUpload: '/files/EduardoSaavedra-cv-en.pdf'
       },
       {
         id: '123e4567-e89b-12d3-a456-426614174003',
@@ -44,7 +44,7 @@ const aboutMe: AboutMeEntity[] = [
         id: '123e4567-e89b-12d3-a456-426614174004',
         type: SocialMediaType.LINKEDIN,
         url: 'www.linkedin.com/in/chelalo',
-        fileToUpload: '/files/cv-es.pdf'
+        fileToUpload: '/files/EduardoSaavedra-cv-es.pdf'
       },
       {
         id: '123e4567-e89b-12d3-a456-426614174003',

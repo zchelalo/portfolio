@@ -1,6 +1,9 @@
 import { WorkExperienceEntity } from '@/modules/work_experience/domain/entity'
 
 import moment from 'moment'
+import { NamespaceLanguage } from '@/constants'
+
+import { useTranslation } from 'react-i18next'
 
 import { Button } from '@/components/Button'
 
@@ -13,6 +16,8 @@ function Work({
   onClick,
   workExperience
 }: WorkProps) {
+  const { t } = useTranslation(NamespaceLanguage.COMMON)
+
   return (
     <>
       <hr className='mt-4 border-violet-900' />
@@ -36,7 +41,7 @@ function Work({
               onClick={onClick}
               className='mt-2'
             >
-              More info
+              {t('more_info')}
             </Button>
           </div>
         </main>
