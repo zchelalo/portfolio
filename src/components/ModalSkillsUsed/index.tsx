@@ -2,6 +2,9 @@ import { SkillEntity } from '@/modules/skill/domain/entity'
 import { ProjectEntity } from '@/modules/project/domain/entity'
 
 import { firstLetterToUpperCase } from '@/utils/string'
+import { NamespaceLanguage } from '@/constants'
+
+import { useTranslation } from 'react-i18next'
 
 import { Modal } from '@/components/Modal'
 import { Button } from '@/components/Button'
@@ -26,15 +29,17 @@ function ModalSkillsUsed({
   setProjects,
   setModalIsOpen
 }: ModalSkillsUsedProps) {
+  const { t } = useTranslation(NamespaceLanguage.COMMON)
+
   return (
     <Modal
       className={`${modalIsOpen ? 'modal-open' : 'modal-closed'}`}
     >
       {modalIsOpen && skill && projects ? (
-        <div className='sm:max-w-4xl w-10/12 sm:w-3/4 lg:w-2/4 max-h-[80dvh] rounded bg text flex flex-col p-4'>
+        <div className='sm:max-w-4xl w-10/12 sm:w-3/4 lg:w-2/4 max-h-[80dvh] rounded bg text flex flex-col p-4 overflow-y-auto'>
           <header className='w-full flex justify-between items-center'>
             <h3 className='text-lg font-medium'>
-              Projects that I have done with {firstLetterToUpperCase(skill.name)}
+              {t('project_that_i_have_done_with')} {firstLetterToUpperCase(skill.name)}
             </h3>
             <Button
               type='button'

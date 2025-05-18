@@ -11,6 +11,12 @@ import { i18next as i18n } from '@/config/i18n'
 const skillsNotitas: SkillEntity[] = []
 const skillsSaloncito: SkillEntity[] = []
 
+const python = skills.find(skill => skill.name === Technology.PYTHON)
+if (python) skillsNotitas.push(python)
+
+const fastapi = skills.find(skill => skill.name === Technology.FASTAPI)
+if (fastapi) skillsNotitas.push(fastapi)
+
 const node = skills.find(skill => skill.name === Technology.NODE)
 if (node) {
   skillsNotitas.push(node)

@@ -92,7 +92,7 @@ function Project() {
 
       <Modal className={`${modalIsOpen ? 'modal-open' : 'modal-closed'}`}>
         {project && project.imageUrls && (
-          <main className='w-11/12 max-h-[80dvh] rounded bg text relative flex flex-col items-center justify-center p-4'>
+          <main className='w-11/12 max-h-full rounded bg text relative flex flex-col items-center justify-center p-4 overflow-y-auto'>
             <img
               src={actualImage}
               alt={project.title}
