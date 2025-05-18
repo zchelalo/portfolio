@@ -10,10 +10,11 @@ export class ProjectValue implements ProjectEntity {
   readonly description: string
   readonly technologies: SkillEntity[]
   readonly sourceCodeUrl?: string
-  readonly previewUrl?: string
+  readonly previewUrl: string
+  readonly imageUrls?: string[]
   readonly lang: Language
 
-  constructor(title: string, description: string, technologies: SkillEntity[], sourceCodeUrl?: string, previewUrl?: string, id?: string, lang?: Language) {
+  constructor(title: string, description: string, technologies: SkillEntity[], previewUrl: string, imageUrls?: string[], sourceCodeUrl?: string, id?: string, lang?: Language) {
     this.title = title
     this.description = description
 
@@ -24,6 +25,7 @@ export class ProjectValue implements ProjectEntity {
     this.technologies = technologies
     this.sourceCodeUrl = sourceCodeUrl
     this.previewUrl = previewUrl
+    this.imageUrls = imageUrls
     this.id = id
     if (lang) {
       this.lang = lang

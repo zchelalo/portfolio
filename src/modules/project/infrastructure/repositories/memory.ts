@@ -60,7 +60,13 @@ export const projects: ProjectEntity[] = [
     description: 'An e-learning platform for students and teachers, similar to Google Classroom. Built with a microservices architecture using a React frontend, an authentication service in TypeScript/Node.js, and user, API gateway, and class management services in Go. Each microservice has its own database. The system is containerized with Docker and orchestrated using Docker Compose.',
     technologies: skillsSaloncito,
     sourceCodeUrl: 'https://github.com/zchelalo/saloncito',
-    previewUrl: '/images/projects/saloncito.png',
+    previewUrl: '/images/projects/saloncito/1.png',
+    imageUrls: [
+      '/images/projects/saloncito/1.png',
+      '/images/projects/saloncito/2.png',
+      '/images/projects/saloncito/3.png',
+      '/images/projects/saloncito/4.png',
+    ],
     lang: Language.EN
   },
   {
@@ -69,7 +75,13 @@ export const projects: ProjectEntity[] = [
     description: 'Plataforma de e-learning para estudiantes y docentes, similar a Google Classroom. Desarrollada con una arquitectura de microservicios, utilizando un frontend en React, un servicio de autenticación en TypeScript/Node.js, y microservicios de gestión de usuarios, API gateway y clases en Go. Cada microservicio cuenta con su propia base de datos. La aplicación está contenerizada con Docker y orquestada mediante Docker Compose.',
     technologies: skillsSaloncito,
     sourceCodeUrl: 'https://github.com/zchelalo/saloncito',
-    previewUrl: '/images/projects/saloncito.png',
+    previewUrl: '/images/projects/saloncito/1.png',
+    imageUrls: [
+      '/images/projects/saloncito/1.png',
+      '/images/projects/saloncito/2.png',
+      '/images/projects/saloncito/3.png',
+      '/images/projects/saloncito/4.png',
+    ],
     lang: Language.ES
   },
   {
@@ -78,7 +90,7 @@ export const projects: ProjectEntity[] = [
     description: 'A simple note-taking app built with microservices architecture. It uses a React frontend, a Node.js backend, and a PostgreSQL database. It also uses Docker and Docker Compose for development and deployment.',
     technologies: skillsNotitas,
     sourceCodeUrl: 'https://github.com/zchelalo/notitas',
-    previewUrl: '/images/projects/notitas.png',
+    previewUrl: '/images/projects/notitas/1.png',
     lang: Language.EN
   },
   {
@@ -87,7 +99,7 @@ export const projects: ProjectEntity[] = [
     description: 'Una aplicación simple para tomar notas construida con arquitectura de microservicios. Utiliza un frontend en React, un backend en Node.js y una base de datos PostgreSQL. También emplea Docker y Docker Compose para el desarrollo y despliegue.',
     technologies: skillsNotitas,
     sourceCodeUrl: 'https://github.com/zchelalo/notitas',
-    previewUrl: '/images/projects/notitas.png',
+    previewUrl: '/images/projects/notitas/1.png',
     lang: Language.ES
   },
 ]

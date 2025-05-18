@@ -8,6 +8,7 @@ export interface ProjectEntity {
   description: string
   technologies: SkillEntity[]
   sourceCodeUrl?: string
-  previewUrl?: string
+  previewUrl: string
+  imageUrls?: string[]
   lang: Language
 }
