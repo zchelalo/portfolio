@@ -1,52 +1,23 @@
 import { ProjectEntity } from '@/modules/project/domain/entity'
 
-import { useState } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 
 import { Button } from '@/components/Button'
 import { ButtonTechnology } from '@/components/ButtonTechnology'
-import { Modal } from '@/components/Modal'
-
-import {
-  HiOutlineArrowSmallLeft,
-  HiOutlineArrowSmallRight
-} from 'react-icons/hi2'
 
 type ProjectCardProps = {
   project: ProjectEntity
+  setProject: Dispatch<SetStateAction<ProjectEntity | undefined>>
+  setModalIsOpen: Dispatch<SetStateAction<boolean>>
+  setActualImage: Dispatch<SetStateAction<string | undefined>>
 }
 
 function ProjectCard({
-  project
+  project,
+  setProject,
+  setModalIsOpen,
+  setActualImage,
 }: ProjectCardProps) {
-  const [modalIsOpen, setModalIsOpen] = useState(false)
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [actualImage, setActualImage] = useState(project.imageUrls?.[0])
-  const [isFading, setIsFading] = useState(false)
-
-  const nextImage = () => {
-    const urls = project.imageUrls
-    if (!urls) return
-
-    setIsFading(true)
-    const nextIndex = currentIndex < urls.length - 1 ? currentIndex + 1 : 0
-    setTimeout(() => {
-      setCurrentIndex(nextIndex);
-      setActualImage(urls[nextIndex]);
-    }, 150)
-  }
-
-  const prevImage = () => {
-    const urls = project.imageUrls
-    if (!urls) return
-
-    setIsFading(true)
-    const prevIndex = currentIndex > 0 ? currentIndex - 1 : urls.length - 1
-    setTimeout(() => {
-      setCurrentIndex(prevIndex);
-      setActualImage(urls[prevIndex]);
-    }, 150)
-  }
-
   return (
     <article className='w-full rounded bg flex flex-col sm:flex-row justify-center p-4'>
       <img
@@ -86,7 +57,13 @@ function ProjectCard({
               <Button
                 type='button'
                 className='mt-4 bg-hover-secondary'
-                onClick={() => setModalIsOpen(true)}
+                onClick={() => {
+                  setModalIsOpen(true)
+                  setProject(project)
+                  if (project.imageUrls) {
+                    setActualImage(project.imageUrls[0])
+                  }
+                }}
               >
                 Preview
               </Button>
@@ -94,21 +71,6 @@ function ProjectCard({
           </div>
         </div>
       </section>
-
-      <Modal className={`${modalIsOpen ? 'modal-open' : 'modal-closed'}`}>
-        {project.imageUrls && (
-          <div className='w-11/12 max-h-[80dvh] rounded bg text relative flex flex-col items-center justify-center p-4'>
-            <img
-              src={actualImage}
-              alt={project.title}
-              className={`w-full h-auto rounded select-none ${isFading ? 'opacity-80' : 'opacity-100'}`}
-              onLoad={() => setIsFading(false)}
-            />
-            <HiOutlineArrowSmallLeft onClick={prevImage} className='absolute left-6 bg text text-2xl rounded cursor-pointer' />
-            <HiOutlineArrowSmallRight onClick={nextImage} className='absolute right-6 bg text text-2xl rounded cursor-pointer' />
-          </div>
-        )}
-      </Modal>
     </article>
   )
 }
