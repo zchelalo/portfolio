@@ -7,9 +7,9 @@ import { ButtonTechnology } from '@/components/ButtonTechnology'
 
 type ProjectCardProps = {
   project: ProjectEntity
-  setProject: Dispatch<SetStateAction<ProjectEntity | undefined>>
-  setModalIsOpen: Dispatch<SetStateAction<boolean>>
-  setActualImage: Dispatch<SetStateAction<string | undefined>>
+  setProject?: Dispatch<SetStateAction<ProjectEntity | undefined>>
+  setModalIsOpen?: Dispatch<SetStateAction<boolean>>
+  setActualImage?: Dispatch<SetStateAction<string | undefined>>
 }
 
 function ProjectCard({
@@ -53,7 +53,7 @@ function ProjectCard({
                 Source code
               </Button>
             ): undefined}
-            {project.imageUrls ? (
+            {project.imageUrls && setModalIsOpen && setProject && setActualImage ? (
               <Button
                 type='button'
                 className='mt-4 bg-hover-secondary'
