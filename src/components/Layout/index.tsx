@@ -23,7 +23,7 @@ function Layout({ children }: LayoutProps) {
   const { language, changeLanguage } = useLanguage()
 
   return (
-    <div className='bg-indigo-200 dark:bg-indigo-950 min-h-screen'>
+    <div className='bg-blue-200 dark:bg-blue-950 min-h-screen'>
       <div className='relative flex flex-col min-h-screen max-w-4xl mx-auto px-4 sm:px-6 lg:px-8'>
 
         <div className='hidden sm:flex'>
