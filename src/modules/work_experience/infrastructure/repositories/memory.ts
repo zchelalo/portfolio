@@ -7,7 +7,7 @@ import { i18next } from '@/config/i18n'
 
 const workExperiences: WorkExperienceEntity[] = [
   {
-    id: '123e4567-e89b-12d3-a456-426614174000',
+    id: '123e4567-e89b-12d3-a456-426614174001',
     company: 'Under Apps Systems',
     position: 'Software Engineer',
     description: 'I maintained and fixed bugs in microservices, developed endpoints in NodeJS, designed and implemented PostgreSQL schemas, and created a full application using TypeScript. I also dockerized applications, set up a reverse proxy with NGINX, conducted unit testing with Jest, documented with Typedoc, and automated processes using bash scripts.',
@@ -29,7 +29,7 @@ const workExperiences: WorkExperienceEntity[] = [
     lang: Language.EN
   },
   {
-    id: '123e4567-e89b-12d3-a456-426614174001',
+    id: '123e4567-e89b-12d3-a456-426614174002',
     company: 'Under Apps Systems',
     position: 'Ingeniero de Software',
     description: 'Mantuve y solucioné errores en microservicios, desarrollé endpoints en NodeJS, diseñé e implementé esquemas en PostgreSQL, y creé una aplicación completa utilizando TypeScript. También contericé aplicaciones, configuré un proxy inverso con NGINX, realicé pruebas unitarias con Jest, documenté con Typedoc y automatizé procesos mediante scripts en bash.',
@@ -51,7 +51,7 @@ const workExperiences: WorkExperienceEntity[] = [
     lang: Language.ES
   },
   {
-    id: '123e4567-e89b-12d3-a456-426614174000',
+    id: '123e4567-e89b-12d3-a456-426614174003',
     company: 'NGX Networks',
     position: 'Software Engineer',
     description: 'I designed and developed a web application to monitor the status and performance of multiple servers. Additionally, I created a proxy server to facilitate seamless communication with a third-party API, improving integration reliability and security. I also developed a cross-platform mobile application for a client portal using Expo, ensuring a consistent user experience across iOS and Android.',
@@ -64,7 +64,7 @@ const workExperiences: WorkExperienceEntity[] = [
     lang: Language.EN
   },
   {
-    id: '123e4567-e89b-12d3-a456-426614174001',
+    id: '123e4567-e89b-12d3-a456-426614174004',
     company: 'NGX Networks',
     position: 'Ingeniero de Software',
     description: 'Diseñé y desarrollé una aplicación web para monitorear el estado y rendimiento de múltiples servidores. Además, creé un servidor proxy para facilitar la comunicación fluida con una API de terceros, mejorando la fiabilidad y seguridad de la integración. También desarrollé una aplicación móvil multiplataforma para un portal de clientes utilizando Expo, asegurando una experiencia de usuario consistente en iOS y Android.',
