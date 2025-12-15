@@ -20,7 +20,7 @@ function Work({
 
   return (
     <>
-      <hr className='mt-4 border-violet-900' />
+      <hr className='mt-4 border-blue-900' />
       <article className='w-full sm:flex rounded text mt-4'>
         <header className='w-full sm:w-2/6 flex flex-col justify-between text-pretty'>
           <div>

@@ -32,7 +32,7 @@ function SocialMedia({
   }
 
   return (
-    <article className='flex items-stretch rounded border-2 border-violet-900 dark:border-violet-300 mt-2 mr-2'>
+    <article className='flex items-stretch rounded border-2 border-blue-900 dark:border-blue-300 mt-2 mr-2'>
       <Button
         type='button'
         className='bg sm:px-3 mr-1 text-lg'
