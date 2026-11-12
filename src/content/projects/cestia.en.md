@@ -46,21 +46,19 @@ Purchases can be corrected or reversed without erasing the trail. That decision 
 
 ## Architecture
 
-Cestia is an Nx monorepo with a Go API, a React and TypeScript SPA, PostgreSQL and queries generated with sqlc. The local environment starts PostgreSQL and Mailpit through Docker Compose; verification, recovery and invitation emails are captured in Mailpit.
-
-Production runs on Lightsail with PostgreSQL on an attached disk, S3 backups and SES email. Terraform and operational scripts live in the repository. Deployments run through GitHub Actions with OIDC.
+Cestia is an Nx monorepo with a Go API and a React and TypeScript SPA. PostgreSQL holds the model and sqlc generates the queries. Production runs on Lightsail with PostgreSQL on an attached disk, S3 backups, SES email and deployments through GitHub Actions with OIDC.
 
 ## Decisions
 
-- **Explicit money domain.** Prices are validated and normalized before they are persisted; arbitrary strings are never treated as money.
+- **Explicit money domain.** I validate and normalize prices before storing them; arbitrary strings are never treated as money.
 - **Idempotency.** Recording, correcting or reversing a purchase requires an idempotency key, preventing duplicates when a client retries.
 - **Version checks.** Each operation verifies the item's expected version and returns a conflict if it changed, instead of overwriting recent work.
 - **History as part of the model.** Actions are recorded as activity with actor, context and payload. Traceability is not reconstructed later.
 - **No balances.** There is no debt table or settlement calculation. History shows contributions, not obligations.
-- **Desktop and mobile tests.** The Playwright suite covers sign-up, email verification, purchases and groups in both layouts.
+- **Desktop and mobile tests.** Playwright walks through sign-up, email verification, purchases and groups in both layouts.
 
 ## Outcomes and status
 
 Cestia is deployed at `cestia.chelalo.me`. It includes verified accounts, personal lists, groups, invitations, purchase recording and correction, expenses and history. The screenshots in this case come from the application running in a local environment with fictional accounts and data; no real production data is published.
 
-The product continues to evolve. The security, idempotency and traceability decisions are implemented and covered by tests.
+The product keeps growing. Purchases, permissions and history are already in production, and the next improvements build on that same model.

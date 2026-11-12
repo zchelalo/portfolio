@@ -17,7 +17,7 @@ highlights:
   - A sequential baseline to measure before optimizing.
   - An HTTP client with a timeout, response limit and redirects disabled.
   - A deliberate restriction to `127.0.0.1` and at most 20 requests.
-  - A roadmap kept separate from what the CLI already runs.
+  - A roadmap for what is not available yet.
 ---
 
 ## Context
@@ -34,7 +34,7 @@ I also needed a clear safety boundary. Generating traffic against third-party se
 
 ## Approach
 
-The first version performs sequential requests and classifies results. That baseline makes any future optimization comparable to an understandable reference. Concurrent generation exists in the internal layer with `sync.WaitGroup`, but it is not exposed in the CLI yet; this case therefore presents it as internal work, not as an available feature.
+The first version performs sequential requests and classifies results. That baseline makes any future optimization comparable to an understandable reference. Concurrent generation exists in the internal layer with `sync.WaitGroup`, but I have not exposed it in the CLI yet, so it is not an available option.
 
 Safety and measurement were designed before speed: URL validation, body limits and timeouts belong to the HTTP client; result classification belongs to the load domain.
 
@@ -61,4 +61,4 @@ The client sets a two-second timeout, caps body reads at 1 MB and disables redir
 
 **Conceptual:** a configurable worker pool, context cancellation, percentiles, a fault-injection proxy and a TUI. The terminal on this page is an output illustration, not a real measurement.
 
-The repository is not linked because its public visibility is not confirmed. The project's evolution is documented as a roadmap, not as delivered functionality.
+The roadmap stays separate from what the CLI already does. The repository's public visibility is not confirmed yet, so I do not link it here.

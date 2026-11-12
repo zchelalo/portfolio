@@ -36,8 +36,8 @@ for (const project of projectPages) {
 test('gallery frames align and preserve image proportions', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop', 'Two-column gallery layout only')
   await page.goto('/es/projects/neuraclinic/')
-  const frames = page.locator('.shot__frame')
-  await expect(frames).toHaveCount(6)
+  const frames = page.locator('.gallery-group').first().locator('.shot__frame')
+  await expect(frames).toHaveCount(2)
 
   const boxes = await frames.evaluateAll((elements) =>
     elements.map((element) => {
@@ -119,18 +119,54 @@ test('Cestia mobile gallery uses four, two and one columns', async ({ page }, te
 test('NeuraClinic gallery is keyboard operable', async ({ page }) => {
   await page.goto('/es/projects/neuraclinic/')
   const openers = page.locator('[data-gallery-open]')
-  await expect(openers).toHaveCount(6)
+  await expect(openers).toHaveCount(12)
 
   await openers.first().click()
   const dialog = page.locator('[data-gallery-dialog]')
   await expect(dialog).toBeVisible()
-  await expect(page.locator('[data-gallery-counter]')).toHaveText('1 / 6')
+  await expect(page.locator('[data-gallery-counter]')).toHaveText('1 / 12')
 
   await page.keyboard.press('ArrowRight')
-  await expect(page.locator('[data-gallery-counter]')).toHaveText('2 / 6')
+  await expect(page.locator('[data-gallery-counter]')).toHaveText('2 / 12')
 
   await page.keyboard.press('Escape')
   await expect(dialog).not.toBeVisible()
+})
+
+test('NeuraClinic mobile gallery uses viewport-sized captures', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop', 'Image ratio check runs once')
+  await page.goto('/es/projects/neuraclinic/')
+
+  const group = page
+    .locator('.gallery-group')
+    .filter({ hasText: 'En móvil' })
+  const images = group.locator('img')
+  await group.scrollIntoViewIfNeeded()
+  await expect
+    .poll(() =>
+      images.evaluateAll((elements) =>
+        elements.every((element) => {
+          const image = element as HTMLImageElement
+          return image.complete && image.naturalWidth > 0
+        }),
+      ),
+    )
+    .toBe(true)
+
+  const ratios = await images.evaluateAll((elements) =>
+    elements.map((element) => {
+      const image = element as HTMLImageElement
+      return image.naturalHeight / image.naturalWidth
+    }),
+  )
+  expect(ratios.every((ratio) => ratio < 2.5)).toBe(true)
+})
+
+test('NeuraClinic uses the public landing as its visual', async ({ page }) => {
+  await page.goto('/es/projects/neuraclinic/')
+  const hero = page.locator('.project-media img')
+  await expect(hero).toHaveAttribute('alt', 'Landing pública de NeuraClinic')
+  await expect(hero).toHaveAttribute('src', /landing/)
 })
 
 test('Comledge publishes no source or deployment links', async ({ page }) => {
@@ -140,7 +176,7 @@ test('Comledge publishes no source or deployment links', async ({ page }) => {
   )
   expect(external).toEqual([])
   await expect(page.getByText('Proyecto privado').first()).toBeVisible()
-  await expect(page.locator('[data-gallery-open]')).toHaveCount(2)
+  await expect(page.locator('[data-gallery-open]')).toHaveCount(12)
 })
 
 test('Cestia links to its live app and excludes debt splitting', async ({ page }) => {

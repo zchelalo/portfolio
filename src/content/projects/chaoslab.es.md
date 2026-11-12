@@ -17,7 +17,7 @@ highlights:
   - Base secuencial para medir antes de optimizar.
   - Cliente HTTP con timeout, límite de respuesta y redirects deshabilitados.
   - Restricción deliberada a `127.0.0.1` y a un máximo de 20 solicitudes.
-  - Hoja de ruta separada de lo que la CLI ya ejecuta.
+  - Hoja de ruta para lo que todavía no está disponible.
 ---
 
 ## Contexto
@@ -34,7 +34,7 @@ También necesitaba una frontera de seguridad clara. Generar tráfico contra ser
 
 ## Enfoque
 
-La primera versión ejecuta solicitudes secuenciales y clasifica los resultados. Esa base permite comparar cualquier optimización futura contra una referencia comprensible. La generación concurrente existe en la capa interna con `sync.WaitGroup`, pero todavía no se expone en la CLI; por eso este caso la presenta como trabajo interno, no como una función disponible.
+La primera versión ejecuta solicitudes secuenciales y clasifica los resultados. Esa base permite comparar cualquier optimización futura contra una referencia comprensible. La generación concurrente existe en la capa interna con `sync.WaitGroup`, pero todavía no la expuse en la CLI; por eso no aparece como una opción disponible.
 
 La seguridad y la medición se diseñaron antes que la velocidad: validación de URL, límite de cuerpo y timeout pertenecen al cliente HTTP; la clasificación de resultados pertenece al dominio de carga.
 
@@ -61,4 +61,4 @@ El cliente configura un timeout de dos segundos, limita la lectura del cuerpo a 
 
 **Conceptual:** worker pool configurable, cancelación con contexto, percentiles, proxy de inyección de fallos y TUI. La terminal de esta página es una ilustración de salida, no una medición real.
 
-El repositorio no se enlaza porque su visibilidad pública no está confirmada. La evolución del proyecto se documenta como una hoja de ruta, no como funcionalidad entregada.
+La hoja de ruta sigue separada de lo que la CLI ya hace. La visibilidad pública del repositorio todavía no está confirmada, así que no la enlazo aquí.

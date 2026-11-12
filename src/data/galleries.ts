@@ -2,10 +2,26 @@ import type { ImageMetadata } from 'astro'
 import ncAgenda from '@/assets/projects/neuraclinic/agenda.png'
 import ncAgendaMobile from '@/assets/projects/neuraclinic/agenda-mobile.png'
 import ncAssessment from '@/assets/projects/neuraclinic/assessment.png'
+import ncInstruments from '@/assets/projects/neuraclinic/instruments.png'
+import ncLanding from '@/assets/projects/neuraclinic/landing.png'
+import ncLandingFlow from '@/assets/projects/neuraclinic/landing-flow.png'
 import ncNote from '@/assets/projects/neuraclinic/note.png'
+import ncNoteMobile from '@/assets/projects/neuraclinic/note-mobile.png'
 import ncPatients from '@/assets/projects/neuraclinic/patients.png'
+import ncPatientsMobile from '@/assets/projects/neuraclinic/patients-mobile.png'
 import ncRecord from '@/assets/projects/neuraclinic/record.png'
+import ncRecordMobile from '@/assets/projects/neuraclinic/record-mobile.png'
+import clArticle from '@/assets/projects/comledge/article.png'
+import clArticleContent from '@/assets/projects/comledge/article-content.png'
+import clArticleContentMobile from '@/assets/projects/comledge/article-content-mobile.png'
+import clArticleTypes from '@/assets/projects/comledge/article-types.png'
+import clArticles from '@/assets/projects/comledge/articles.png'
+import clArticlesMobile from '@/assets/projects/comledge/articles-mobile.png'
 import clHome from '@/assets/projects/comledge/home.png'
+import clHomeMobile from '@/assets/projects/comledge/home-mobile.png'
+import clRoles from '@/assets/projects/comledge/roles.png'
+import clSections from '@/assets/projects/comledge/sections.png'
+import clSectionsMobile from '@/assets/projects/comledge/sections-mobile.png'
 import clUsers from '@/assets/projects/comledge/users.png'
 import ceDashboard from '@/assets/projects/cestia/dashboard.png'
 import ceExpenses from '@/assets/projects/cestia/expenses.png'
@@ -35,15 +51,49 @@ export type GalleryGroup = {
 }
 
 export const heroImages: Record<string, ImageMetadata> = {
-  neuraclinic: ncRecord,
+  neuraclinic: ncLanding,
   comledge: clHome,
   cestia: ceList,
+}
+
+export const heroAlts: Record<string, Localized> = {
+  neuraclinic: {
+    es: 'Landing pública de NeuraClinic',
+    en: 'NeuraClinic public landing',
+  },
 }
 
 export const galleries: Record<string, GalleryGroup[]> = {
   neuraclinic: [
     {
-      title: { es: 'El contexto del caso', en: 'The case context' },
+      title: { es: 'La landing', en: 'The landing' },
+      items: [
+        {
+          image: ncLanding,
+          alt: {
+            es: 'Landing pública de NeuraClinic en español',
+            en: 'NeuraClinic public landing in Spanish',
+          },
+          caption: {
+            es: 'La landing presenta el producto y el recorrido clínico.',
+            en: 'The landing presents the product and the clinical flow.',
+          },
+        },
+        {
+          image: ncLandingFlow,
+          alt: {
+            es: 'Sección de recorrido clínico de la landing de NeuraClinic',
+            en: 'Clinical flow section of the NeuraClinic landing',
+          },
+          caption: {
+            es: 'El recorrido explica cómo se conectan agenda, expediente y seguimiento.',
+            en: 'The flow explains how scheduling, records and follow-up connect.',
+          },
+        },
+      ],
+    },
+    {
+      title: { es: 'Expediente y notas', en: 'Records and notes' },
       items: [
         {
           image: ncRecord,
@@ -70,19 +120,8 @@ export const galleries: Record<string, GalleryGroup[]> = {
       ],
     },
     {
-      title: { es: 'Agenda, pacientes y evaluación', en: 'Schedule, patients and assessment' },
+      title: { es: 'Agenda y pacientes', en: 'Schedule and patients' },
       items: [
-        {
-          image: ncPatients,
-          alt: {
-            es: 'Listado de pacientes de NeuraClinic con búsqueda y exportación',
-            en: 'NeuraClinic patient list with search and export controls',
-          },
-          caption: {
-            es: 'Listado de pacientes con búsqueda, filtros y exportación.',
-            en: 'Patient list with search, filters and export.',
-          },
-        },
         {
           image: ncAgenda,
           alt: {
@@ -95,6 +134,22 @@ export const galleries: Record<string, GalleryGroup[]> = {
           },
         },
         {
+          image: ncPatients,
+          alt: {
+            es: 'Listado de pacientes de NeuraClinic con búsqueda y exportación',
+            en: 'NeuraClinic patient list with search and export controls',
+          },
+          caption: {
+            es: 'Listado de pacientes con búsqueda, filtros y exportación.',
+            en: 'Patient list with search, filters and export.',
+          },
+        },
+      ],
+    },
+    {
+      title: { es: 'Evaluaciones e instrumentos', en: 'Assessments and instruments' },
+      items: [
+        {
           image: ncAssessment,
           alt: {
             es: 'Evaluación psicológica de demostración en NeuraClinic',
@@ -105,6 +160,23 @@ export const galleries: Record<string, GalleryGroup[]> = {
             en: 'Assessment with instrument, answers and a demonstration result.',
           },
         },
+        {
+          image: ncInstruments,
+          alt: {
+            es: 'Instrumentos de evaluación en NeuraClinic',
+            en: 'Assessment instruments in NeuraClinic',
+          },
+          caption: {
+            es: 'Instrumentos reutilizables para construir y aplicar evaluaciones.',
+            en: 'Reusable instruments for building and applying assessments.',
+          },
+        },
+      ],
+    },
+    {
+      title: { es: 'En móvil', en: 'On mobile' },
+      layout: 'mobile',
+      items: [
         {
           image: ncAgendaMobile,
           alt: {
@@ -117,22 +189,107 @@ export const galleries: Record<string, GalleryGroup[]> = {
           },
           mobile: true,
         },
+        {
+          image: ncPatientsMobile,
+          alt: {
+            es: 'Listado de pacientes de NeuraClinic en móvil',
+            en: 'NeuraClinic patient list on mobile',
+          },
+          caption: {
+            es: 'Pacientes y búsqueda en una pantalla pequeña.',
+            en: 'Patients and search on a small screen.',
+          },
+          mobile: true,
+        },
+        {
+          image: ncRecordMobile,
+          alt: {
+            es: 'Expediente de una paciente ficticia en móvil',
+            en: 'A fictional patient record on mobile',
+          },
+          caption: {
+            es: 'El expediente conserva sus secciones en móvil.',
+            en: 'The record keeps its sections on mobile.',
+          },
+          mobile: true,
+        },
+        {
+          image: ncNoteMobile,
+          alt: {
+            es: 'Nota de sesión abierta en móvil',
+            en: 'An open session note on mobile',
+          },
+          caption: {
+            es: 'La nota mantiene título, contenido y exportación.',
+            en: 'The note keeps its title, content and export.',
+          },
+          mobile: true,
+        },
       ],
     },
   ],
   comledge: [
     {
-      title: { es: 'Administración y acceso', en: 'Administration and access' },
+      title: { es: 'Artículo de ejemplo', en: 'Example article' },
+      items: [
+        {
+          image: clArticle,
+          alt: {
+            es: 'Artículo «Guía de incorporación al equipo» abierto en el editor',
+            en: '“Team onboarding guide” article open in the editor',
+          },
+          caption: {
+            es: 'Artículo publicado con título, estado y contenido editable.',
+            en: 'A published article with its title, status and editable content.',
+          },
+        },
+        {
+          image: clArticleContent,
+          alt: {
+            es: 'Contenido del artículo de ejemplo con lista y tabla',
+            en: 'Example article content with a list and a table',
+          },
+          caption: {
+            es: 'El artículo combina pasos, una tabla y recursos enlazados.',
+            en: 'The article combines steps, a table and linked resources.',
+          },
+        },
+      ],
+    },
+    {
+      title: { es: 'Biblioteca y administración', en: 'Library and administration' },
       items: [
         {
           image: clHome,
           alt: {
-            es: 'Pantalla de inicio de Comledge con datos de ejemplo',
-            en: 'Comledge home screen with example data',
+            es: 'Inicio del espacio de conocimiento con artículos recientes',
+            en: 'Knowledge workspace home with recent articles',
           },
           caption: {
-            es: 'Inicio del espacio de conocimiento con artículos y actividad.',
-            en: 'Knowledge workspace home with articles and activity.',
+            es: 'Inicio con artículos recientes y el trabajo bajo tu responsabilidad.',
+            en: 'Home with recent articles and the work you own.',
+          },
+        },
+        {
+          image: clArticles,
+          alt: {
+            es: 'Listado de artículos con búsqueda y filtros',
+            en: 'Article list with search and filters',
+          },
+          caption: {
+            es: 'Búsqueda por título, tipo, nivel y sección.',
+            en: 'Search by title, type, level and section.',
+          },
+        },
+        {
+          image: clSections,
+          alt: {
+            es: 'Administración de secciones de Comledge',
+            en: 'Comledge section administration',
+          },
+          caption: {
+            es: 'Secciones para ordenar la navegación del conocimiento.',
+            en: 'Sections that organize knowledge navigation.',
           },
         },
         {
@@ -145,6 +302,87 @@ export const galleries: Record<string, GalleryGroup[]> = {
             es: 'Usuarios activos, búsqueda y paginación por cursor.',
             en: 'Active users, search and cursor pagination.',
           },
+        },
+      ],
+    },
+    {
+      title: { es: 'Acceso y configuración', en: 'Access and configuration' },
+      items: [
+        {
+          image: clRoles,
+          alt: {
+            es: 'Roles y permisos en Comledge',
+            en: 'Roles and permissions in Comledge',
+          },
+          caption: {
+            es: 'Roles que agrupan capacidades y permisos.',
+            en: 'Roles that group capabilities and permissions.',
+          },
+        },
+        {
+          image: clArticleTypes,
+          alt: {
+            es: 'Tipos de artículo en Comledge',
+            en: 'Article types in Comledge',
+          },
+          caption: {
+            es: 'Tipos de artículo y su comportamiento editorial.',
+            en: 'Article types and their editorial behavior.',
+          },
+        },
+      ],
+    },
+    {
+      title: { es: 'En móvil', en: 'On mobile' },
+      layout: 'mobile',
+      items: [
+        {
+          image: clHomeMobile,
+          alt: {
+            es: 'Inicio de Comledge en móvil',
+            en: 'Comledge home on mobile',
+          },
+          caption: {
+            es: 'Inicio y artículos recientes en una pantalla pequeña.',
+            en: 'Home and recent articles on a small screen.',
+          },
+          mobile: true,
+        },
+        {
+          image: clArticlesMobile,
+          alt: {
+            es: 'Listado de artículos de Comledge en móvil',
+            en: 'Comledge article list on mobile',
+          },
+          caption: {
+            es: 'La biblioteca conserva búsqueda y jerarquía en móvil.',
+            en: 'The library keeps search and hierarchy on mobile.',
+          },
+          mobile: true,
+        },
+        {
+          image: clArticleContentMobile,
+          alt: {
+            es: 'Artículo de ejemplo de Comledge en móvil',
+            en: 'Comledge example article on mobile',
+          },
+          caption: {
+            es: 'El contenido y la tabla se adaptan a la pantalla.',
+            en: 'The content and table adapt to the screen.',
+          },
+          mobile: true,
+        },
+        {
+          image: clSectionsMobile,
+          alt: {
+            es: 'Secciones de Comledge en móvil',
+            en: 'Comledge sections on mobile',
+          },
+          caption: {
+            es: 'La administración de secciones también funciona en móvil.',
+            en: 'Section administration also works on mobile.',
+          },
+          mobile: true,
         },
       ],
     },

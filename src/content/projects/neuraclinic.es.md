@@ -40,25 +40,26 @@ El reto no era solo agregar pantallas: había que modelar pacientes, citas, nota
 
 Tomé el expediente del paciente como unidad central del producto. A partir de ahí, la agenda prepara la sesión, las notas documentan lo ocurrido, las evaluaciones agregan seguimiento y los reportes permiten compartir información sin reconstruir el caso.
 
-El trabajo incluyó el frontend clínico y administrativo, la integración con servicios backend, flujos de autenticación y autorización, gestión de archivos y exportaciones. Las capturas de este caso se generaron con datos ficticios de demostración.
+El trabajo incluyó el frontend clínico y administrativo, la integración con servicios backend, flujos de autenticación y autorización, gestión de archivos y exportaciones. También trabajé la landing pública en Astro: presenta el producto, ordena el recorrido clínico y mantiene el contenido en español e inglés. Las capturas de este caso se generaron con datos ficticios de demostración.
 
 ## Arquitectura
 
 El frontend está construido con React, TypeScript, TanStack Router y TanStack Query. La API se organiza alrededor de un gateway en Go y servicios para autenticación, facturación, expediente clínico, archivos, notificaciones y catálogos de ubicación. El servicio de usuarios utiliza TypeScript y Drizzle sobre PostgreSQL.
 
-Los servicios se comunican mediante contratos gRPC definidos en protobuf y mantienen bases de datos independientes. RabbitMQ se utiliza para eventos entre servicios; el repositorio documenta decisiones de consistencia eventual y coreografía en sus ADR. Los archivos combinan metadatos en PostgreSQL con almacenamiento compatible con S3, usando URLs prefirmadas para carga y descarga.
+Los servicios se comunican mediante contratos gRPC definidos en protobuf y mantienen bases de datos independientes. Cuando un cambio debe generar un evento, guardo el cambio y el evento en la misma transacción con el patrón outbox. Después, un relay publica esos eventos en RabbitMQ y los servicios que los necesitan los procesan. Para flujos que cruzan servicios, como la creación de un adjunto, uso compensaciones inspiradas en sagas: si un paso falla, libero o marco lo que ya se había creado. Así evito depender de una transacción distribuida sin perder de vista los estados intermedios. Los archivos combinan metadatos en PostgreSQL con almacenamiento compatible con S3, usando URLs prefirmadas para carga y descarga.
 
 ## Decisiones
 
-- **Límites por capacidad.** Autenticación, expediente, archivos y facturación tienen responsabilidades separadas, lo que permite evolucionar cada parte sin convertir el gateway en un monolito de lógica.
-- **Autorización en dos niveles.** Las rutas del frontend protegen la experiencia, pero las decisiones de acceso viven también en los servicios. Los flujos administrativos y clínicos usan guardas y permisos distintos.
+- **Límites por capacidad.** Separé autenticación, expediente, archivos y facturación para que cada parte evolucione sin convertir el gateway en un monolito de lógica.
+- **Consistencia sin transacciones distribuidas.** Cada servicio conserva su base de datos. Los eventos salen por outbox y los flujos que cruzan servicios se compensan cuando un paso falla.
+- **Autorización en dos niveles.** La interfaz protege la navegación, pero las decisiones de acceso también se validan en los servicios. Los flujos administrativos y clínicos usan guardas y permisos distintos.
 - **Archivos fuera de la base de datos.** La base conserva metadatos y relaciones; el contenido binario vive en almacenamiento de objetos y se sirve mediante URLs temporales.
-- **Reportes del lado del servidor.** Las exportaciones de pacientes, notas y evaluaciones se generan en backend para mantener consistencia entre pantalla, PDF y XLSX.
-- **Catálogo de ubicaciones local.** Las sugerencias de direcciones usan catálogos importados en lugar de depender de un servicio de geocodificación en tiempo de ejecución.
-- **Pruebas en varios anchos.** La matriz de rutas públicas del frontend se valida en 320, 768, 1024 y 1440 px para detectar desbordamientos y errores de carga.
+- **Reportes del lado del servidor.** Genero las exportaciones de pacientes, notas y evaluaciones en backend para que la pantalla, el PDF y el XLSX salgan de la misma fuente.
+- **Catálogo de ubicaciones local.** Las sugerencias de direcciones usan catálogos importados, sin depender de un servicio de geocodificación en tiempo de ejecución.
+- **Pruebas en varios anchos.** Valido las rutas públicas del frontend en 320, 768, 1024 y 1440 px para detectar desbordamientos y errores de carga.
 
 ## Resultados y estado
 
-NeuraClinic está en producción y mantiene una landing pública en `neuraclinic.app`. El producto incluye agenda, gestión de pacientes, expediente, notas, evaluaciones y exportaciones verificables en el código. No se publican métricas de negocio ni datos clínicos reales; las imágenes de la galería son demostraciones con información ficticia.
+NeuraClinic está en producción y mantiene una landing pública en `neuraclinic.app`. El producto incluye agenda, gestión de pacientes, expediente, notas, evaluaciones y exportaciones. No se publican métricas de negocio ni datos clínicos reales; las imágenes de la galería son demostraciones con información ficticia.
 
-El siguiente paso natural es seguir profundizando en observabilidad y automatización operativa, pero esas capacidades no se presentan aquí como terminadas.
+El siguiente paso es seguir trabajando en observabilidad y automatización operativa, pero esas capacidades todavía no forman parte de lo que presento aquí como terminado.

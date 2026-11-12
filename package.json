@@ -3,12 +3,14 @@
   "private": true,
   "version": "2.0.0",
   "type": "module",
+  "packageManager": "pnpm@10.15.0",
   "engines": {
-    "node": ">=24"
+    "node": ">=24",
+    "pnpm": ">=10.15.0"
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "npm run validate && astro build",
+    "build": "pnpm run validate && astro build",
     "preview": "astro preview",
     "serve:dist": "node scripts/serve-dist.mjs",
     "check": "astro check",
@@ -16,6 +18,12 @@
     "generate:og": "node scripts/generate-og.mjs",
     "build:cv": "node scripts/build-cv.mjs",
     "test:e2e": "playwright test"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ]
   },
   "dependencies": {
     "@fontsource/ubuntu": "^5.3.0",

@@ -46,21 +46,19 @@ Las compras pueden corregirse o revertirse sin borrar el rastro. Esa decisión o
 
 ## Arquitectura
 
-Cestia es un monorepo Nx con una API en Go, una SPA en React y TypeScript, PostgreSQL y consultas generadas con sqlc. El entorno local levanta PostgreSQL y Mailpit mediante Docker Compose; los correos de verificación, recuperación e invitación se capturan en Mailpit.
-
-La infraestructura de producción corre en Lightsail con PostgreSQL en un disco adjunto, respaldos en S3 y correo mediante SES. Terraform y los scripts operativos viven en el repositorio. Los despliegues se ejecutan con GitHub Actions mediante OIDC.
+Cestia es un monorepo Nx con una API en Go y una SPA en React con TypeScript. PostgreSQL guarda el modelo y sqlc genera las consultas. En producción corre en Lightsail, con PostgreSQL en un disco adjunto, respaldos en S3, correo mediante SES y despliegues con GitHub Actions y OIDC.
 
 ## Decisiones
 
-- **Importes con dominio explícito.** El precio se valida y normaliza antes de persistirse; no se aceptan cadenas arbitrarias como si fueran dinero.
+- **Importes con dominio explícito.** Valido y normalizo el precio antes de guardarlo; no acepto cadenas arbitrarias como si fueran dinero.
 - **Idempotencia.** Registrar, corregir o revertir una compra requiere una clave de idempotencia, lo que evita duplicados cuando el cliente reintenta.
 - **Control de versión.** Cada operación verifica la versión esperada del artículo y devuelve un conflicto si cambió, en lugar de sobrescribir cambios recientes.
 - **Historial como parte del modelo.** Las acciones quedan registradas en actividad, con actor, contexto y payload. La trazabilidad no se reconstruye después.
 - **Sin balances.** No existe una tabla de deudas ni un cálculo de liquidaciones. El historial muestra aportaciones, no obligaciones.
-- **Pruebas en desktop y móvil.** La suite de Playwright recorre registro, verificación por correo, compras y grupos en ambos formatos.
+- **Pruebas en desktop y móvil.** Recorro con Playwright el registro, la verificación por correo, las compras y los grupos en ambos formatos.
 
 ## Resultados y estado
 
 Cestia está desplegada en `cestia.chelalo.me`. La aplicación incluye cuentas verificadas, listas personales, grupos, invitaciones, registro y corrección de compras, gastos e historial. Las capturas de esta ficha provienen de la aplicación ejecutada en un entorno local con cuentas y datos ficticios; no se publican datos reales de producción.
 
-El producto sigue en evolución. Las decisiones de seguridad, idempotencia y trazabilidad están implementadas y cubiertas por pruebas.
+El producto sigue creciendo. La base de compras, permisos e historial ya está en producción, y las siguientes mejoras se van incorporando sobre ese mismo modelo.

@@ -9,28 +9,29 @@ Portafolio personal de Eduardo Saavedra. Sitio bilingüe generado completamente 
 - Contenido de casos de estudio en Markdown con validación de esquema y secciones
 - Imágenes optimizadas con Astro Assets
 - Playwright para validación end-to-end
+- pnpm 10 como gestor de paquetes
 
 No hay React, servidor de aplicación, API, autenticación ni rutas renderizadas en el cliente.
 
 ## Comandos
 
-Requiere Node.js 24.
+Requiere Node.js 24 y pnpm 10.15.
 
 ```bash
-npm ci
-npm run dev
-npm run validate
-npm run check
-npm run build
-npm run test:e2e
+pnpm install --frozen-lockfile
+pnpm run dev
+pnpm run validate
+pnpm run check
+pnpm run build
+pnpm run test:e2e
 ```
 
-`npm run build` ejecuta primero la validación editorial y genera `dist/`.
+`pnpm run build` ejecuta primero la validación editorial y genera `dist/`.
 
 Para revisar el artefacto estático antes de publicarlo:
 
 ```bash
-npm run build
+pnpm run build
 node scripts/serve-dist.mjs
 ```
 
@@ -47,7 +48,7 @@ src/
   pages/               Rutas estáticas y endpoints de SEO
   styles/              Tokens, estilos globales y movimiento
   scripts/             Mejora progresiva (header, reveals)
-scripts/               Validación, servidor local y generación de OG
+scripts/               Validación, capturas, CV, servidor local y generación de OG
 tests/                 Pruebas Playwright desktop/móvil
 ```
 
@@ -60,7 +61,7 @@ El cuerpo debe conservar estas secciones:
 - ES: Contexto, Problema, Enfoque, Arquitectura, Decisiones, Resultados y estado.
 - EN: Context, Problem, Approach, Architecture, Decisions, Outcomes and status.
 
-`npm run validate` comprueba:
+`pnpm run validate` comprueba:
 
 - Pares ES/EN completos y orden único.
 - Secciones obligatorias.
@@ -88,7 +89,7 @@ El script crea cuentas y datos ficticios mediante la API real y no debe apuntar 
 Los PDF de `public/files/` se generan desde las plantillas de `scripts/cv/`:
 
 ```bash
-npm run build:cv
+pnpm run build:cv
 ```
 
 `cv-es.html` y `cv-en.html` comparten `cv.css`. El script produce versiones de dos páginas en tamaño Letter, con texto seleccionable y enlaces.
