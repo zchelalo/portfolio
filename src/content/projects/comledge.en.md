@@ -19,14 +19,14 @@ highlights:
   - Access control by type, level and individual article.
   - Search that applies access rules before returning results.
   - An article lifecycle with versions, publishing and archiving.
-  - An explicit implementation matrix so partial work is not presented as finished.
+  - Editing and publishing are separate, with a version history.
 ---
 
 ## Context
 
 Comledge is a private platform for organizing knowledge inside an organization. It brings articles, classifications, versions, publishing, attachments, collections and user administration under one permission system.
 
-The repository is an Nx monorepo with a Go API, a React SPA and a Playwright end-to-end suite. There is no public deployment URL or public source link; this case is documented from the code and a local environment with example data.
+I worked on Comledge as an Nx monorepo: a Go API, a React SPA and an end-to-end Playwright suite. The product has no public deployment URL or public source link; this case is based on the actual work and a local environment with example data.
 
 ## Problem
 
@@ -51,10 +51,11 @@ Search uses cursor pagination to keep listings stable while articles are publish
 - **Roles and direct permissions.** Roles group capabilities, but a user can also receive specific global permissions. Password rotation invalidates previously issued tokens through a credential version.
 - **Version and publication are separate.** Editing is not publishing. The lifecycle keeps history and allows archiving without deleting content.
 - **Cursor pagination.** It avoids duplicates and jumps when the result set changes between pages.
-- **Explicit scope.** The repository documentation distinguishes implemented work from partial work. Workflows, custom fields and multi-tenancy are not part of the current delivery.
+- **Private attachments.** Files are stored as private objects, and their permissions follow the same rules as the article.
+- **Audited actions.** Administrative operations leave a record so it is possible to reconstruct who changed what.
 
 ## Outcomes and status
 
-Comledge covers authentication, users and permissions, articles and versions, publishing, Markdown import, attachments, external links, ACL-aware search and auditing. Some areas remain partial: collection administration and permission definitions do not yet have a complete experience.
+Comledge covers authentication, users and permissions, articles and versions, publishing, Markdown import, attachments, external links, ACL-aware search and auditing. Collection administration and permission definitions do not yet have a complete experience, and I prefer to show that instead of presenting them as finished.
 
-The screenshots show a local environment with example data. No organization names, document content, internal endpoints or deployment addresses are published.
+For the screenshots I prepared an example article, “Team onboarding guide,” with sections, a table and a linked resource. The environment is local and the data is fictional; no organization names, document content, internal endpoints or deployment addresses are published.

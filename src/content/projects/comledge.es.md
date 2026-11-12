@@ -19,14 +19,14 @@ highlights:
   - Control de acceso por tipo, nivel y artículo individual.
   - Búsqueda que aplica las reglas de acceso antes de devolver resultados.
   - Ciclo de vida de artículos con versiones, publicación y archivo.
-  - Matriz explícita de implementación para no presentar trabajo parcial como terminado.
+  - Edición y publicación separadas, con historial de versiones.
 ---
 
 ## Contexto
 
 Comledge es una plataforma privada para organizar conocimiento dentro de una organización. El producto reúne artículos, clasificaciones, versiones, publicación, adjuntos, colecciones y administración de usuarios bajo un mismo sistema de permisos.
 
-El repositorio es un monorepo Nx con una API en Go, una SPA en React y una suite de pruebas end-to-end en Playwright. No existe una URL pública de despliegue ni un enlace público al código; este caso se documenta a partir del código y de un entorno local con datos de ejemplo.
+Trabajé Comledge como un monorepo Nx: una API en Go, una SPA en React y pruebas end-to-end con Playwright. El producto no tiene una URL pública de despliegue ni un enlace público al código; este caso se apoya en el trabajo real y en un entorno local con datos de ejemplo.
 
 ## Problema
 
@@ -51,10 +51,11 @@ La búsqueda usa paginación por cursor para mantener listados estables mientras
 - **Roles y permisos directos.** Los roles agrupan capacidades, pero un usuario también puede recibir permisos globales específicos. La rotación de contraseña invalida tokens emitidos previamente mediante una versión de credencial.
 - **Versión y publicación separadas.** Editar no equivale a publicar. El ciclo de vida conserva historial y permite archivar sin borrar el contenido.
 - **Paginación por cursor.** Evita duplicados y saltos cuando el conjunto cambia entre páginas.
-- **Alcance explícito.** La documentación del repositorio distingue lo implementado de lo parcial. Workflows, campos personalizados y multitenancy no forman parte de la entrega actual.
+- **Adjuntos privados.** Los archivos se guardan como objetos privados y sus permisos se resuelven con los mismos criterios que el artículo.
+- **Auditoría de acciones.** Las operaciones administrativas dejan registro para poder reconstruir quién cambió qué.
 
 ## Resultados y estado
 
-Comledge cubre autenticación, usuarios y permisos, artículos y versiones, publicación, importación Markdown, adjuntos, enlaces externos, búsqueda con ACL y auditoría. Algunas áreas siguen parciales: la administración de colecciones y la definición de permisos no tienen todavía una experiencia completa.
+Comledge cubre autenticación, usuarios y permisos, artículos y versiones, publicación, importación Markdown, adjuntos, enlaces externos, búsqueda con ACL y auditoría. La administración de colecciones y la definición de permisos todavía no tienen una experiencia completa, y prefiero mostrarlo así en lugar de presentarlas como terminadas.
 
-Las capturas muestran un entorno local con datos de ejemplo. No se publican nombres de organizaciones, contenido documental, endpoints internos ni la dirección del despliegue.
+Para las capturas preparé un artículo de ejemplo, «Guía de incorporación al equipo», con secciones, una tabla y un enlace de recursos. El entorno es local y los datos son ficticios; no se publican nombres de organizaciones, contenido documental, endpoints internos ni direcciones de despliegue.

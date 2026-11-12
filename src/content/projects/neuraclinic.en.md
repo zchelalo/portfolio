@@ -40,25 +40,26 @@ The challenge was not just adding screens. The product needed a reliable model f
 
 I treated the patient record as the product's central unit. Scheduling prepares the session, notes document what happened, assessments add follow-up, and reports share information without rebuilding the case from scratch.
 
-The work covered the clinical and administrative frontend, backend service integration, authentication and authorization flows, file management and exports. Every screenshot in this case was generated with fictional demonstration data.
+The work covered the clinical and administrative frontend, backend service integration, authentication and authorization flows, file management and exports. I also worked on the public landing in Astro: it presents the product, explains the clinical flow and keeps the content in Spanish and English. Every screenshot in this case was generated with fictional demonstration data.
 
 ## Architecture
 
 The frontend uses React, TypeScript, TanStack Router and TanStack Query. The API is organized around a Go gateway and services for authentication, billing, clinical records, files, notifications and location catalogs. The users service uses TypeScript and Drizzle on PostgreSQL.
 
-Services communicate through protobuf-defined gRPC contracts and keep independent databases. RabbitMQ carries events between services; the repository documents eventual-consistency and choreography decisions in its ADRs. Files combine PostgreSQL metadata with S3-compatible storage and pre-signed upload and download URLs.
+Services communicate through protobuf-defined gRPC contracts and keep independent databases. When a change needs to emit an event, I store the change and the event in the same transaction using the outbox pattern. A relay then publishes those events to RabbitMQ, and the services that need them process the result. For flows that span services, such as creating an attachment, I use saga-style compensations: if a step fails, I release or mark what was already created. That avoids relying on a distributed transaction while keeping intermediate states visible. Files combine PostgreSQL metadata with S3-compatible storage and pre-signed upload and download URLs.
 
 ## Decisions
 
-- **Capability-based boundaries.** Authentication, records, files and billing have separate responsibilities, so each area can evolve without turning the gateway into a logic monolith.
-- **Two layers of authorization.** Frontend route guards protect the experience, but access decisions also live in the services. Administrative and clinical flows use distinct guards and permissions.
+- **Capability-based boundaries.** I separated authentication, records, files and billing so each area can evolve without turning the gateway into a logic monolith.
+- **Consistency without distributed transactions.** Each service keeps its own database. Events leave through the outbox, and cross-service flows are compensated when a step fails.
+- **Two layers of authorization.** The interface protects navigation, but access decisions are also enforced in the services. Administrative and clinical flows use distinct guards and permissions.
 - **Files outside the database.** The database stores metadata and relationships; binary content lives in object storage and is served through temporary URLs.
-- **Server-side reports.** Patient, note and assessment exports are generated in the backend to keep the screen, PDF and XLSX consistent.
+- **Server-side reports.** I generate patient, note and assessment exports in the backend so the screen, PDF and XLSX share the same source.
 - **A local location catalog.** Address suggestions use imported catalogs instead of depending on a geocoding service at runtime.
-- **Tests across viewports.** The public frontend route matrix is checked at 320, 768, 1024 and 1440 px to catch overflow and load errors.
+- **Tests across viewports.** I check the public frontend routes at 320, 768, 1024 and 1440 px to catch overflow and load errors.
 
 ## Outcomes and status
 
-NeuraClinic is in production with a public landing at `neuraclinic.app`. The product includes scheduling, patient management, records, notes, assessments and exports that can be verified in the code. No business metrics or real clinical data are published; the gallery images are demonstrations with fictional information.
+NeuraClinic is in production with a public landing at `neuraclinic.app`. The product includes scheduling, patient management, records, notes, assessments and exports. No business metrics or real clinical data are published; the gallery images are demonstrations with fictional information.
 
-The natural next step is to deepen observability and operational automation, but those capabilities are not presented here as finished.
+The next step is to keep working on observability and operational automation, but those capabilities are not part of what I present here as finished.
