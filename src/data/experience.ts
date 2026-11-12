@@ -25,14 +25,14 @@ export const experience: ExperienceEntry[] = [
     id: 'coen',
     company: 'COEN',
     role: {
-      es: 'Software Engineer',
-      en: 'Software Engineer',
+      es: 'Líder Técnico',
+      en: 'Technical Lead',
     },
     start: '2025-12',
     end: null,
     summary: {
-      es: 'Desarrollo software empresarial y participo en la mejora de los procesos técnicos que rodean la entrega: documentación, orden del repositorio, preparación de despliegues y uso responsable de IA.',
-      en: 'I build enterprise software and help improve the technical processes around delivery: documentation, repository order, deployment preparation and responsible use of AI.',
+      es: 'Lidero técnicamente el desarrollo de software empresarial y participo en la mejora de los procesos técnicos que rodean la entrega: documentación, orden del repositorio, preparación de despliegues y uso responsable de IA.',
+      en: 'I lead the technical delivery of enterprise software and help improve the technical processes around delivery: documentation, repository order, deployment preparation and responsible use of AI.',
     },
     highlights: [
       {

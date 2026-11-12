@@ -83,6 +83,16 @@ node scripts/capture-cestia.mjs
 
 El script crea cuentas y datos ficticios mediante la API real y no debe apuntar a producción.
 
+## Currículum
+
+Los PDF de `public/files/` se generan desde las plantillas de `scripts/cv/`:
+
+```bash
+npm run build:cv
+```
+
+`cv-es.html` y `cv-en.html` comparten `cv.css`. El script produce versiones de dos páginas en tamaño Letter, con texto seleccionable y enlaces.
+
 ## Navegación
 
 «Proyectos» lleva a la sección de la home (`#projects`); el índice completo se abre desde «Todos los proyectos». Los cambios de documento usan una transición nativa de 160 ms cuando el navegador la soporta y se desactiva con `prefers-reduced-motion`.

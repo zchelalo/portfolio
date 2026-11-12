@@ -4,6 +4,8 @@
 
 Periodo confirmado por el propietario: diciembre de 2025 — actualidad.
 
+Cargo actual confirmado por el propietario: Líder Técnico.
+
 Hechos publicados, confirmados como entregados o aplicados:
 
 - Formatos de comentarios y documentación de tareas.
@@ -28,6 +30,7 @@ La ubicación pública se limita a México. No se publica ciudad ni estado; el p
 
 ## Pendientes antes de publicar
 
+- Los PDF de `public/files/` se regeneran con `npm run build:cv` desde `scripts/cv/` y usan las fechas de formación del sitio.
 - Las capturas de Cestia ya son reales, generadas en local con datos ficticios; conservar el script y el inventario actualizados si se recapturan.
 - Confirmar la visibilidad pública del repositorio de ChaosLab antes de enlazarlo.
 - Verificar en CloudFront el índice de directorios, el root object y la página 404 después del primer despliegue.
