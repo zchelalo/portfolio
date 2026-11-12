@@ -3,6 +3,7 @@ import { Image } from 'astro:assets'
 import type { ImageMetadata } from 'astro'
 import type { ProjectEntry } from '@/lib/projects'
 import { getDictionary, projectPath, type Locale } from '@/i18n/ui'
+import { heroAlts } from '@/data/galleries'
 import ProjectVisual from './ProjectVisual.astro'
 import Icon from '@/components/ui/Icon.astro'
 
@@ -19,9 +20,10 @@ const { data } = entry
 
 const cardLink = projectPath(locale, data.project)
 const mediaAlt =
-  locale === 'es'
+  heroAlts[data.project]?.[locale] ??
+  (locale === 'es'
     ? `${data.title} — captura con datos de demostración`
-    : `${data.title} — screenshot with demonstration data`
+    : `${data.title} — screenshot with demonstration data`)
 ---
 
 <a

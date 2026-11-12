@@ -5,7 +5,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro'
 import Gallery from '@/components/projects/Gallery.astro'
 import TerminalDemo from '@/components/projects/TerminalDemo.astro'
 import Icon from '@/components/ui/Icon.astro'
-import { galleries, heroImages } from '@/data/galleries'
+import { galleries, heroAlts, heroImages } from '@/data/galleries'
 import { getProjects, nextProject } from '@/lib/projects'
 import { getDictionary, homePath, projectPath, projectsPath, type Locale } from '@/i18n/ui'
 
@@ -36,9 +36,10 @@ const nextData = next.data
 
 const canonicalPath = projectPath(locale, data.project)
 const imageAlt =
-  locale === 'es'
+  heroAlts[data.project]?.[locale] ??
+  (locale === 'es'
     ? `${data.title} — captura con datos de demostración`
-    : `${data.title} — screenshot with demonstration data`
+    : `${data.title} — screenshot with demonstration data`)
 
 const structuredData = {
   '@context': 'https://schema.org',
