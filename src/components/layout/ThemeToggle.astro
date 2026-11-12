@@ -1,0 +1,68 @@
+---
+import Icon from '@/components/ui/Icon.astro'
+import type { Locale } from '@/i18n/ui'
+import { getDictionary } from '@/i18n/ui'
+
+type Props = {
+  locale: Locale
+}
+
+const { locale } = Astro.props
+const dict = getDictionary(locale)
+---
+
+<button
+  type="button"
+  class="icon-button theme-toggle"
+  data-theme-toggle
+  aria-label={dict.a11y.theme}
+  title={dict.a11y.theme}
+>
+  <span class="theme-icon theme-icon--moon"><Icon name="moon" size={18} /></span>
+  <span class="theme-icon theme-icon--sun"><Icon name="sun" size={18} /></span>
+</button>
+
+<script>
+  const storageKey = 'theme'
+
+  function applyTheme(theme: string) {
+    document.documentElement.dataset.theme = theme
+    const isDark = theme === 'dark'
+    document.querySelectorAll<HTMLElement>('[data-theme-toggle]').forEach((button) => {
+      button.setAttribute('aria-pressed', String(isDark))
+    })
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-theme-toggle]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const current = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light'
+      const next = current === 'dark' ? 'light' : 'dark'
+      applyTheme(next)
+      try {
+        localStorage.setItem(storageKey, next)
+      } catch {
+        /* Storage can be unavailable in private contexts. */
+      }
+    })
+  })
+
+  applyTheme(document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light')
+</script>
+
+<style>
+  .theme-icon {
+    display: inline-flex;
+  }
+
+  .theme-icon--sun {
+    display: none;
+  }
+
+  :global([data-theme='dark']) .theme-icon--moon {
+    display: none;
+  }
+
+  :global([data-theme='dark']) .theme-icon--sun {
+    display: inline-flex;
+  }
+</style>

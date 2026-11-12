@@ -1,0 +1,252 @@
+---
+import { Image } from 'astro:assets'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import SectionHeading from '@/components/ui/SectionHeading.astro'
+import ProjectCard from '@/components/projects/ProjectCard.astro'
+import ExperienceTimeline from '@/components/home/ExperienceTimeline.astro'
+import Icon from '@/components/ui/Icon.astro'
+import profile from '@/assets/profile.jpg'
+import { getProjects } from '@/lib/projects'
+import { heroImages } from '@/data/galleries'
+import { education } from '@/data/education'
+import { skillGroups } from '@/data/skills'
+import { site } from '@/data/site'
+import { getDictionary, homePath, type Locale } from '@/i18n/ui'
+
+export function getStaticPaths() {
+  return ['es', 'en'].map((locale) => ({ params: { lang: locale } }))
+}
+
+const locale = Astro.params.lang as Locale
+const dict = getDictionary(locale)
+const projects = await getProjects(locale)
+const years = new Date().getFullYear() - 2023
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  alternateName: site.shortName,
+  url: new URL(homePath(locale), Astro.site),
+  image: new URL('/og-default.png', Astro.site),
+  jobTitle: 'Software Engineer',
+  email: `mailto:${site.email}`,
+  sameAs: [site.links.linkedin, site.links.github],
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: 'MX',
+  },
+  knowsAbout: [
+    'Go',
+    'TypeScript',
+    'PostgreSQL',
+    'Distributed systems',
+    'AWS',
+    'Software architecture',
+  ],
+}
+
+const cvLabel = dict.nav.cv
+---
+
+<BaseLayout
+  locale={locale}
+  title={dict.meta.homeTitle}
+  description={dict.meta.homeDescription}
+  canonicalPath={homePath(locale)}
+  alternatePaths={{ es: '/es/', en: '/en/' }}
+  structuredData={structuredData}
+>
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-copy hero-intro">
+          <p class="eyebrow">{dict.hero.eyebrow}</p>
+          <h1>
+            {dict.hero.greeting}
+            <span class="accent">{dict.hero.headline}</span>
+          </h1>
+          <p class="hero-lead">{dict.hero.lead}</p>
+          <div class="hero-actions">
+            <a class="button button--primary" href="#projects">
+              {dict.hero.ctaProjects}
+              <Icon name="arrow-right" size={17} />
+            </a>
+            <a class="button button--ghost" href={site.cv[locale]}>
+              <Icon name="download" size={17} />
+              {cvLabel}
+            </a>
+          </div>
+          <div class="hero-meta">
+            <span class="hero-meta__item">
+              <span class="status-dot">{dict.hero.availability}</span>
+            </span>
+            <span class="hero-meta__item">
+              <Icon name="map-pin" size={15} />
+              {site.location[locale]}
+            </span>
+          </div>
+        </div>
+
+        <div class="hero-portrait">
+          <span class="portrait-ring" aria-hidden="true"></span>
+          <div class="portrait-frame">
+            <Image
+              src={profile}
+              alt={dict.hero.portraitAlt}
+              widths={[320, 480, 640]}
+              sizes="(max-width: 900px) 72vw, 23rem"
+              loading="eager"
+              fetchpriority="high"
+            />
+          </div>
+          <div class="portrait-badge">
+            <strong>{site.name}</strong>
+            <span>Software Engineer · Backend</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-stats reveal">
+        <div class="hero-stat">
+          <strong>{years}+</strong>
+          <span>{dict.hero.statYears}</span>
+        </div>
+        <div class="hero-stat">
+          <strong>{dict.hero.statDelivery}</strong>
+          <span>{dict.hero.statDeliveryDetail}</span>
+        </div>
+        <div class="hero-stat">
+          <strong>Backend</strong>
+          <span>{dict.hero.statFocus}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="projects">
+    <div class="container">
+      <SectionHeading
+        eyebrow={dict.sections.workEyebrow}
+        title={dict.sections.workTitle}
+        lead={dict.sections.workLead}
+      >
+        <a class="link-arrow" href={`/${locale}/projects/`}>
+          {dict.project.allProjects}
+          <Icon name="arrow-right" size={16} />
+        </a>
+      </SectionHeading>
+
+      <div class="work-grid">
+        {projects.map((project, index) => (
+          <ProjectCard
+            entry={project}
+            locale={locale}
+            image={heroImages[project.data.project]}
+            index={index}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="experience">
+    <div class="container">
+      <SectionHeading
+        eyebrow={dict.sections.experienceEyebrow}
+        title={dict.sections.experienceTitle}
+        lead={dict.sections.experienceLead}
+      />
+      <ExperienceTimeline locale={locale} />
+    </div>
+  </section>
+
+  <section class="section" id="capabilities">
+    <div class="container">
+      <SectionHeading
+        eyebrow={dict.sections.capabilitiesEyebrow}
+        title={dict.sections.capabilitiesTitle}
+        lead={dict.sections.capabilitiesLead}
+      />
+      <div class="skills-grid">
+        {skillGroups.map((group) => (
+          <article class="skill-card reveal">
+            <h3>{group.title[locale]}</h3>
+            <p>{group.lead[locale]}</p>
+            <ul class="tag-list">
+              {group.items.map((item) => <li class="tag">{item}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="education">
+    <div class="container">
+      <SectionHeading
+        eyebrow={dict.sections.educationEyebrow}
+        title={dict.sections.educationTitle}
+      />
+      <div class="split-grid">
+        {education.map((item) => (
+          <article class="education-card reveal">
+            <p class="education-card__year">{item.start} — {item.end}</p>
+            <h3>{item.degree[locale]}</h3>
+            <p>{item.institution}</p>
+          </article>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="contact-panel reveal">
+        <div>
+          <p class="eyebrow">{dict.sections.contactEyebrow}</p>
+          <h2>{dict.sections.contactTitle}</h2>
+          <p>{dict.sections.contactLead}</p>
+          <p class="contact-note">{dict.contact.availability}</p>
+        </div>
+        <div class="contact-actions">
+          <a class="button button--primary" href={`mailto:${site.email}`}>
+            <Icon name="mail" size={17} />
+            {dict.contact.email}
+          </a>
+          <a
+            class="button button--ghost"
+            href={site.links.linkedin}
+            target="_blank"
+            rel="me noopener noreferrer"
+          >
+            LinkedIn
+            <Icon name="arrow-up-right" size={15} />
+          </a>
+          <a
+            class="button button--ghost"
+            href={site.links.github}
+            target="_blank"
+            rel="me noopener noreferrer"
+          >
+            GitHub
+            <Icon name="arrow-up-right" size={15} />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  h1 .accent {
+    display: block;
+  }
+
+  @media (max-width: 900px) {
+    .portrait-badge {
+      display: none;
+    }
+  }
+</style>

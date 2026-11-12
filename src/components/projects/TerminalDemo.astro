@@ -1,0 +1,41 @@
+---
+import { getDictionary, type Locale } from '@/i18n/ui'
+
+type Props = {
+  locale: Locale
+  compact?: boolean
+}
+
+const { locale, compact = false } = Astro.props
+const dict = getDictionary(locale)
+
+const lines = compact
+  ? [
+      { text: '$ chaoslab -url http://127.0.0.1:8080/', prompt: true },
+      { text: 'Attempts: 5', prompt: false },
+      { text: 'Success Count: 5', prompt: false },
+      { text: 'HTTP Unsuccessful: 0', prompt: false },
+    ]
+  : [
+      { text: '$ chaoslab -url http://127.0.0.1:8080/health -requests 5', prompt: true },
+      { text: 'Attempts: 5', prompt: false },
+      { text: 'Success Count: 5', prompt: false },
+      { text: 'HTTP Unsuccessful Count: 0', prompt: false },
+      { text: 'Request Failure Count: 0', prompt: false },
+      { text: 'Incomplete Responses Count: 0', prompt: false },
+      { text: 'Total Elapsed Time: 42.18ms', prompt: false },
+    ]
+---
+
+<div class="terminal" role="img" aria-label={`${dict.mockup.terminalTitle}: ${dict.mockup.terminalNote}`}>
+  <div class="terminal__bar" aria-hidden="true">
+    <i></i><i></i><i></i>
+    <span>{dict.mockup.terminalTitle}</span>
+  </div>
+  <div class="terminal__body">
+    <pre><code>{lines.map((line) => (
+      <span class={line.prompt ? 'prompt' : undefined}>{line.text}{'\n'}</span>
+    ))}</code></pre>
+  </div>
+  {!compact && <p class="terminal__note">{dict.mockup.terminalNote}</p>}
+</div>

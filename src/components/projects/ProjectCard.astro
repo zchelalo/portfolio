@@ -1,0 +1,63 @@
+---
+import { Image } from 'astro:assets'
+import type { ImageMetadata } from 'astro'
+import type { ProjectEntry } from '@/lib/projects'
+import { getDictionary, projectPath, type Locale } from '@/i18n/ui'
+import ProjectVisual from './ProjectVisual.astro'
+import Icon from '@/components/ui/Icon.astro'
+
+type Props = {
+  entry: ProjectEntry
+  locale: Locale
+  image?: ImageMetadata
+  index?: number
+}
+
+const { entry, locale, image, index = 0 } = Astro.props
+const dict = getDictionary(locale)
+const { data } = entry
+
+const cardLink = projectPath(locale, data.project)
+const mediaAlt =
+  locale === 'es'
+    ? `${data.title} — captura con datos de demostración`
+    : `${data.title} — screenshot with demonstration data`
+---
+
+<a
+  class={`project-card card project-card--${data.project} reveal`}
+  href={cardLink}
+  style={`--reveal-delay: ${index * 70}ms`}
+>
+  <div class="project-card__media">
+    {image ? (
+      <Image
+        src={image}
+        alt={mediaAlt}
+        widths={[480, 720, 960, 1200]}
+        sizes="(max-width: 700px) 100vw, 50vw"
+        loading="lazy"
+        decoding="async"
+      />
+    ) : (
+      <ProjectVisual slug={data.project} locale={locale} compact />
+    )}
+  </div>
+  <div class="project-card__body">
+    <div class="project-card__topline">
+      <span>{data.status}</span>
+      <span>{data.period}</span>
+    </div>
+    <h3>{data.title}</h3>
+    <p>{data.summary}</p>
+    <div class="project-card__footer">
+      <ul class="tag-list" aria-label={dict.project.stack}>
+        {data.stack.slice(0, 4).map((item) => <li class="tag">{item}</li>)}
+      </ul>
+      <span class="project-card__cta">
+        {dict.project.readCase}
+        <Icon name="arrow-right" size={16} />
+      </span>
+    </div>
+  </div>
+</a>

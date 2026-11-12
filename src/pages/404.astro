@@ -1,0 +1,46 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import Icon from '@/components/ui/Icon.astro'
+import { getDictionary, homePath } from '@/i18n/ui'
+
+const locale = 'es'
+const dict = getDictionary(locale)
+---
+
+<BaseLayout
+  locale={locale}
+  title={dict.meta.notFoundTitle}
+  description="La página solicitada no existe."
+  canonicalPath="/404.html"
+  noindex
+  languageHref="/en/"
+>
+  <section class="section not-found">
+    <div class="container">
+      <p class="not-found__code">404</p>
+      <h1>{dict.notFound.title}</h1>
+      <p>{dict.notFound.lead}</p>
+      <p lang="en">This page does not exist either. You can go back to the English home page.</p>
+      <div class="hero-actions" style="justify-content: center;">
+        <a class="button button--primary" href={homePath('es')}>
+          {dict.notFound.home}
+          <Icon name="arrow-right" size={17} />
+        </a>
+        <a class="button button--ghost" href={homePath('en')} hreflang="en" lang="en">
+          English home
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found :global(.hero-actions) {
+    margin-top: 0;
+  }
+
+  .not-found p[lang='en'] {
+    margin-top: -0.6rem;
+    font-size: 0.9rem;
+  }
+</style>

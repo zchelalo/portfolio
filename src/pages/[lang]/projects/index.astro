@@ -1,0 +1,82 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import ProjectCard from '@/components/projects/ProjectCard.astro'
+import Icon from '@/components/ui/Icon.astro'
+import { getProjects } from '@/lib/projects'
+import { heroImages } from '@/data/galleries'
+import { getDictionary, homePath, projectsPath, type Locale } from '@/i18n/ui'
+
+export function getStaticPaths() {
+  return ['es', 'en'].map((locale) => ({ params: { lang: locale } }))
+}
+
+const locale = Astro.params.lang as Locale
+const dict = getDictionary(locale)
+const projects = await getProjects(locale)
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: dict.meta.projectsTitle,
+  description: dict.meta.projectsDescription,
+  url: new URL(projectsPath(locale), Astro.site),
+  inLanguage: locale,
+}
+---
+
+<BaseLayout
+  locale={locale}
+  title={dict.meta.projectsTitle}
+  description={dict.meta.projectsDescription}
+  canonicalPath={projectsPath(locale)}
+  alternatePaths={{ es: '/es/projects/', en: '/en/projects/' }}
+  structuredData={structuredData}
+>
+  <section class="section projects-intro">
+    <div class="container">
+      <a class="breadcrumb" href={homePath(locale)}>
+        <Icon name="chevron-left" size={15} />
+        {dict.nav.home}
+      </a>
+      <p class="eyebrow">{dict.sections.workEyebrow}</p>
+      <h1>{dict.sections.workTitle}</h1>
+      <p class="projects-lead">{dict.sections.workLead}</p>
+    </div>
+  </section>
+
+  <section class="section section--tight projects-list">
+    <div class="container">
+      <div class="work-grid">
+        {projects.map((project, index) => (
+          <ProjectCard
+            entry={project}
+            locale={locale}
+            image={heroImages[project.data.project]}
+            index={index}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .projects-intro {
+    padding-bottom: 2rem;
+  }
+
+  .projects-intro h1 {
+    max-width: 50rem;
+  }
+
+  .projects-lead {
+    max-width: 48rem;
+    margin-top: 1rem;
+    color: var(--muted);
+    font-size: 1.02rem;
+  }
+
+  .projects-list {
+    padding-top: 1rem;
+  }
+</style>

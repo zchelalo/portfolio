@@ -1,0 +1,43 @@
+---
+import Icon from '@/components/ui/Icon.astro'
+import { getDictionary, homePath, type Locale } from '@/i18n/ui'
+import { site } from '@/data/site'
+
+type Props = {
+  locale: Locale
+}
+
+const { locale } = Astro.props
+const dict = getDictionary(locale)
+const year = new Date().getFullYear()
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>© {year} {site.name}. {dict.footer.rights}</p>
+    <nav aria-label={dict.nav.home}>
+      <a href={`${homePath(locale)}#projects`}>{dict.nav.work}</a>
+      <a href={`${homePath(locale)}#experience`}>{dict.nav.experience}</a>
+      <a href={`mailto:${site.email}`}>{dict.contact.email}</a>
+      <a href={site.links.github} rel="me noopener noreferrer" target="_blank">
+        GitHub
+      </a>
+      <a href="#top">
+        {dict.footer.backToTop}
+        <Icon name="arrow-right" size={13} />
+      </a>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .site-footer a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
+  }
+
+  .site-footer a[href='#top'] svg {
+    transform: rotate(-90deg);
+  }
+</style>
