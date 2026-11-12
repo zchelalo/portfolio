@@ -1,0 +1,50 @@
+---
+import { experience } from '@/data/experience'
+import { formatPeriod, getDictionary, type Locale } from '@/i18n/ui'
+
+type Props = {
+  locale: Locale
+}
+
+const { locale } = Astro.props
+const dict = getDictionary(locale)
+---
+
+<div class="timeline">
+  {experience.map((item, index) => {
+    const period = formatPeriod(item.start, item.end, locale, dict.experience.current)
+    return (
+      <article
+        class="timeline-item reveal"
+        data-current={String(item.end === null)}
+        style={`--reveal-delay: ${index * 80}ms`}
+      >
+        <div class="timeline-item__head">
+          <div>
+            <p class="timeline-item__role">{item.role[locale]}</p>
+            <h3>{item.company}</h3>
+          </div>
+          <span class="timeline-item__period">{period}</span>
+        </div>
+        <p class="timeline-item__summary">{item.summary[locale]}</p>
+        <details open={index === 0}>
+          <summary>{dict.experience.details}</summary>
+          <div class="timeline-item__detail">
+            {item.highlights.map((highlight) => (
+              <div class="timeline-highlight">
+                <strong>{highlight.title[locale]}</strong>
+                <p>{highlight.body[locale]}</p>
+              </div>
+            ))}
+          </div>
+        </details>
+        <div class="timeline-item__footer">
+          <ul class="tag-list" aria-label={dict.experience.stack}>
+            {item.stack.map((tech) => <li class="tag">{tech}</li>)}
+          </ul>
+          {item.end === null && <span class="status-dot">{dict.experience.current}</span>}
+        </div>
+      </article>
+    )
+  })}
+</div>

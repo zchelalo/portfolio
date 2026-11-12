@@ -1,0 +1,198 @@
+---
+import { Image } from 'astro:assets'
+import { getCollection, render, type CollectionEntry } from 'astro:content'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import Gallery from '@/components/projects/Gallery.astro'
+import TerminalDemo from '@/components/projects/TerminalDemo.astro'
+import Icon from '@/components/ui/Icon.astro'
+import { galleries, heroImages } from '@/data/galleries'
+import { getProjects, nextProject } from '@/lib/projects'
+import { getDictionary, homePath, projectPath, projectsPath, type Locale } from '@/i18n/ui'
+
+export async function getStaticPaths() {
+  const entries = await getCollection('projects')
+  return entries.map((entry) => ({
+    params: { lang: entry.data.locale, slug: entry.data.project },
+    props: { entry },
+  }))
+}
+
+type Props = {
+  entry: CollectionEntry<'projects'>
+}
+
+const { entry } = Astro.props
+const locale = entry.data.locale as Locale
+const other: Locale = locale === 'es' ? 'en' : 'es'
+const dict = getDictionary(locale)
+const projects = await getProjects(locale)
+const { Content } = await render(entry)
+const { data } = entry
+
+const groups = galleries[data.project] ?? []
+const hero = heroImages[data.project]
+const next = nextProject(projects, data.project)
+const nextData = next.data
+
+const canonicalPath = projectPath(locale, data.project)
+const imageAlt =
+  locale === 'es'
+    ? `${data.title} — captura con datos de demostración`
+    : `${data.title} — screenshot with demonstration data`
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  name: data.title,
+  description: data.summary,
+  url: new URL(canonicalPath, Astro.site),
+  inLanguage: locale,
+  creator: {
+    '@type': 'Person',
+    name: 'Eduardo Saavedra',
+    url: new URL(homePath(locale), Astro.site),
+  },
+  keywords: data.stack.join(', '),
+}
+---
+
+<BaseLayout
+  locale={locale}
+  title={`${data.title} — Eduardo Saavedra`}
+  description={data.summary}
+  canonicalPath={canonicalPath}
+  alternatePaths={{
+    es: projectPath('es', data.project),
+    en: projectPath('en', data.project),
+  }}
+  type="article"
+  image="/og-default.png"
+  languageHref={projectPath(other, data.project)}
+  structuredData={structuredData}
+>
+  <article>
+    <header class="project-hero">
+      <div class="container">
+        <a class="breadcrumb" href={projectsPath(locale)}>
+          <Icon name="chevron-left" size={15} />
+          {dict.project.allProjects}
+        </a>
+
+        <div class="project-hero__grid">
+          <div class="hero-intro">
+            <p class="eyebrow">{dict.project.caseStudy}</p>
+            <h1>{data.title}</h1>
+            <p class="project-hero__summary">{data.summary}</p>
+            {data.links.length > 0 && (
+              <div class="project-links">
+                {data.links.map((link) => (
+                  <a
+                    class="button button--primary button--small"
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {link.kind === 'live' ? dict.project.live : dict.project.repo}
+                    <Icon name="arrow-up-right" size={15} />
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <dl class="project-meta">
+            <div>
+              <dt>{dict.project.role}</dt>
+              <dd>{data.role}</dd>
+            </div>
+            <div>
+              <dt>{dict.project.period}</dt>
+              <dd>{data.period}</dd>
+            </div>
+            <div>
+              <dt>{dict.project.status}</dt>
+              <dd>{data.status}</dd>
+            </div>
+            <div class="project-meta__stack">
+              <dt>{dict.project.stack}</dt>
+              <dd>
+                <ul class="tag-list">
+                  {data.stack.map((tech) => <li class="tag">{tech}</li>)}
+                </ul>
+              </dd>
+            </div>
+          </dl>
+        </div>
+
+        {hero ? (
+          <figure class="project-media">
+            <Image
+              src={hero}
+              alt={imageAlt}
+              widths={hero.width >= 2400 ? [800, 1280, 1600, 2000, 2400] : [800, 1280, 1600]}
+              sizes="(max-width: 1200px) 100vw, 74rem"
+              loading="eager"
+              fetchpriority="high"
+            />
+            <figcaption>
+              <span>{data.title}</span>
+              <span>{dict.project.demoData}</span>
+            </figcaption>
+          </figure>
+        ) : data.project === 'chaoslab' ? (
+          <div class="project-showcase">
+            <TerminalDemo locale={locale} />
+          </div>
+        ) : null}
+      </div>
+    </header>
+
+    <div class="container project-layout">
+      <div class="prose">
+        <Content />
+      </div>
+
+      <aside class="aside-stack" aria-label={dict.project.highlights}>
+        <div class="aside-card">
+          <h2>{dict.project.highlights}</h2>
+          <ul>
+            {data.highlights.map((highlight) => <li>{highlight}</li>)}
+          </ul>
+        </div>
+
+      </aside>
+    </div>
+
+    {groups.length > 0 && (
+      <div class="container">
+        <Gallery groups={groups} locale={locale} demoNote />
+      </div>
+    )}
+
+    <div class="container">
+      <nav class="project-next" aria-label={dict.project.nextProject}>
+        <div>
+          <span class="project-next__label">{dict.project.nextProject}</span>
+          <a href={projectPath(locale, nextData.project)}>
+            {nextData.title}
+            <Icon name="arrow-right" size={20} />
+          </a>
+        </div>
+        <a class="button button--ghost button--small" href={projectsPath(locale)}>
+          {dict.project.backToProjects}
+        </a>
+      </nav>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .project-showcase {
+    margin-top: clamp(2rem, 4vw, 3rem);
+  }
+
+  .project-showcase :global(.terminal) {
+    font-size: 0.85rem;
+  }
+
+</style>

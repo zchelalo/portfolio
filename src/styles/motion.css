@@ -1,0 +1,119 @@
+/* Progressive enhancement: content is visible unless JS confirms the observer. */
+.reveal {
+  transition:
+    opacity 0.55s var(--ease),
+    transform 0.55s var(--ease);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+html.reveal-ready .reveal:not(.is-visible) {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-intro > * {
+    animation: rise-in 0.7s var(--ease) both;
+  }
+
+  .hero-intro > *:nth-child(2) {
+    animation-delay: 0.08s;
+  }
+
+  .hero-intro > *:nth-child(3) {
+    animation-delay: 0.16s;
+  }
+
+  .hero-intro > *:nth-child(4) {
+    animation-delay: 0.24s;
+  }
+
+  .hero-intro > *:nth-child(5) {
+    animation-delay: 0.32s;
+  }
+
+  .hero-portrait {
+    animation: portrait-in 0.9s var(--ease) 0.15s both;
+  }
+
+  @keyframes rise-in {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes portrait-in {
+    from {
+      opacity: 0;
+      transform: translateY(18px) scale(0.985);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 160ms;
+  animation-timing-function: ease;
+}
+
+@media print {
+  html.reveal-ready .reveal:not(.is-visible) {
+    opacity: 1;
+    transform: none;
+  }
+
+  .site-header,
+  .skip-link {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  html.reveal-ready .reveal:not(.is-visible) {
+    opacity: 1;
+    transform: none;
+  }
+
+  .project-card:hover,
+  .shot:hover,
+  .button:hover,
+  .portrait-frame {
+    transform: none !important;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+}

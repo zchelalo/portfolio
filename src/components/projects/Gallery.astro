@@ -1,0 +1,160 @@
+---
+import { Image } from 'astro:assets'
+import type { GalleryGroup } from '@/data/galleries'
+import { getDictionary, type Locale } from '@/i18n/ui'
+import Icon from '@/components/ui/Icon.astro'
+
+type Props = {
+  groups: GalleryGroup[]
+  locale: Locale
+  demoNote?: boolean
+}
+
+const { groups, locale, demoNote = false } = Astro.props
+const dict = getDictionary(locale)
+
+const flatItems = groups.flatMap((group) => group.items)
+---
+
+<section class="gallery" aria-labelledby="gallery-title" data-gallery>
+  <div class="section-heading">
+    <div class="section-heading__body">
+      <p class="eyebrow">{dict.project.gallery}</p>
+      <h2 id="gallery-title">{dict.project.galleryTitle}</h2>
+      <p>{dict.project.galleryLead}</p>
+    </div>
+    {demoNote && <span class="tag">{dict.project.demoData}</span>}
+  </div>
+
+  {groups.map((group) => (
+    <div class="gallery-group">
+      <h2>{group.title[locale]}</h2>
+      <div class={`shots${group.layout === 'mobile' ? ' shots--mobile' : ''}`}>
+        {group.items.map((item) => {
+          const globalIndex = flatItems.indexOf(item)
+          const mobileLayout = group.layout === 'mobile'
+          return (
+            <figure class={`shot${item.mobile ? ' shot--mobile' : ''}`}>
+              <a
+                class="shot__frame"
+                href={item.image.src}
+                data-gallery-open
+                data-index={globalIndex}
+                data-src={item.image.src}
+                data-alt={item.alt[locale]}
+                data-caption={item.caption[locale]}
+                data-width={item.image.width}
+                data-height={item.image.height}
+                aria-label={`${dict.a11y.gallery}: ${item.caption[locale]}`}
+              >
+                <Image
+                  src={item.image}
+                  alt={item.alt[locale]}
+                  widths={
+                    mobileLayout
+                      ? [195, 390, 780]
+                      : item.mobile
+                        ? [195, 390]
+                        : [600, 900, 1200]
+                  }
+                  sizes={
+                    mobileLayout
+                      ? '(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 23vw'
+                      : item.mobile
+                        ? '(max-width: 700px) 82vw, 160px'
+                        : '(max-width: 700px) 92vw, 540px'
+                  }
+                  loading="lazy"
+                  decoding="async"
+                />
+              </a>
+              <figcaption>{item.caption[locale]}</figcaption>
+            </figure>
+          )
+        })}
+      </div>
+    </div>
+  ))}
+
+  <dialog class="lightbox" data-gallery-dialog aria-labelledby="lightbox-title">
+    <div class="lightbox__head">
+      <span class="lightbox__title" id="lightbox-title">{dict.project.gallery}</span>
+      <button type="button" class="lightbox__close" data-gallery-close aria-label={dict.a11y.close}>
+        <Icon name="close" size={17} />
+      </button>
+    </div>
+    <div class="lightbox__image">
+      <img data-gallery-image src={flatItems[0]?.image.src} alt={flatItems[0]?.alt[locale] ?? ''} loading="lazy" />
+    </div>
+    <p class="lightbox__caption" data-gallery-caption></p>
+    <div class="lightbox__footer">
+      <span class="lightbox__counter" data-gallery-counter aria-live="polite"></span>
+      <div class="lightbox__nav">
+        <button type="button" class="icon-button" data-gallery-prev aria-label={dict.a11y.previous}>
+          <Icon name="chevron-left" size={18} />
+        </button>
+        <button type="button" class="icon-button" data-gallery-next aria-label={dict.a11y.next}>
+          <Icon name="chevron-right" size={18} />
+        </button>
+      </div>
+    </div>
+  </dialog>
+</section>
+
+<script>
+  const gallery = document.querySelector<HTMLElement>('[data-gallery]')
+
+  if (gallery) {
+    const dialog = gallery.querySelector<HTMLDialogElement>('[data-gallery-dialog]')
+    const image = gallery.querySelector<HTMLImageElement>('[data-gallery-image]')
+    const caption = gallery.querySelector<HTMLElement>('[data-gallery-caption]')
+    const counter = gallery.querySelector<HTMLElement>('[data-gallery-counter]')
+    const closeButton = gallery.querySelector<HTMLButtonElement>('[data-gallery-close]')
+    const previous = gallery.querySelector<HTMLButtonElement>('[data-gallery-prev]')
+    const next = gallery.querySelector<HTMLButtonElement>('[data-gallery-next]')
+    const openers = Array.from(gallery.querySelectorAll<HTMLAnchorElement>('[data-gallery-open]'))
+    const total = openers.length
+    let current = 0
+
+    const render = (index: number) => {
+      current = (index + total) % total
+      const opener = openers[current]!
+      if (!image || !caption || !counter) return
+      image.src = opener.dataset.src ?? ''
+      image.alt = opener.dataset.alt ?? ''
+      if (opener.dataset.width) image.width = Number(opener.dataset.width)
+      if (opener.dataset.height) image.height = Number(opener.dataset.height)
+      caption.textContent = opener.dataset.caption ?? ''
+      counter.textContent = `${current + 1} / ${total}`
+    }
+
+    openers.forEach((opener, index) => {
+      opener.addEventListener('click', (event) => {
+        if (!dialog || typeof dialog.showModal !== 'function') return
+        event.preventDefault()
+        render(index)
+        dialog.showModal()
+        closeButton?.focus()
+      })
+    })
+
+    closeButton?.addEventListener('click', () => dialog?.close())
+    previous?.addEventListener('click', () => render(current - 1))
+    next?.addEventListener('click', () => render(current + 1))
+
+    dialog?.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close()
+    })
+
+    dialog?.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault()
+        render(current - 1)
+      }
+      if (event.key === 'ArrowRight') {
+        event.preventDefault()
+        render(current + 1)
+      }
+    })
+  }
+</script>

@@ -1,0 +1,86 @@
+:root {
+  --font-sans: 'Ubuntu', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'Ubuntu Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --bg: #f3f7fe;
+  --bg-elevated: #ffffff;
+  --bg-subtle: #e8effc;
+  --surface: #ffffff;
+  --surface-2: #f8faff;
+  --text: #0a1a33;
+  --text-soft: #26395b;
+  --muted: #586b8a;
+  --line: #d7e2f6;
+  --line-strong: #b9cbea;
+  --accent: #1d5cf5;
+  --accent-strong: #123fae;
+  --accent-soft: #e3ebff;
+  --accent-contrast: #ffffff;
+  --glow: rgba(29, 92, 245, 0.12);
+  --grid: rgba(29, 92, 245, 0.045);
+  --ok: #0c7457;
+  --ok-soft: #dcf5ec;
+  --shadow-sm: 0 1px 2px rgba(9, 28, 61, 0.06);
+  --shadow-card: 0 14px 38px -22px rgba(11, 40, 92, 0.35);
+  --shadow-lift: 0 26px 60px -28px rgba(11, 40, 92, 0.45);
+  --radius-sm: 0.55rem;
+  --radius: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-xl: 2rem;
+  --container: 74rem;
+  --header-height: 4.75rem;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --bg: #060f1f;
+  --bg-elevated: #0a172c;
+  --bg-subtle: #0c1c35;
+  --surface: #0b1930;
+  --surface-2: #0f2039;
+  --text: #eaf1ff;
+  --text-soft: #c7d6ef;
+  --muted: #9db0ce;
+  --line: #1b3052;
+  --line-strong: #2b4671;
+  --accent: #7aa8ff;
+  --accent-strong: #a9c7ff;
+  --accent-soft: #12294b;
+  --accent-contrast: #06101f;
+  --glow: rgba(72, 128, 255, 0.18);
+  --grid: rgba(122, 168, 255, 0.055);
+  --ok: #6fe0bd;
+  --ok-soft: #0c2f2a;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-card: 0 18px 44px -24px rgba(0, 0, 0, 0.75);
+  --shadow-lift: 0 30px 70px -30px rgba(0, 0, 0, 0.85);
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --bg: #060f1f;
+    --bg-elevated: #0a172c;
+    --bg-subtle: #0c1c35;
+    --surface: #0b1930;
+    --surface-2: #0f2039;
+    --text: #eaf1ff;
+    --text-soft: #c7d6ef;
+    --muted: #9db0ce;
+    --line: #1b3052;
+    --line-strong: #2b4671;
+    --accent: #7aa8ff;
+    --accent-strong: #a9c7ff;
+    --accent-soft: #12294b;
+    --accent-contrast: #06101f;
+    --glow: rgba(72, 128, 255, 0.18);
+    --grid: rgba(122, 168, 255, 0.055);
+    --ok: #6fe0bd;
+    --ok-soft: #0c2f2a;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-card: 0 18px 44px -24px rgba(0, 0, 0, 0.75);
+    --shadow-lift: 0 30px 70px -30px rgba(0, 0, 0, 0.85);
+    color-scheme: dark;
+  }
+}

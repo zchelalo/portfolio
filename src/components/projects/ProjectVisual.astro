@@ -1,0 +1,16 @@
+---
+import TerminalDemo from './TerminalDemo.astro'
+import type { Locale } from '@/i18n/ui'
+
+type Props = {
+  slug: string
+  locale: Locale
+  compact?: boolean
+}
+
+const { slug, locale, compact = false } = Astro.props
+---
+
+<div class="project-visual">
+  {slug === 'chaoslab' && <TerminalDemo locale={locale} compact={compact} />}
+</div>

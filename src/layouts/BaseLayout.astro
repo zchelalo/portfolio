@@ -1,0 +1,112 @@
+---
+import '@fontsource/ubuntu/400.css'
+import '@fontsource/ubuntu/500.css'
+import '@fontsource/ubuntu/700.css'
+import '@/styles/global.css'
+import '@/styles/motion.css'
+
+import Header from '@/components/layout/Header.astro'
+import Footer from '@/components/layout/Footer.astro'
+import { getDictionary, type Locale } from '@/i18n/ui'
+import { site } from '@/data/site'
+
+type Props = {
+  locale: Locale
+  title: string
+  description: string
+  canonicalPath?: string
+  alternatePaths?: { es: string; en: string }
+  image?: string
+  imageAlt?: string
+  type?: 'website' | 'article'
+  noindex?: boolean
+  languageHref?: string
+  structuredData?: Record<string, unknown> | Record<string, unknown>[]
+}
+
+const {
+  locale,
+  title,
+  description,
+  canonicalPath = Astro.url.pathname,
+  alternatePaths,
+  image = '/og-default.png',
+  imageAlt = 'Eduardo Saavedra — Software Engineer',
+  type = 'website',
+  noindex = false,
+  languageHref,
+  structuredData,
+} = Astro.props
+
+const dict = getDictionary(locale)
+const siteUrl = Astro.site ?? new URL(site.url)
+const canonical = new URL(canonicalPath, siteUrl)
+const ogImage = new URL(image, siteUrl)
+const alternates = alternatePaths ?? { es: '/es/', en: '/en/' }
+const jsonLd = structuredData
+  ? Array.isArray(structuredData)
+    ? structuredData
+    : [structuredData]
+  : []
+---
+
+<!doctype html>
+<html lang={dict.htmlLang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {!noindex && <link rel="alternate" hreflang="es" href={new URL(alternates.es, siteUrl)} />}
+    {!noindex && <link rel="alternate" hreflang="en" href={new URL(alternates.en, siteUrl)} />}
+    {!noindex && <link rel="alternate" hreflang="x-default" href={new URL(alternates.es, siteUrl)} />}
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="theme-color" content="#f3f7fe" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#060f1f" media="(prefers-color-scheme: dark)" />
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content="Eduardo Saavedra" />
+    <meta property="og:locale" content={locale === 'es' ? 'es_MX' : 'en_US'} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="sitemap" href="/sitemap.xml" />
+    {jsonLd.map((data) => (
+      <script is:inline type="application/ld+json" set:html={JSON.stringify(data).replace(/</g, '\\u003c')} />
+    ))}
+    <script is:inline>
+      (() => {
+        try {
+          const stored = localStorage.getItem('theme')
+          const theme =
+            stored === 'light' || stored === 'dark'
+              ? stored
+              : window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light'
+          document.documentElement.dataset.theme = theme
+        } catch {
+          document.documentElement.dataset.theme = 'light'
+        }
+      })()
+    </script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">{dict.a11y.skip}</a>
+    <Header locale={locale} languageHref={languageHref} />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer locale={locale} />
+    <script>
+      import '@/scripts/site'
+    </script>
+  </body>
+</html>
